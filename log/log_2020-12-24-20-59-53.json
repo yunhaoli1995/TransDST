@@ -1,0 +1,1172 @@
+2020-12-24 20:59:53,970 - root - INFO - pytorch version: 1.4.0
+2020-12-24 20:59:53,971 - root - INFO - Namespace(attention_probs_dropout_prob=0.1, batch_size=16, bert_ckpt_path='assets/bert-base-uncased-pytorch_model.bin', bert_config_path='assets/bert_config_base_uncased.json', data_root='data/mwz2.1/', dec_lr=0.0001, dec_warmup=0.1, decoder_teacher_forcing=0.5, dev_data='dev_dials.json', dev_data_path='data/mwz2.1/dev_dials.json', dropout=0.1, enc_lr=4e-05, enc_warmup=0.1, eval_epoch=1, exclude_domain=False, grad_accumulation=2, hidden_dropout_prob=0.1, max_seq_length=256, msg=None, n_epochs=30, n_history=1, not_shuffle_state=False, num_workers=4, ontology_data='data/mwz2.1/ontology.json', op_code='4', random_seed=42, save_dir='checkpoint/', shuffle_p=0.5, shuffle_state=True, slot_token='[SLOT]', test_data='test_dials.json', test_data_path='data/mwz2.1/test_dials.json', train_data='train_dials.json', train_data_path='data/mwz2.1/train_dials.json', vocab_path='assets/vocab.txt', word_dropout=0.1)
+2020-12-24 20:59:53,975 - root - INFO - {'delete': 0, 'update': 1, 'dontcare': 2, 'carryover': 3}
+2020-12-24 20:59:54,025 - root - INFO - Loading data from data/mwz2.1/train_dials.data.........
+2020-12-24 20:59:59,379 - root - INFO - # train examples 54984
+2020-12-24 20:59:59,381 - root - INFO - Loading data from data/mwz2.1/dev_dials.data.........
+2020-12-24 21:00:00,657 - root - INFO - # dev examples 7371
+2020-12-24 21:00:00,658 - root - INFO - Loading data from data/mwz2.1/test_dials.data.........
+2020-12-24 21:00:01,095 - root - INFO - # test examples 7368
+2020-12-24 21:00:12,903 - root - INFO - [1/30] [0/3437] mean_loss : 14.606, state_loss : 2.638, gen_loss : 9.430, dom_loss : 1.929
+2020-12-24 21:01:32,611 - root - INFO - [1/30] [200/3437] mean_loss : 13.747, state_loss : 1.499, gen_loss : 8.224, dom_loss : 1.803
+2020-12-24 21:02:53,360 - root - INFO - [1/30] [400/3437] mean_loss : 11.489, state_loss : 0.658, gen_loss : 7.377, dom_loss : 1.708
+2020-12-24 21:04:13,593 - root - INFO - [1/30] [600/3437] mean_loss : 10.052, state_loss : 0.488, gen_loss : 7.304, dom_loss : 1.523
+2020-12-24 21:05:32,904 - root - INFO - [1/30] [800/3437] mean_loss : 9.112, state_loss : 0.369, gen_loss : 5.049, dom_loss : 1.528
+2020-12-24 21:06:51,823 - root - INFO - [1/30] [1000/3437] mean_loss : 8.180, state_loss : 0.370, gen_loss : 4.412, dom_loss : 1.401
+2020-12-24 21:08:11,646 - root - INFO - [1/30] [1200/3437] mean_loss : 6.943, state_loss : 0.411, gen_loss : 3.334, dom_loss : 1.628
+2020-12-24 21:09:30,945 - root - INFO - [1/30] [1400/3437] mean_loss : 5.563, state_loss : 0.402, gen_loss : 2.386, dom_loss : 0.909
+2020-12-24 21:10:50,333 - root - INFO - [1/30] [1600/3437] mean_loss : 4.577, state_loss : 0.294, gen_loss : 2.498, dom_loss : 0.693
+2020-12-24 21:12:09,619 - root - INFO - [1/30] [1800/3437] mean_loss : 3.786, state_loss : 0.474, gen_loss : 1.265, dom_loss : 0.490
+2020-12-24 21:13:27,199 - root - INFO - [1/30] [2000/3437] mean_loss : 3.296, state_loss : 0.268, gen_loss : 2.283, dom_loss : 0.621
+2020-12-24 21:14:52,275 - root - INFO - [1/30] [2200/3437] mean_loss : 2.906, state_loss : 0.342, gen_loss : 2.453, dom_loss : 0.408
+2020-12-24 21:16:12,594 - root - INFO - [1/30] [2400/3437] mean_loss : 2.726, state_loss : 0.338, gen_loss : 2.506, dom_loss : 0.330
+2020-12-24 21:17:31,958 - root - INFO - [1/30] [2600/3437] mean_loss : 2.483, state_loss : 0.341, gen_loss : 1.265, dom_loss : 0.070
+2020-12-24 21:18:51,331 - root - INFO - [1/30] [2800/3437] mean_loss : 2.279, state_loss : 0.378, gen_loss : 1.192, dom_loss : 0.035
+2020-12-24 21:20:11,114 - root - INFO - [1/30] [3000/3437] mean_loss : 2.023, state_loss : 0.329, gen_loss : 1.486, dom_loss : 0.298
+2020-12-24 21:21:31,296 - root - INFO - [1/30] [3200/3437] mean_loss : 1.915, state_loss : 0.367, gen_loss : 1.417, dom_loss : 0.247
+2020-12-24 21:22:51,428 - root - INFO - [1/30] [3400/3437] mean_loss : 1.829, state_loss : 0.370, gen_loss : 1.574, dom_loss : 0.047
+2020-12-24 21:24:59,706 - root - INFO - ------------------------------
+2020-12-24 21:24:59,707 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-24 21:24:59,707 - root - INFO - Epoch 1 joint accuracy : 0.0136
+2020-12-24 21:24:59,707 - root - INFO - Epoch 1 slot turn accuracy : 0.8142
+2020-12-24 21:24:59,707 - root - INFO - Epoch 1 slot turn F1: 0.0136
+2020-12-24 21:24:59,707 - root - INFO - Epoch 1 op accuracy : 0.8142
+2020-12-24 21:24:59,707 - root - INFO - Epoch 1 op F1 : {'delete': 0, 'update': 0, 'dontcare': 0, 'carryover': 0.8976158131535326}
+2020-12-24 21:24:59,707 - root - INFO - Epoch 1 op hit count : {'delete': 0, 'update': 0, 'dontcare': 0, 'carryover': 180055}
+2020-12-24 21:24:59,707 - root - INFO - Epoch 1 op all count : {'delete': 0, 'update': 40300, 'dontcare': 775, 'carryover': 180055}
+2020-12-24 21:24:59,707 - root - INFO - Final Joint Accuracy : 0.0000
+2020-12-24 21:24:59,707 - root - INFO - Final slot turn F1 : 0.0000
+2020-12-24 21:24:59,707 - root - INFO - Latency Per Prediction : 12.518937 ms
+2020-12-24 21:24:59,707 - root - INFO - -----------------------------
+
+2020-12-24 21:25:00,263 - root - INFO - Best Score : {'epoch': 1, 'joint_acc': 0.0135666802333469, 'slot_acc': 0.814217880884545, 'slot_f1': 0.0135666802333469, 'op_acc': 0.814249536471756, 'op_f1': {'delete': 0, 'update': 0, 'dontcare': 0, 'carryover': 0.8976158131535326}, 'final_slot_f1': 0.0}
+2020-12-24 21:25:00,263 - root - INFO - 
+
+2020-12-24 21:25:01,123 - root - INFO - [2/30] [0/3437] mean_loss : 0.803, state_loss : 0.238, gen_loss : 0.628, dom_loss : 0.028
+2020-12-24 21:26:28,323 - root - INFO - [2/30] [200/3437] mean_loss : 1.730, state_loss : 0.309, gen_loss : 0.780, dom_loss : 0.127
+2020-12-24 21:27:49,276 - root - INFO - [2/30] [400/3437] mean_loss : 1.598, state_loss : 0.307, gen_loss : 1.619, dom_loss : 0.109
+2020-12-24 21:29:10,159 - root - INFO - [2/30] [600/3437] mean_loss : 1.620, state_loss : 0.392, gen_loss : 1.002, dom_loss : 0.302
+2020-12-24 21:30:31,372 - root - INFO - [2/30] [800/3437] mean_loss : 1.548, state_loss : 0.384, gen_loss : 0.412, dom_loss : 0.027
+2020-12-24 21:31:50,369 - root - INFO - [2/30] [1000/3437] mean_loss : 1.427, state_loss : 0.366, gen_loss : 1.951, dom_loss : 0.124
+2020-12-24 21:33:11,444 - root - INFO - [2/30] [1200/3437] mean_loss : 1.412, state_loss : 0.338, gen_loss : 0.914, dom_loss : 0.059
+2020-12-24 21:34:32,346 - root - INFO - [2/30] [1400/3437] mean_loss : 1.353, state_loss : 0.367, gen_loss : 1.245, dom_loss : 0.159
+2020-12-24 21:35:53,813 - root - INFO - [2/30] [1600/3437] mean_loss : 1.366, state_loss : 0.313, gen_loss : 1.309, dom_loss : 0.022
+2020-12-24 21:37:14,309 - root - INFO - [2/30] [1800/3437] mean_loss : 1.213, state_loss : 0.388, gen_loss : 0.788, dom_loss : 0.025
+2020-12-24 21:38:35,761 - root - INFO - [2/30] [2000/3437] mean_loss : 1.272, state_loss : 0.432, gen_loss : 0.728, dom_loss : 0.018
+2020-12-24 21:39:57,943 - root - INFO - [2/30] [2200/3437] mean_loss : 1.238, state_loss : 0.328, gen_loss : 0.698, dom_loss : 0.058
+2020-12-24 21:41:19,422 - root - INFO - [2/30] [2400/3437] mean_loss : 1.169, state_loss : 0.204, gen_loss : 0.534, dom_loss : 0.262
+2020-12-24 21:42:40,083 - root - INFO - [2/30] [2600/3437] mean_loss : 1.148, state_loss : 0.207, gen_loss : 1.329, dom_loss : 0.321
+2020-12-24 21:44:01,500 - root - INFO - [2/30] [2800/3437] mean_loss : 1.136, state_loss : 0.229, gen_loss : 0.210, dom_loss : 0.029
+2020-12-24 21:45:22,124 - root - INFO - [2/30] [3000/3437] mean_loss : 1.133, state_loss : 0.247, gen_loss : 0.960, dom_loss : 0.457
+2020-12-24 21:46:43,155 - root - INFO - [2/30] [3200/3437] mean_loss : 1.030, state_loss : 0.239, gen_loss : 0.329, dom_loss : 0.015
+2020-12-24 21:48:03,014 - root - INFO - [2/30] [3400/3437] mean_loss : 1.024, state_loss : 0.177, gen_loss : 0.354, dom_loss : 0.019
+2020-12-24 21:51:39,502 - root - INFO - ------------------------------
+2020-12-24 21:51:39,503 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-24 21:51:39,503 - root - INFO - Epoch 2 joint accuracy : 0.0339
+2020-12-24 21:51:39,503 - root - INFO - Epoch 2 slot turn accuracy : 0.8567
+2020-12-24 21:51:39,503 - root - INFO - Epoch 2 slot turn F1: 0.4488
+2020-12-24 21:51:39,503 - root - INFO - Epoch 2 op accuracy : 0.8570
+2020-12-24 21:51:39,503 - root - INFO - Epoch 2 op F1 : {'delete': 0, 'update': 0.2068178938030668, 'dontcare': 0, 'carryover': 0.9218467721578507}
+2020-12-24 21:51:39,503 - root - INFO - Epoch 2 op hit count : {'delete': 0, 'update': 3264, 'dontcare': 0, 'carryover': 186249}
+2020-12-24 21:51:39,504 - root - INFO - Epoch 2 op all count : {'delete': 5843, 'update': 26436, 'dontcare': 775, 'carryover': 188076}
+2020-12-24 21:51:39,504 - root - INFO - Final Joint Accuracy : 0.0020
+2020-12-24 21:51:39,504 - root - INFO - Final slot turn F1 : 0.4416
+2020-12-24 21:51:39,504 - root - INFO - Latency Per Prediction : 23.586288 ms
+2020-12-24 21:51:39,504 - root - INFO - -----------------------------
+
+2020-12-24 21:51:41,692 - root - INFO - Best Score : {'epoch': 2, 'joint_acc': 0.03391670058336725, 'slot_acc': 0.856740378962584, 'slot_f1': 0.44881929184488994, 'op_acc': 0.8570207570207404, 'op_f1': {'delete': 0, 'update': 0.2068178938030668, 'dontcare': 0, 'carryover': 0.9218467721578507}, 'final_slot_f1': 0.44157875855933537}
+2020-12-24 21:51:41,692 - root - INFO - 
+
+2020-12-24 21:51:42,596 - root - INFO - [3/30] [0/3437] mean_loss : 1.158, state_loss : 0.334, gen_loss : 0.954, dom_loss : 0.018
+2020-12-24 21:53:03,962 - root - INFO - [3/30] [200/3437] mean_loss : 0.994, state_loss : 0.191, gen_loss : 0.194, dom_loss : 0.225
+2020-12-24 21:54:24,988 - root - INFO - [3/30] [400/3437] mean_loss : 0.981, state_loss : 0.211, gen_loss : 1.521, dom_loss : 0.026
+2020-12-24 21:55:46,133 - root - INFO - [3/30] [600/3437] mean_loss : 0.932, state_loss : 0.164, gen_loss : 0.465, dom_loss : 0.047
+2020-12-24 21:57:05,700 - root - INFO - [3/30] [800/3437] mean_loss : 1.003, state_loss : 0.200, gen_loss : 0.386, dom_loss : 0.020
+2020-12-24 21:58:25,479 - root - INFO - [3/30] [1000/3437] mean_loss : 0.974, state_loss : 0.143, gen_loss : 0.493, dom_loss : 0.254
+2020-12-24 21:59:46,813 - root - INFO - [3/30] [1200/3437] mean_loss : 0.934, state_loss : 0.152, gen_loss : 0.146, dom_loss : 0.021
+2020-12-24 22:01:08,534 - root - INFO - [3/30] [1400/3437] mean_loss : 0.904, state_loss : 0.164, gen_loss : 0.870, dom_loss : 0.341
+2020-12-24 22:02:30,099 - root - INFO - [3/30] [1600/3437] mean_loss : 0.862, state_loss : 0.161, gen_loss : 0.116, dom_loss : 0.026
+2020-12-24 22:03:51,131 - root - INFO - [3/30] [1800/3437] mean_loss : 0.861, state_loss : 0.139, gen_loss : 0.438, dom_loss : 0.019
+2020-12-24 22:05:12,045 - root - INFO - [3/30] [2000/3437] mean_loss : 1.015, state_loss : 0.131, gen_loss : 0.467, dom_loss : 0.115
+2020-12-24 22:06:33,339 - root - INFO - [3/30] [2200/3437] mean_loss : 0.897, state_loss : 0.097, gen_loss : 0.392, dom_loss : 0.014
+2020-12-24 22:07:54,476 - root - INFO - [3/30] [2400/3437] mean_loss : 0.926, state_loss : 0.056, gen_loss : 0.422, dom_loss : 0.024
+2020-12-24 22:09:15,589 - root - INFO - [3/30] [2600/3437] mean_loss : 0.887, state_loss : 0.136, gen_loss : 0.764, dom_loss : 0.026
+2020-12-24 22:10:35,099 - root - INFO - [3/30] [2800/3437] mean_loss : 0.807, state_loss : 0.105, gen_loss : 0.722, dom_loss : 0.333
+2020-12-24 22:11:57,039 - root - INFO - [3/30] [3000/3437] mean_loss : 0.876, state_loss : 0.197, gen_loss : 0.595, dom_loss : 0.028
+2020-12-24 22:13:16,863 - root - INFO - [3/30] [3200/3437] mean_loss : 0.876, state_loss : 0.140, gen_loss : 0.951, dom_loss : 0.015
+2020-12-24 22:14:37,600 - root - INFO - [3/30] [3400/3437] mean_loss : 0.833, state_loss : 0.078, gen_loss : 0.814, dom_loss : 0.040
+2020-12-24 22:18:56,413 - root - INFO - ------------------------------
+2020-12-24 22:18:56,414 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-24 22:18:56,414 - root - INFO - Epoch 3 joint accuracy : 0.2036
+2020-12-24 22:18:56,414 - root - INFO - Epoch 3 slot turn accuracy : 0.9349
+2020-12-24 22:18:56,414 - root - INFO - Epoch 3 slot turn F1: 0.7679
+2020-12-24 22:18:56,414 - root - INFO - Epoch 3 op accuracy : 0.9374
+2020-12-24 22:18:56,414 - root - INFO - Epoch 3 op F1 : {'delete': 0, 'update': 0.603444459202196, 'dontcare': 0, 'carryover': 0.9667445432166631}
+2020-12-24 22:18:56,414 - root - INFO - Epoch 3 op hit count : {'delete': 0, 'update': 6815, 'dontcare': 0, 'carryover': 200483}
+2020-12-24 22:18:56,414 - root - INFO - Epoch 3 op all count : {'delete': 4139, 'update': 14047, 'dontcare': 775, 'carryover': 202169}
+2020-12-24 22:18:56,414 - root - INFO - Final Joint Accuracy : 0.0540
+2020-12-24 22:18:56,414 - root - INFO - Final slot turn F1 : 0.7340
+2020-12-24 22:18:56,414 - root - INFO - Latency Per Prediction : 29.339296 ms
+2020-12-24 22:18:56,414 - root - INFO - -----------------------------
+
+2020-12-24 22:18:58,608 - root - INFO - Best Score : {'epoch': 3, 'joint_acc': 0.20363587030253696, 'slot_acc': 0.9349206349205891, 'slot_f1': 0.7678897202899556, 'op_acc': 0.9374485596707363, 'op_f1': {'delete': 0, 'update': 0.603444459202196, 'dontcare': 0, 'carryover': 0.9667445432166631}, 'final_slot_f1': 0.733999816234418}
+2020-12-24 22:18:58,609 - root - INFO - 
+
+2020-12-24 22:18:59,607 - root - INFO - [4/30] [0/3437] mean_loss : 0.729, state_loss : 0.115, gen_loss : 0.627, dom_loss : 0.022
+2020-12-24 22:20:20,363 - root - INFO - [4/30] [200/3437] mean_loss : 0.867, state_loss : 0.172, gen_loss : 0.589, dom_loss : 0.011
+2020-12-24 22:21:41,003 - root - INFO - [4/30] [400/3437] mean_loss : 0.791, state_loss : 0.118, gen_loss : 0.171, dom_loss : 0.058
+2020-12-24 22:23:00,840 - root - INFO - [4/30] [600/3437] mean_loss : 0.716, state_loss : 0.110, gen_loss : 0.315, dom_loss : 0.271
+2020-12-24 22:24:21,054 - root - INFO - [4/30] [800/3437] mean_loss : 0.806, state_loss : 0.090, gen_loss : 0.364, dom_loss : 0.010
+2020-12-24 22:25:41,967 - root - INFO - [4/30] [1000/3437] mean_loss : 0.815, state_loss : 0.056, gen_loss : 0.102, dom_loss : 0.013
+2020-12-24 22:27:02,663 - root - INFO - [4/30] [1200/3437] mean_loss : 0.756, state_loss : 0.059, gen_loss : 0.231, dom_loss : 0.009
+2020-12-24 22:28:23,341 - root - INFO - [4/30] [1400/3437] mean_loss : 0.667, state_loss : 0.075, gen_loss : 0.142, dom_loss : 0.026
+2020-12-24 22:29:43,635 - root - INFO - [4/30] [1600/3437] mean_loss : 0.768, state_loss : 0.093, gen_loss : 0.036, dom_loss : 0.233
+2020-12-24 22:31:04,221 - root - INFO - [4/30] [1800/3437] mean_loss : 0.728, state_loss : 0.186, gen_loss : 1.480, dom_loss : 0.271
+2020-12-24 22:32:24,140 - root - INFO - [4/30] [2000/3437] mean_loss : 0.683, state_loss : 0.093, gen_loss : 0.503, dom_loss : 0.353
+2020-12-24 22:33:43,747 - root - INFO - [4/30] [2200/3437] mean_loss : 0.740, state_loss : 0.068, gen_loss : 0.591, dom_loss : 0.207
+2020-12-24 22:35:03,602 - root - INFO - [4/30] [2400/3437] mean_loss : 0.739, state_loss : 0.080, gen_loss : 0.562, dom_loss : 0.009
+2020-12-24 22:36:23,688 - root - INFO - [4/30] [2600/3437] mean_loss : 0.695, state_loss : 0.091, gen_loss : 0.398, dom_loss : 0.045
+2020-12-24 22:37:43,534 - root - INFO - [4/30] [2800/3437] mean_loss : 0.709, state_loss : 0.116, gen_loss : 0.238, dom_loss : 0.015
+2020-12-24 22:39:05,176 - root - INFO - [4/30] [3000/3437] mean_loss : 0.701, state_loss : 0.119, gen_loss : 0.213, dom_loss : 0.436
+2020-12-24 22:40:25,216 - root - INFO - [4/30] [3200/3437] mean_loss : 0.665, state_loss : 0.059, gen_loss : 0.441, dom_loss : 0.032
+2020-12-24 22:41:46,622 - root - INFO - [4/30] [3400/3437] mean_loss : 0.691, state_loss : 0.051, gen_loss : 0.084, dom_loss : 0.053
+2020-12-24 22:46:01,313 - root - INFO - ------------------------------
+2020-12-24 22:46:01,314 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-24 22:46:01,314 - root - INFO - Epoch 4 joint accuracy : 0.3896
+2020-12-24 22:46:01,314 - root - INFO - Epoch 4 slot turn accuracy : 0.9602
+2020-12-24 22:46:01,314 - root - INFO - Epoch 4 slot turn F1: 0.8514
+2020-12-24 22:46:01,314 - root - INFO - Epoch 4 op accuracy : 0.9619
+2020-12-24 22:46:01,314 - root - INFO - Epoch 4 op F1 : {'delete': 0, 'update': 0.7232111692844678, 'dontcare': 0, 'carryover': 0.9799843079645427}
+2020-12-24 22:46:01,314 - root - INFO - Epoch 4 op hit count : {'delete': 0, 'update': 7252, 'dontcare': 0, 'carryover': 205464}
+2020-12-24 22:46:01,314 - root - INFO - Epoch 4 op all count : {'delete': 2109, 'update': 11840, 'dontcare': 775, 'carryover': 206406}
+2020-12-24 22:46:01,314 - root - INFO - Final Joint Accuracy : 0.1860
+2020-12-24 22:46:01,315 - root - INFO - Final slot turn F1 : 0.8239
+2020-12-24 22:46:01,315 - root - INFO - Latency Per Prediction : 28.816614 ms
+2020-12-24 22:46:01,315 - root - INFO - -----------------------------
+
+2020-12-24 22:46:03,638 - root - INFO - Best Score : {'epoch': 4, 'joint_acc': 0.38963505630172296, 'slot_acc': 0.9602315380092685, 'slot_f1': 0.8513855148550025, 'op_acc': 0.9619499841721592, 'op_f1': {'delete': 0, 'update': 0.7232111692844678, 'dontcare': 0, 'carryover': 0.9799843079645427}, 'final_slot_f1': 0.823863417339797}
+2020-12-24 22:46:03,639 - root - INFO - 
+
+2020-12-24 22:46:04,587 - root - INFO - [5/30] [0/3437] mean_loss : 0.234, state_loss : 0.043, gen_loss : 0.184, dom_loss : 0.014
+2020-12-24 22:47:25,846 - root - INFO - [5/30] [200/3437] mean_loss : 0.628, state_loss : 0.043, gen_loss : 0.460, dom_loss : 0.044
+2020-12-24 22:48:45,520 - root - INFO - [5/30] [400/3437] mean_loss : 0.614, state_loss : 0.106, gen_loss : 0.186, dom_loss : 0.005
+2020-12-24 22:50:05,436 - root - INFO - [5/30] [600/3437] mean_loss : 0.710, state_loss : 0.069, gen_loss : 0.103, dom_loss : 0.100
+2020-12-24 22:51:25,318 - root - INFO - [5/30] [800/3437] mean_loss : 0.600, state_loss : 0.038, gen_loss : 0.169, dom_loss : 0.006
+2020-12-24 22:52:46,177 - root - INFO - [5/30] [1000/3437] mean_loss : 0.672, state_loss : 0.087, gen_loss : 0.808, dom_loss : 0.020
+2020-12-24 22:54:06,085 - root - INFO - [5/30] [1200/3437] mean_loss : 0.621, state_loss : 0.116, gen_loss : 0.952, dom_loss : 0.020
+2020-12-24 22:55:26,036 - root - INFO - [5/30] [1400/3437] mean_loss : 0.666, state_loss : 0.099, gen_loss : 0.126, dom_loss : 0.326
+2020-12-24 22:56:46,468 - root - INFO - [5/30] [1600/3437] mean_loss : 0.653, state_loss : 0.058, gen_loss : 0.191, dom_loss : 0.017
+2020-12-24 22:58:07,163 - root - INFO - [5/30] [1800/3437] mean_loss : 0.635, state_loss : 0.110, gen_loss : 0.107, dom_loss : 0.015
+2020-12-24 22:59:24,756 - root - INFO - [5/30] [2000/3437] mean_loss : 0.624, state_loss : 0.117, gen_loss : 0.795, dom_loss : 0.007
+2020-12-24 23:00:44,530 - root - INFO - [5/30] [2200/3437] mean_loss : 0.644, state_loss : 0.150, gen_loss : 0.336, dom_loss : 0.009
+2020-12-24 23:02:05,608 - root - INFO - [5/30] [2400/3437] mean_loss : 0.642, state_loss : 0.077, gen_loss : 0.092, dom_loss : 0.019
+2020-12-24 23:03:24,573 - root - INFO - [5/30] [2600/3437] mean_loss : 0.562, state_loss : 0.057, gen_loss : 0.570, dom_loss : 0.016
+2020-12-24 23:04:45,623 - root - INFO - [5/30] [2800/3437] mean_loss : 0.634, state_loss : 0.067, gen_loss : 0.093, dom_loss : 0.009
+2020-12-24 23:06:06,126 - root - INFO - [5/30] [3000/3437] mean_loss : 0.587, state_loss : 0.057, gen_loss : 0.245, dom_loss : 0.011
+2020-12-24 23:07:26,216 - root - INFO - [5/30] [3200/3437] mean_loss : 0.551, state_loss : 0.070, gen_loss : 0.405, dom_loss : 0.073
+2020-12-24 23:08:46,656 - root - INFO - [5/30] [3400/3437] mean_loss : 0.606, state_loss : 0.064, gen_loss : 0.088, dom_loss : 0.006
+2020-12-24 23:12:59,984 - root - INFO - ------------------------------
+2020-12-24 23:12:59,984 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-24 23:12:59,984 - root - INFO - Epoch 5 joint accuracy : 0.4405
+2020-12-24 23:12:59,984 - root - INFO - Epoch 5 slot turn accuracy : 0.9655
+2020-12-24 23:12:59,984 - root - INFO - Epoch 5 slot turn F1: 0.8775
+2020-12-24 23:12:59,985 - root - INFO - Epoch 5 op accuracy : 0.9669
+2020-12-24 23:12:59,985 - root - INFO - Epoch 5 op F1 : {'delete': 0, 'update': 0.7551020408163266, 'dontcare': 0.01585204755614267, 'carryover': 0.9826072883743955}
+2020-12-24 23:12:59,985 - root - INFO - Epoch 5 op hit count : {'delete': 0, 'update': 7363, 'dontcare': 6, 'carryover': 206434}
+2020-12-24 23:12:59,985 - root - INFO - Epoch 5 op all count : {'delete': 1825, 'update': 11286, 'dontcare': 742, 'carryover': 207277}
+2020-12-24 23:12:59,985 - root - INFO - Final Joint Accuracy : 0.2470
+2020-12-24 23:12:59,985 - root - INFO - Final slot turn F1 : 0.8552
+2020-12-24 23:12:59,985 - root - INFO - Latency Per Prediction : 28.637540 ms
+2020-12-24 23:12:59,985 - root - INFO - -----------------------------
+
+2020-12-24 23:13:02,063 - root - INFO - Best Score : {'epoch': 5, 'joint_acc': 0.44051010717677386, 'slot_acc': 0.965518021073525, 'slot_f1': 0.8775043326915758, 'op_acc': 0.9668656446433724, 'op_f1': {'delete': 0, 'update': 0.7551020408163266, 'dontcare': 0.01585204755614267, 'carryover': 0.9826072883743955}, 'final_slot_f1': 0.8552287460348186}
+2020-12-24 23:13:02,063 - root - INFO - 
+
+2020-12-24 23:13:03,090 - root - INFO - [6/30] [0/3437] mean_loss : 0.537, state_loss : 0.080, gen_loss : 0.471, dom_loss : 0.013
+2020-12-24 23:14:23,436 - root - INFO - [6/30] [200/3437] mean_loss : 0.567, state_loss : 0.098, gen_loss : 0.344, dom_loss : 0.004
+2020-12-24 23:15:44,821 - root - INFO - [6/30] [400/3437] mean_loss : 0.575, state_loss : 0.070, gen_loss : 0.124, dom_loss : 0.033
+2020-12-24 23:17:05,122 - root - INFO - [6/30] [600/3437] mean_loss : 0.579, state_loss : 0.087, gen_loss : 0.126, dom_loss : 0.036
+2020-12-24 23:18:25,907 - root - INFO - [6/30] [800/3437] mean_loss : 0.532, state_loss : 0.072, gen_loss : 0.315, dom_loss : 0.087
+2020-12-24 23:19:45,866 - root - INFO - [6/30] [1000/3437] mean_loss : 0.604, state_loss : 0.075, gen_loss : 0.010, dom_loss : 0.044
+2020-12-24 23:21:06,784 - root - INFO - [6/30] [1200/3437] mean_loss : 0.609, state_loss : 0.056, gen_loss : 0.277, dom_loss : 0.016
+2020-12-24 23:22:27,614 - root - INFO - [6/30] [1400/3437] mean_loss : 0.577, state_loss : 0.118, gen_loss : 0.149, dom_loss : 0.026
+2020-12-24 23:23:47,791 - root - INFO - [6/30] [1600/3437] mean_loss : 0.512, state_loss : 0.143, gen_loss : 0.083, dom_loss : 0.049
+2020-12-24 23:25:08,001 - root - INFO - [6/30] [1800/3437] mean_loss : 0.673, state_loss : 0.056, gen_loss : 0.167, dom_loss : 0.038
+2020-12-24 23:26:27,056 - root - INFO - [6/30] [2000/3437] mean_loss : 0.555, state_loss : 0.118, gen_loss : 1.159, dom_loss : 0.024
+2020-12-24 23:27:49,117 - root - INFO - [6/30] [2200/3437] mean_loss : 0.601, state_loss : 0.064, gen_loss : 0.509, dom_loss : 0.145
+2020-12-24 23:29:09,041 - root - INFO - [6/30] [2400/3437] mean_loss : 0.510, state_loss : 0.099, gen_loss : 0.578, dom_loss : 0.008
+2020-12-24 23:30:28,929 - root - INFO - [6/30] [2600/3437] mean_loss : 0.542, state_loss : 0.045, gen_loss : 0.755, dom_loss : 0.032
+2020-12-24 23:31:48,807 - root - INFO - [6/30] [2800/3437] mean_loss : 0.565, state_loss : 0.112, gen_loss : 0.279, dom_loss : 0.012
+2020-12-24 23:33:09,114 - root - INFO - [6/30] [3000/3437] mean_loss : 0.537, state_loss : 0.090, gen_loss : 0.425, dom_loss : 0.015
+2020-12-24 23:34:29,937 - root - INFO - [6/30] [3200/3437] mean_loss : 0.568, state_loss : 0.067, gen_loss : 0.085, dom_loss : 0.297
+2020-12-24 23:35:51,083 - root - INFO - [6/30] [3400/3437] mean_loss : 0.476, state_loss : 0.035, gen_loss : 0.400, dom_loss : 0.012
+2020-12-24 23:40:04,965 - root - INFO - ------------------------------
+2020-12-24 23:40:04,965 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-24 23:40:04,965 - root - INFO - Epoch 6 joint accuracy : 0.4230
+2020-12-24 23:40:04,965 - root - INFO - Epoch 6 slot turn accuracy : 0.9638
+2020-12-24 23:40:04,965 - root - INFO - Epoch 6 slot turn F1: 0.8629
+2020-12-24 23:40:04,965 - root - INFO - Epoch 6 op accuracy : 0.9657
+2020-12-24 23:40:04,965 - root - INFO - Epoch 6 op F1 : {'delete': 0, 'update': 0.7353044525877215, 'dontcare': 0.061281337047353765, 'carryover': 0.9820053862400854}
+2020-12-24 23:40:04,966 - root - INFO - Epoch 6 op hit count : {'delete': 0, 'update': 7324, 'dontcare': 22, 'carryover': 206201}
+2020-12-24 23:40:04,966 - root - INFO - Epoch 6 op all count : {'delete': 1662, 'update': 11833, 'dontcare': 668, 'carryover': 206967}
+2020-12-24 23:40:04,966 - root - INFO - Final Joint Accuracy : 0.2230
+2020-12-24 23:40:04,966 - root - INFO - Final slot turn F1 : 0.8361
+2020-12-24 23:40:04,966 - root - INFO - Latency Per Prediction : 28.529677 ms
+2020-12-24 23:40:04,966 - root - INFO - -----------------------------
+
+2020-12-24 23:40:05,199 - root - INFO - Best Score : {'epoch': 5, 'joint_acc': 0.44051010717677386, 'slot_acc': 0.965518021073525, 'slot_f1': 0.8775043326915758, 'op_acc': 0.9668656446433724, 'op_f1': {'delete': 0, 'update': 0.7551020408163266, 'dontcare': 0.01585204755614267, 'carryover': 0.9826072883743955}, 'final_slot_f1': 0.8552287460348186}
+2020-12-24 23:40:05,199 - root - INFO - 
+
+2020-12-24 23:40:05,998 - root - INFO - [7/30] [0/3437] mean_loss : 0.363, state_loss : 0.102, gen_loss : 0.078, dom_loss : 0.117
+2020-12-24 23:41:25,948 - root - INFO - [7/30] [200/3437] mean_loss : 0.514, state_loss : 0.072, gen_loss : 0.243, dom_loss : 0.006
+2020-12-24 23:42:46,707 - root - INFO - [7/30] [400/3437] mean_loss : 0.545, state_loss : 0.080, gen_loss : 0.325, dom_loss : 0.009
+2020-12-24 23:44:07,130 - root - INFO - [7/30] [600/3437] mean_loss : 0.531, state_loss : 0.085, gen_loss : 0.350, dom_loss : 0.006
+2020-12-24 23:45:28,053 - root - INFO - [7/30] [800/3437] mean_loss : 0.500, state_loss : 0.106, gen_loss : 0.701, dom_loss : 0.012
+2020-12-24 23:46:48,964 - root - INFO - [7/30] [1000/3437] mean_loss : 0.525, state_loss : 0.077, gen_loss : 0.177, dom_loss : 0.108
+2020-12-24 23:48:09,682 - root - INFO - [7/30] [1200/3437] mean_loss : 0.549, state_loss : 0.159, gen_loss : 0.382, dom_loss : 0.005
+2020-12-24 23:49:30,191 - root - INFO - [7/30] [1400/3437] mean_loss : 0.533, state_loss : 0.102, gen_loss : 0.372, dom_loss : 0.011
+2020-12-24 23:50:50,303 - root - INFO - [7/30] [1600/3437] mean_loss : 0.510, state_loss : 0.045, gen_loss : 0.188, dom_loss : 0.009
+2020-12-24 23:52:09,596 - root - INFO - [7/30] [1800/3437] mean_loss : 0.476, state_loss : 0.080, gen_loss : 0.610, dom_loss : 0.018
+2020-12-24 23:53:29,330 - root - INFO - [7/30] [2000/3437] mean_loss : 0.537, state_loss : 0.100, gen_loss : 0.159, dom_loss : 0.015
+2020-12-24 23:54:50,415 - root - INFO - [7/30] [2200/3437] mean_loss : 0.510, state_loss : 0.116, gen_loss : 0.507, dom_loss : 0.036
+2020-12-24 23:56:11,159 - root - INFO - [7/30] [2400/3437] mean_loss : 0.475, state_loss : 0.113, gen_loss : 0.356, dom_loss : 0.090
+2020-12-24 23:57:32,101 - root - INFO - [7/30] [2600/3437] mean_loss : 0.541, state_loss : 0.099, gen_loss : 0.024, dom_loss : 0.012
+2020-12-24 23:58:52,453 - root - INFO - [7/30] [2800/3437] mean_loss : 0.484, state_loss : 0.030, gen_loss : 0.030, dom_loss : 0.009
+2020-12-25 00:00:11,642 - root - INFO - [7/30] [3000/3437] mean_loss : 0.440, state_loss : 0.049, gen_loss : 0.068, dom_loss : 0.007
+2020-12-25 00:01:31,679 - root - INFO - [7/30] [3200/3437] mean_loss : 0.500, state_loss : 0.044, gen_loss : 0.290, dom_loss : 0.025
+2020-12-25 00:02:51,626 - root - INFO - [7/30] [3400/3437] mean_loss : 0.483, state_loss : 0.112, gen_loss : 0.466, dom_loss : 0.016
+2020-12-25 00:07:04,399 - root - INFO - ------------------------------
+2020-12-25 00:07:04,399 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 00:07:04,399 - root - INFO - Epoch 7 joint accuracy : 0.4704
+2020-12-25 00:07:04,399 - root - INFO - Epoch 7 slot turn accuracy : 0.9683
+2020-12-25 00:07:04,399 - root - INFO - Epoch 7 slot turn F1: 0.8897
+2020-12-25 00:07:04,399 - root - INFO - Epoch 7 op accuracy : 0.9694
+2020-12-25 00:07:04,400 - root - INFO - Epoch 7 op F1 : {'delete': 0, 'update': 0.7711006781429316, 'dontcare': 0.1597542242703533, 'carryover': 0.9839699847355832}
+2020-12-25 00:07:04,400 - root - INFO - Epoch 7 op hit count : {'delete': 0, 'update': 7391, 'dontcare': 52, 'carryover': 206922}
+2020-12-25 00:07:04,400 - root - INFO - Epoch 7 op all count : {'delete': 1853, 'update': 11010, 'dontcare': 542, 'carryover': 207725}
+2020-12-25 00:07:04,400 - root - INFO - Final Joint Accuracy : 0.2810
+2020-12-25 00:07:04,400 - root - INFO - Final slot turn F1 : 0.8720
+2020-12-25 00:07:04,400 - root - INFO - Latency Per Prediction : 28.543995 ms
+2020-12-25 00:07:04,400 - root - INFO - -----------------------------
+
+2020-12-25 00:07:06,656 - root - INFO - Best Score : {'epoch': 7, 'joint_acc': 0.47035680369013705, 'slot_acc': 0.9683218016550867, 'slot_f1': 0.8897384254684648, 'op_acc': 0.9694071360737556, 'op_f1': {'delete': 0, 'update': 0.7711006781429316, 'dontcare': 0.1597542242703533, 'carryover': 0.9839699847355832}, 'final_slot_f1': 0.8719723313438287}
+2020-12-25 00:07:06,657 - root - INFO - 
+
+2020-12-25 00:07:07,598 - root - INFO - [8/30] [0/3437] mean_loss : 0.372, state_loss : 0.110, gen_loss : 0.291, dom_loss : 0.013
+2020-12-25 00:08:28,376 - root - INFO - [8/30] [200/3437] mean_loss : 0.476, state_loss : 0.061, gen_loss : 0.076, dom_loss : 0.104
+2020-12-25 00:09:49,681 - root - INFO - [8/30] [400/3437] mean_loss : 0.500, state_loss : 0.073, gen_loss : 0.802, dom_loss : 0.004
+2020-12-25 00:11:10,066 - root - INFO - [8/30] [600/3437] mean_loss : 0.456, state_loss : 0.079, gen_loss : 0.192, dom_loss : 0.014
+2020-12-25 00:12:30,585 - root - INFO - [8/30] [800/3437] mean_loss : 0.466, state_loss : 0.054, gen_loss : 0.244, dom_loss : 0.005
+2020-12-25 00:13:51,441 - root - INFO - [8/30] [1000/3437] mean_loss : 0.420, state_loss : 0.090, gen_loss : 0.514, dom_loss : 0.004
+2020-12-25 00:15:11,807 - root - INFO - [8/30] [1200/3437] mean_loss : 0.432, state_loss : 0.068, gen_loss : 0.064, dom_loss : 0.120
+2020-12-25 00:16:31,736 - root - INFO - [8/30] [1400/3437] mean_loss : 0.423, state_loss : 0.045, gen_loss : 0.208, dom_loss : 0.106
+2020-12-25 00:17:53,766 - root - INFO - [8/30] [1600/3437] mean_loss : 0.466, state_loss : 0.101, gen_loss : 0.439, dom_loss : 0.005
+2020-12-25 00:19:13,950 - root - INFO - [8/30] [1800/3437] mean_loss : 0.448, state_loss : 0.089, gen_loss : 0.276, dom_loss : 0.019
+2020-12-25 00:20:35,451 - root - INFO - [8/30] [2000/3437] mean_loss : 0.448, state_loss : 0.030, gen_loss : 0.110, dom_loss : 0.003
+2020-12-25 00:21:55,825 - root - INFO - [8/30] [2200/3437] mean_loss : 0.474, state_loss : 0.060, gen_loss : 0.261, dom_loss : 0.007
+2020-12-25 00:23:15,849 - root - INFO - [8/30] [2400/3437] mean_loss : 0.472, state_loss : 0.129, gen_loss : 0.401, dom_loss : 0.277
+2020-12-25 00:24:36,684 - root - INFO - [8/30] [2600/3437] mean_loss : 0.422, state_loss : 0.100, gen_loss : 0.314, dom_loss : 0.022
+2020-12-25 00:25:58,732 - root - INFO - [8/30] [2800/3437] mean_loss : 0.481, state_loss : 0.059, gen_loss : 0.014, dom_loss : 0.011
+2020-12-25 00:27:19,608 - root - INFO - [8/30] [3000/3437] mean_loss : 0.430, state_loss : 0.123, gen_loss : 0.921, dom_loss : 0.008
+2020-12-25 00:28:40,091 - root - INFO - [8/30] [3200/3437] mean_loss : 0.509, state_loss : 0.015, gen_loss : 0.019, dom_loss : 0.106
+2020-12-25 00:30:00,298 - root - INFO - [8/30] [3400/3437] mean_loss : 0.482, state_loss : 0.042, gen_loss : 1.236, dom_loss : 0.008
+2020-12-25 00:34:18,845 - root - INFO - ------------------------------
+2020-12-25 00:34:18,846 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 00:34:18,846 - root - INFO - Epoch 8 joint accuracy : 0.4911
+2020-12-25 00:34:18,846 - root - INFO - Epoch 8 slot turn accuracy : 0.9701
+2020-12-25 00:34:18,846 - root - INFO - Epoch 8 slot turn F1: 0.9029
+2020-12-25 00:34:18,846 - root - INFO - Epoch 8 op accuracy : 0.9708
+2020-12-25 00:34:18,846 - root - INFO - Epoch 8 op F1 : {'delete': 0.006628787878787878, 'update': 0.7952743334575062, 'dontcare': 0.16282642089093705, 'carryover': 0.9846971519303266}
+2020-12-25 00:34:18,846 - root - INFO - Epoch 8 op hit count : {'delete': 7, 'update': 7472, 'dontcare': 53, 'carryover': 207134}
+2020-12-25 00:34:18,847 - root - INFO - Epoch 8 op all count : {'delete': 2104, 'update': 10449, 'dontcare': 546, 'carryover': 208031}
+2020-12-25 00:34:18,847 - root - INFO - Final Joint Accuracy : 0.3150
+2020-12-25 00:34:18,847 - root - INFO - Final slot turn F1 : 0.8899
+2020-12-25 00:34:18,847 - root - INFO - Latency Per Prediction : 29.285667 ms
+2020-12-25 00:34:18,847 - root - INFO - -----------------------------
+
+2020-12-25 00:34:20,926 - root - INFO - Best Score : {'epoch': 8, 'joint_acc': 0.4911138244471578, 'slot_acc': 0.9700719034051912, 'slot_f1': 0.9029178728038729, 'op_acc': 0.9707683263238375, 'op_f1': {'delete': 0.006628787878787878, 'update': 0.7952743334575062, 'dontcare': 0.16282642089093705, 'carryover': 0.9846971519303266}, 'final_slot_f1': 0.8898914911410126}
+2020-12-25 00:34:20,926 - root - INFO - 
+
+2020-12-25 00:34:21,916 - root - INFO - [9/30] [0/3437] mean_loss : 0.183, state_loss : 0.057, gen_loss : 0.142, dom_loss : 0.006
+2020-12-25 00:35:41,308 - root - INFO - [9/30] [200/3437] mean_loss : 0.384, state_loss : 0.056, gen_loss : 0.540, dom_loss : 0.090
+2020-12-25 00:37:02,354 - root - INFO - [9/30] [400/3437] mean_loss : 0.391, state_loss : 0.106, gen_loss : 0.306, dom_loss : 0.011
+2020-12-25 00:38:22,566 - root - INFO - [9/30] [600/3437] mean_loss : 0.443, state_loss : 0.033, gen_loss : 0.072, dom_loss : 0.013
+2020-12-25 00:39:43,387 - root - INFO - [9/30] [800/3437] mean_loss : 0.377, state_loss : 0.085, gen_loss : 0.285, dom_loss : 0.006
+2020-12-25 00:41:04,797 - root - INFO - [9/30] [1000/3437] mean_loss : 0.416, state_loss : 0.120, gen_loss : 0.189, dom_loss : 0.009
+2020-12-25 00:42:26,323 - root - INFO - [9/30] [1200/3437] mean_loss : 0.408, state_loss : 0.064, gen_loss : 0.430, dom_loss : 0.003
+2020-12-25 00:43:45,929 - root - INFO - [9/30] [1400/3437] mean_loss : 0.449, state_loss : 0.050, gen_loss : 0.992, dom_loss : 0.005
+2020-12-25 00:45:07,654 - root - INFO - [9/30] [1600/3437] mean_loss : 0.407, state_loss : 0.025, gen_loss : 0.178, dom_loss : 0.005
+2020-12-25 00:46:29,563 - root - INFO - [9/30] [1800/3437] mean_loss : 0.476, state_loss : 0.055, gen_loss : 0.019, dom_loss : 0.203
+2020-12-25 00:47:50,043 - root - INFO - [9/30] [2000/3437] mean_loss : 0.415, state_loss : 0.030, gen_loss : 0.004, dom_loss : 0.002
+2020-12-25 00:49:10,000 - root - INFO - [9/30] [2200/3437] mean_loss : 0.414, state_loss : 0.036, gen_loss : 0.265, dom_loss : 0.003
+2020-12-25 00:50:30,065 - root - INFO - [9/30] [2400/3437] mean_loss : 0.408, state_loss : 0.085, gen_loss : 0.086, dom_loss : 0.011
+2020-12-25 00:51:49,540 - root - INFO - [9/30] [2600/3437] mean_loss : 0.399, state_loss : 0.066, gen_loss : 0.084, dom_loss : 0.006
+2020-12-25 00:53:09,339 - root - INFO - [9/30] [2800/3437] mean_loss : 0.453, state_loss : 0.042, gen_loss : 0.278, dom_loss : 0.007
+2020-12-25 00:54:30,022 - root - INFO - [9/30] [3000/3437] mean_loss : 0.412, state_loss : 0.058, gen_loss : 1.471, dom_loss : 0.006
+2020-12-25 00:55:50,622 - root - INFO - [9/30] [3200/3437] mean_loss : 0.446, state_loss : 0.106, gen_loss : 0.314, dom_loss : 0.015
+2020-12-25 00:57:10,282 - root - INFO - [9/30] [3400/3437] mean_loss : 0.441, state_loss : 0.072, gen_loss : 0.858, dom_loss : 0.022
+2020-12-25 01:01:29,192 - root - INFO - ------------------------------
+2020-12-25 01:01:29,192 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 01:01:29,192 - root - INFO - Epoch 9 joint accuracy : 0.4786
+2020-12-25 01:01:29,192 - root - INFO - Epoch 9 slot turn accuracy : 0.9689
+2020-12-25 01:01:29,192 - root - INFO - Epoch 9 slot turn F1: 0.8988
+2020-12-25 01:01:29,193 - root - INFO - Epoch 9 op accuracy : 0.9696
+2020-12-25 01:01:29,193 - root - INFO - Epoch 9 op F1 : {'delete': 0.010305192231470472, 'update': 0.7968725067815543, 'dontcare': 0.2666666666666667, 'carryover': 0.9840698869475848}
+2020-12-25 01:01:29,193 - root - INFO - Epoch 9 op hit count : {'delete': 13, 'update': 7491, 'dontcare': 80, 'carryover': 206820}
+2020-12-25 01:01:29,193 - root - INFO - Epoch 9 op all count : {'delete': 2508, 'update': 10302, 'dontcare': 425, 'carryover': 207895}
+2020-12-25 01:01:29,193 - root - INFO - Final Joint Accuracy : 0.2950
+2020-12-25 01:01:29,193 - root - INFO - Final slot turn F1 : 0.8857
+2020-12-25 01:01:29,193 - root - INFO - Latency Per Prediction : 29.252666 ms
+2020-12-25 01:01:29,193 - root - INFO - -----------------------------
+
+2020-12-25 01:01:29,428 - root - INFO - Best Score : {'epoch': 8, 'joint_acc': 0.4911138244471578, 'slot_acc': 0.9700719034051912, 'slot_f1': 0.9029178728038729, 'op_acc': 0.9707683263238375, 'op_f1': {'delete': 0.006628787878787878, 'update': 0.7952743334575062, 'dontcare': 0.16282642089093705, 'carryover': 0.9846971519303266}, 'final_slot_f1': 0.8898914911410126}
+2020-12-25 01:01:29,428 - root - INFO - 
+
+2020-12-25 01:01:30,416 - root - INFO - [10/30] [0/3437] mean_loss : 0.260, state_loss : 0.084, gen_loss : 0.205, dom_loss : 0.006
+2020-12-25 01:02:51,883 - root - INFO - [10/30] [200/3437] mean_loss : 0.400, state_loss : 0.106, gen_loss : 0.240, dom_loss : 0.008
+2020-12-25 01:04:11,118 - root - INFO - [10/30] [400/3437] mean_loss : 0.392, state_loss : 0.073, gen_loss : 0.226, dom_loss : 0.280
+2020-12-25 01:05:31,711 - root - INFO - [10/30] [600/3437] mean_loss : 0.379, state_loss : 0.039, gen_loss : 0.069, dom_loss : 0.004
+2020-12-25 01:06:52,296 - root - INFO - [10/30] [800/3437] mean_loss : 0.394, state_loss : 0.060, gen_loss : 0.095, dom_loss : 0.004
+2020-12-25 01:08:11,292 - root - INFO - [10/30] [1000/3437] mean_loss : 0.352, state_loss : 0.029, gen_loss : 0.110, dom_loss : 0.004
+2020-12-25 01:09:31,420 - root - INFO - [10/30] [1200/3437] mean_loss : 0.381, state_loss : 0.036, gen_loss : 0.091, dom_loss : 0.187
+2020-12-25 01:10:50,642 - root - INFO - [10/30] [1400/3437] mean_loss : 0.382, state_loss : 0.114, gen_loss : 0.244, dom_loss : 0.250
+2020-12-25 01:12:11,204 - root - INFO - [10/30] [1600/3437] mean_loss : 0.395, state_loss : 0.064, gen_loss : 0.416, dom_loss : 0.163
+2020-12-25 01:13:31,406 - root - INFO - [10/30] [1800/3437] mean_loss : 0.410, state_loss : 0.037, gen_loss : 0.841, dom_loss : 0.016
+2020-12-25 01:14:52,392 - root - INFO - [10/30] [2000/3437] mean_loss : 0.430, state_loss : 0.072, gen_loss : 0.348, dom_loss : 0.023
+2020-12-25 01:16:12,680 - root - INFO - [10/30] [2200/3437] mean_loss : 0.371, state_loss : 0.070, gen_loss : 0.110, dom_loss : 0.112
+2020-12-25 01:17:32,206 - root - INFO - [10/30] [2400/3437] mean_loss : 0.365, state_loss : 0.039, gen_loss : 0.338, dom_loss : 0.003
+2020-12-25 01:18:52,256 - root - INFO - [10/30] [2600/3437] mean_loss : 0.392, state_loss : 0.056, gen_loss : 0.179, dom_loss : 0.003
+2020-12-25 01:20:11,523 - root - INFO - [10/30] [2800/3437] mean_loss : 0.366, state_loss : 0.067, gen_loss : 0.388, dom_loss : 0.057
+2020-12-25 01:21:31,002 - root - INFO - [10/30] [3000/3437] mean_loss : 0.370, state_loss : 0.062, gen_loss : 0.303, dom_loss : 0.010
+2020-12-25 01:22:50,763 - root - INFO - [10/30] [3200/3437] mean_loss : 0.353, state_loss : 0.071, gen_loss : 0.477, dom_loss : 0.010
+2020-12-25 01:24:11,437 - root - INFO - [10/30] [3400/3437] mean_loss : 0.404, state_loss : 0.033, gen_loss : 0.006, dom_loss : 0.031
+2020-12-25 01:28:26,204 - root - INFO - ------------------------------
+2020-12-25 01:28:26,204 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 01:28:26,204 - root - INFO - Epoch 10 joint accuracy : 0.4866
+2020-12-25 01:28:26,204 - root - INFO - Epoch 10 slot turn accuracy : 0.9699
+2020-12-25 01:28:26,204 - root - INFO - Epoch 10 slot turn F1: 0.9026
+2020-12-25 01:28:26,204 - root - INFO - Epoch 10 op accuracy : 0.9707
+2020-12-25 01:28:26,205 - root - INFO - Epoch 10 op F1 : {'delete': 0.009164969450101835, 'update': 0.7850724178031505, 'dontcare': 0.2218798151001541, 'carryover': 0.98463856781919}
+2020-12-25 01:28:26,205 - root - INFO - Epoch 10 op hit count : {'delete': 9, 'update': 7426, 'dontcare': 72, 'carryover': 207133}
+2020-12-25 01:28:26,205 - root - INFO - Epoch 10 op all count : {'delete': 1950, 'update': 10704, 'dontcare': 480, 'carryover': 207996}
+2020-12-25 01:28:26,205 - root - INFO - Final Joint Accuracy : 0.2940
+2020-12-25 01:28:26,205 - root - INFO - Final slot turn F1 : 0.8873
+2020-12-25 01:28:26,205 - root - INFO - Latency Per Prediction : 28.689481 ms
+2020-12-25 01:28:26,205 - root - INFO - -----------------------------
+
+2020-12-25 01:28:26,437 - root - INFO - Best Score : {'epoch': 8, 'joint_acc': 0.4911138244471578, 'slot_acc': 0.9700719034051912, 'slot_f1': 0.9029178728038729, 'op_acc': 0.9707683263238375, 'op_f1': {'delete': 0.006628787878787878, 'update': 0.7952743334575062, 'dontcare': 0.16282642089093705, 'carryover': 0.9846971519303266}, 'final_slot_f1': 0.8898914911410126}
+2020-12-25 01:28:26,437 - root - INFO - 
+
+2020-12-25 01:28:27,312 - root - INFO - [11/30] [0/3437] mean_loss : 0.283, state_loss : 0.055, gen_loss : 0.246, dom_loss : 0.005
+2020-12-25 01:29:47,897 - root - INFO - [11/30] [200/3437] mean_loss : 0.359, state_loss : 0.051, gen_loss : 0.080, dom_loss : 0.003
+2020-12-25 01:31:09,092 - root - INFO - [11/30] [400/3437] mean_loss : 0.328, state_loss : 0.074, gen_loss : 0.011, dom_loss : 0.059
+2020-12-25 01:32:30,616 - root - INFO - [11/30] [600/3437] mean_loss : 0.338, state_loss : 0.074, gen_loss : 0.039, dom_loss : 0.008
+2020-12-25 01:33:50,641 - root - INFO - [11/30] [800/3437] mean_loss : 0.350, state_loss : 0.093, gen_loss : 1.315, dom_loss : 0.002
+2020-12-25 01:35:11,784 - root - INFO - [11/30] [1000/3437] mean_loss : 0.333, state_loss : 0.082, gen_loss : 0.092, dom_loss : 0.002
+2020-12-25 01:36:32,190 - root - INFO - [11/30] [1200/3437] mean_loss : 0.355, state_loss : 0.095, gen_loss : 0.389, dom_loss : 0.032
+2020-12-25 01:37:52,722 - root - INFO - [11/30] [1400/3437] mean_loss : 0.360, state_loss : 0.062, gen_loss : 0.059, dom_loss : 0.002
+2020-12-25 01:39:13,075 - root - INFO - [11/30] [1600/3437] mean_loss : 0.379, state_loss : 0.099, gen_loss : 0.167, dom_loss : 0.004
+2020-12-25 01:40:34,300 - root - INFO - [11/30] [1800/3437] mean_loss : 0.392, state_loss : 0.138, gen_loss : 0.532, dom_loss : 0.009
+2020-12-25 01:41:55,136 - root - INFO - [11/30] [2000/3437] mean_loss : 0.370, state_loss : 0.049, gen_loss : 0.202, dom_loss : 0.020
+2020-12-25 01:43:15,446 - root - INFO - [11/30] [2200/3437] mean_loss : 0.366, state_loss : 0.110, gen_loss : 0.553, dom_loss : 0.518
+2020-12-25 01:44:35,340 - root - INFO - [11/30] [2400/3437] mean_loss : 0.370, state_loss : 0.070, gen_loss : 0.009, dom_loss : 0.029
+2020-12-25 01:45:54,380 - root - INFO - [11/30] [2600/3437] mean_loss : 0.370, state_loss : 0.108, gen_loss : 0.022, dom_loss : 0.004
+2020-12-25 01:47:14,246 - root - INFO - [11/30] [2800/3437] mean_loss : 0.333, state_loss : 0.030, gen_loss : 0.156, dom_loss : 0.003
+2020-12-25 01:48:35,183 - root - INFO - [11/30] [3000/3437] mean_loss : 0.329, state_loss : 0.059, gen_loss : 0.262, dom_loss : 0.081
+2020-12-25 01:49:55,527 - root - INFO - [11/30] [3200/3437] mean_loss : 0.372, state_loss : 0.107, gen_loss : 0.400, dom_loss : 0.194
+2020-12-25 01:51:15,185 - root - INFO - [11/30] [3400/3437] mean_loss : 0.382, state_loss : 0.032, gen_loss : 0.199, dom_loss : 0.016
+2020-12-25 01:55:32,151 - root - INFO - ------------------------------
+2020-12-25 01:55:32,151 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 01:55:32,152 - root - INFO - Epoch 11 joint accuracy : 0.5097
+2020-12-25 01:55:32,152 - root - INFO - Epoch 11 slot turn accuracy : 0.9713
+2020-12-25 01:55:32,152 - root - INFO - Epoch 11 slot turn F1: 0.9068
+2020-12-25 01:55:32,152 - root - INFO - Epoch 11 op accuracy : 0.9721
+2020-12-25 01:55:32,152 - root - INFO - Epoch 11 op F1 : {'delete': 0.015282730514518594, 'update': 0.7990999678559948, 'dontcare': 0.20833333333333334, 'carryover': 0.9853992926483408}
+2020-12-25 01:55:32,152 - root - INFO - Epoch 11 op hit count : {'delete': 15, 'update': 7458, 'dontcare': 65, 'carryover': 207430}
+2020-12-25 01:55:32,152 - root - INFO - Epoch 11 op all count : {'delete': 1945, 'update': 10416, 'dontcare': 503, 'carryover': 208266}
+2020-12-25 01:55:32,152 - root - INFO - Final Joint Accuracy : 0.3310
+2020-12-25 01:55:32,152 - root - INFO - Final slot turn F1 : 0.8932
+2020-12-25 01:55:32,152 - root - INFO - Latency Per Prediction : 29.027377 ms
+2020-12-25 01:55:32,152 - root - INFO - -----------------------------
+
+2020-12-25 01:55:34,075 - root - INFO - Best Score : {'epoch': 11, 'joint_acc': 0.5097001763668431, 'slot_acc': 0.9713381268936334, 'slot_f1': 0.9067755431166936, 'op_acc': 0.9721340388006573, 'op_f1': {'delete': 0.015282730514518594, 'update': 0.7990999678559948, 'dontcare': 0.20833333333333334, 'carryover': 0.9853992926483408}, 'final_slot_f1': 0.8932043767944142}
+2020-12-25 01:55:34,075 - root - INFO - 
+
+2020-12-25 01:55:35,065 - root - INFO - [12/30] [0/3437] mean_loss : 0.517, state_loss : 0.053, gen_loss : 0.484, dom_loss : 0.003
+2020-12-25 01:56:55,115 - root - INFO - [12/30] [200/3437] mean_loss : 0.302, state_loss : 0.020, gen_loss : 0.004, dom_loss : 0.002
+2020-12-25 01:58:16,296 - root - INFO - [12/30] [400/3437] mean_loss : 0.314, state_loss : 0.074, gen_loss : 0.171, dom_loss : 0.005
+2020-12-25 01:59:36,709 - root - INFO - [12/30] [600/3437] mean_loss : 0.322, state_loss : 0.046, gen_loss : 0.570, dom_loss : 0.002
+2020-12-25 02:00:56,844 - root - INFO - [12/30] [800/3437] mean_loss : 0.307, state_loss : 0.054, gen_loss : 0.136, dom_loss : 0.013
+2020-12-25 02:02:16,717 - root - INFO - [12/30] [1000/3437] mean_loss : 0.285, state_loss : 0.048, gen_loss : 0.075, dom_loss : 0.007
+2020-12-25 02:03:36,691 - root - INFO - [12/30] [1200/3437] mean_loss : 0.313, state_loss : 0.067, gen_loss : 0.059, dom_loss : 0.001
+2020-12-25 02:04:55,019 - root - INFO - [12/30] [1400/3437] mean_loss : 0.322, state_loss : 0.083, gen_loss : 0.201, dom_loss : 0.023
+2020-12-25 02:06:15,379 - root - INFO - [12/30] [1600/3437] mean_loss : 0.313, state_loss : 0.039, gen_loss : 0.143, dom_loss : 0.204
+2020-12-25 02:07:35,690 - root - INFO - [12/30] [1800/3437] mean_loss : 0.378, state_loss : 0.014, gen_loss : 0.188, dom_loss : 0.004
+2020-12-25 02:08:55,737 - root - INFO - [12/30] [2000/3437] mean_loss : 0.344, state_loss : 0.043, gen_loss : 0.063, dom_loss : 0.004
+2020-12-25 02:10:16,140 - root - INFO - [12/30] [2200/3437] mean_loss : 0.321, state_loss : 0.020, gen_loss : 0.003, dom_loss : 0.003
+2020-12-25 02:11:37,300 - root - INFO - [12/30] [2400/3437] mean_loss : 0.300, state_loss : 0.062, gen_loss : 0.192, dom_loss : 0.002
+2020-12-25 02:12:57,779 - root - INFO - [12/30] [2600/3437] mean_loss : 0.353, state_loss : 0.077, gen_loss : 0.363, dom_loss : 0.001
+2020-12-25 02:14:17,823 - root - INFO - [12/30] [2800/3437] mean_loss : 0.349, state_loss : 0.025, gen_loss : 0.131, dom_loss : 0.002
+2020-12-25 02:15:37,904 - root - INFO - [12/30] [3000/3437] mean_loss : 0.336, state_loss : 0.071, gen_loss : 0.078, dom_loss : 0.029
+2020-12-25 02:16:57,535 - root - INFO - [12/30] [3200/3437] mean_loss : 0.361, state_loss : 0.094, gen_loss : 0.058, dom_loss : 0.003
+2020-12-25 02:18:18,503 - root - INFO - [12/30] [3400/3437] mean_loss : 0.322, state_loss : 0.033, gen_loss : 0.318, dom_loss : 0.004
+2020-12-25 02:22:29,182 - root - INFO - ------------------------------
+2020-12-25 02:22:29,182 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 02:22:29,182 - root - INFO - Epoch 12 joint accuracy : 0.5222
+2020-12-25 02:22:29,182 - root - INFO - Epoch 12 slot turn accuracy : 0.9726
+2020-12-25 02:22:29,182 - root - INFO - Epoch 12 slot turn F1: 0.9119
+2020-12-25 02:22:29,182 - root - INFO - Epoch 12 op accuracy : 0.9734
+2020-12-25 02:22:29,183 - root - INFO - Epoch 12 op F1 : {'delete': 0.019209039548022597, 'update': 0.7994403487058064, 'dontcare': 0.26218487394957984, 'carryover': 0.986072079598967}
+2020-12-25 02:22:29,183 - root - INFO - Epoch 12 op hit count : {'delete': 17, 'update': 7428, 'dontcare': 78, 'carryover': 207722}
+2020-12-25 02:22:29,183 - root - INFO - Epoch 12 op all count : {'delete': 1747, 'update': 10486, 'dontcare': 444, 'carryover': 208453}
+2020-12-25 02:22:29,183 - root - INFO - Final Joint Accuracy : 0.3400
+2020-12-25 02:22:29,183 - root - INFO - Final slot turn F1 : 0.8974
+2020-12-25 02:22:29,183 - root - INFO - Latency Per Prediction : 28.263395 ms
+2020-12-25 02:22:29,183 - root - INFO - -----------------------------
+
+2020-12-25 02:22:31,384 - root - INFO - Best Score : {'epoch': 12, 'joint_acc': 0.5221815221815221, 'slot_acc': 0.9726133948355715, 'slot_f1': 0.9119293977640963, 'op_acc': 0.973386695608873, 'op_f1': {'delete': 0.019209039548022597, 'update': 0.7994403487058064, 'dontcare': 0.26218487394957984, 'carryover': 0.986072079598967}, 'final_slot_f1': 0.8974382499625547}
+2020-12-25 02:22:31,384 - root - INFO - 
+
+2020-12-25 02:22:32,433 - root - INFO - [13/30] [0/3437] mean_loss : 0.333, state_loss : 0.067, gen_loss : 0.025, dom_loss : 0.137
+2020-12-25 02:23:52,511 - root - INFO - [13/30] [200/3437] mean_loss : 0.301, state_loss : 0.044, gen_loss : 0.120, dom_loss : 0.002
+2020-12-25 02:25:13,073 - root - INFO - [13/30] [400/3437] mean_loss : 0.344, state_loss : 0.059, gen_loss : 0.218, dom_loss : 0.012
+2020-12-25 02:26:33,421 - root - INFO - [13/30] [600/3437] mean_loss : 0.308, state_loss : 0.051, gen_loss : 0.076, dom_loss : 0.121
+2020-12-25 02:27:54,114 - root - INFO - [13/30] [800/3437] mean_loss : 0.318, state_loss : 0.058, gen_loss : 0.334, dom_loss : 0.001
+2020-12-25 02:29:14,459 - root - INFO - [13/30] [1000/3437] mean_loss : 0.311, state_loss : 0.051, gen_loss : 0.076, dom_loss : 0.001
+2020-12-25 02:30:32,907 - root - INFO - [13/30] [1200/3437] mean_loss : 0.283, state_loss : 0.083, gen_loss : 0.230, dom_loss : 0.025
+2020-12-25 02:31:53,078 - root - INFO - [13/30] [1400/3437] mean_loss : 0.285, state_loss : 0.077, gen_loss : 0.378, dom_loss : 0.098
+2020-12-25 02:33:13,557 - root - INFO - [13/30] [1600/3437] mean_loss : 0.284, state_loss : 0.054, gen_loss : 0.114, dom_loss : 0.011
+2020-12-25 02:34:32,820 - root - INFO - [13/30] [1800/3437] mean_loss : 0.285, state_loss : 0.097, gen_loss : 0.501, dom_loss : 0.004
+2020-12-25 02:35:53,148 - root - INFO - [13/30] [2000/3437] mean_loss : 0.317, state_loss : 0.066, gen_loss : 0.234, dom_loss : 0.011
+2020-12-25 02:37:13,819 - root - INFO - [13/30] [2200/3437] mean_loss : 0.311, state_loss : 0.067, gen_loss : 0.076, dom_loss : 0.004
+2020-12-25 02:38:34,009 - root - INFO - [13/30] [2400/3437] mean_loss : 0.313, state_loss : 0.075, gen_loss : 0.496, dom_loss : 0.001
+2020-12-25 02:39:53,851 - root - INFO - [13/30] [2600/3437] mean_loss : 0.305, state_loss : 0.043, gen_loss : 0.362, dom_loss : 0.043
+2020-12-25 02:41:12,986 - root - INFO - [13/30] [2800/3437] mean_loss : 0.317, state_loss : 0.105, gen_loss : 0.081, dom_loss : 0.052
+2020-12-25 02:42:33,231 - root - INFO - [13/30] [3000/3437] mean_loss : 0.312, state_loss : 0.079, gen_loss : 0.690, dom_loss : 0.041
+2020-12-25 02:43:53,972 - root - INFO - [13/30] [3200/3437] mean_loss : 0.291, state_loss : 0.041, gen_loss : 0.192, dom_loss : 0.049
+2020-12-25 02:45:14,366 - root - INFO - [13/30] [3400/3437] mean_loss : 0.286, state_loss : 0.092, gen_loss : 0.166, dom_loss : 0.003
+2020-12-25 02:49:31,837 - root - INFO - ------------------------------
+2020-12-25 02:49:31,837 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 02:49:31,838 - root - INFO - Epoch 13 joint accuracy : 0.5163
+2020-12-25 02:49:31,838 - root - INFO - Epoch 13 slot turn accuracy : 0.9719
+2020-12-25 02:49:31,838 - root - INFO - Epoch 13 slot turn F1: 0.9096
+2020-12-25 02:49:31,838 - root - INFO - Epoch 13 op accuracy : 0.9727
+2020-12-25 02:49:31,838 - root - INFO - Epoch 13 op F1 : {'delete': 0.02051282051282051, 'update': 0.8098113207547171, 'dontcare': 0.2629757785467128, 'carryover': 0.9857264001026159}
+2020-12-25 02:49:31,838 - root - INFO - Epoch 13 op hit count : {'delete': 22, 'update': 7511, 'dontcare': 76, 'carryover': 207489}
+2020-12-25 02:49:31,838 - root - INFO - Epoch 13 op all count : {'delete': 2120, 'update': 10204, 'dontcare': 438, 'carryover': 208368}
+2020-12-25 02:49:31,838 - root - INFO - Final Joint Accuracy : 0.3410
+2020-12-25 02:49:31,838 - root - INFO - Final slot turn F1 : 0.8961
+2020-12-25 02:49:31,838 - root - INFO - Latency Per Prediction : 29.165073 ms
+2020-12-25 02:49:31,838 - root - INFO - -----------------------------
+
+2020-12-25 02:49:32,144 - root - INFO - Best Score : {'epoch': 12, 'joint_acc': 0.5221815221815221, 'slot_acc': 0.9726133948355715, 'slot_f1': 0.9119293977640963, 'op_acc': 0.973386695608873, 'op_f1': {'delete': 0.019209039548022597, 'update': 0.7994403487058064, 'dontcare': 0.26218487394957984, 'carryover': 0.986072079598967}, 'final_slot_f1': 0.8974382499625547}
+2020-12-25 02:49:32,145 - root - INFO - 
+
+2020-12-25 02:49:33,101 - root - INFO - [14/30] [0/3437] mean_loss : 0.213, state_loss : 0.049, gen_loss : 0.182, dom_loss : 0.003
+2020-12-25 02:50:53,350 - root - INFO - [14/30] [200/3437] mean_loss : 0.275, state_loss : 0.047, gen_loss : 0.265, dom_loss : 0.001
+2020-12-25 02:52:13,669 - root - INFO - [14/30] [400/3437] mean_loss : 0.256, state_loss : 0.042, gen_loss : 0.165, dom_loss : 0.004
+2020-12-25 02:53:34,388 - root - INFO - [14/30] [600/3437] mean_loss : 0.282, state_loss : 0.041, gen_loss : 0.189, dom_loss : 0.073
+2020-12-25 02:54:55,256 - root - INFO - [14/30] [800/3437] mean_loss : 0.295, state_loss : 0.026, gen_loss : 0.285, dom_loss : 0.002
+2020-12-25 02:56:16,248 - root - INFO - [14/30] [1000/3437] mean_loss : 0.289, state_loss : 0.034, gen_loss : 0.027, dom_loss : 0.003
+2020-12-25 02:57:36,490 - root - INFO - [14/30] [1200/3437] mean_loss : 0.286, state_loss : 0.043, gen_loss : 0.132, dom_loss : 0.001
+2020-12-25 02:58:57,820 - root - INFO - [14/30] [1400/3437] mean_loss : 0.287, state_loss : 0.060, gen_loss : 0.038, dom_loss : 0.072
+2020-12-25 03:00:19,286 - root - INFO - [14/30] [1600/3437] mean_loss : 0.279, state_loss : 0.068, gen_loss : 0.241, dom_loss : 0.002
+2020-12-25 03:01:39,738 - root - INFO - [14/30] [1800/3437] mean_loss : 0.260, state_loss : 0.105, gen_loss : 0.180, dom_loss : 0.004
+2020-12-25 03:02:59,518 - root - INFO - [14/30] [2000/3437] mean_loss : 0.305, state_loss : 0.071, gen_loss : 0.134, dom_loss : 0.033
+2020-12-25 03:04:19,570 - root - INFO - [14/30] [2200/3437] mean_loss : 0.299, state_loss : 0.086, gen_loss : 0.202, dom_loss : 0.004
+2020-12-25 03:05:39,812 - root - INFO - [14/30] [2400/3437] mean_loss : 0.291, state_loss : 0.055, gen_loss : 0.087, dom_loss : 0.003
+2020-12-25 03:06:58,823 - root - INFO - [14/30] [2600/3437] mean_loss : 0.293, state_loss : 0.035, gen_loss : 0.049, dom_loss : 0.001
+2020-12-25 03:08:16,497 - root - INFO - [14/30] [2800/3437] mean_loss : 0.271, state_loss : 0.098, gen_loss : 0.003, dom_loss : 0.007
+2020-12-25 03:09:34,784 - root - INFO - [14/30] [3000/3437] mean_loss : 0.286, state_loss : 0.040, gen_loss : 0.048, dom_loss : 0.003
+2020-12-25 03:10:55,209 - root - INFO - [14/30] [3200/3437] mean_loss : 0.297, state_loss : 0.053, gen_loss : 0.082, dom_loss : 0.002
+2020-12-25 03:12:14,723 - root - INFO - [14/30] [3400/3437] mean_loss : 0.280, state_loss : 0.066, gen_loss : 0.006, dom_loss : 0.001
+2020-12-25 03:16:25,293 - root - INFO - ------------------------------
+2020-12-25 03:16:25,294 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 03:16:25,294 - root - INFO - Epoch 14 joint accuracy : 0.5264
+2020-12-25 03:16:25,294 - root - INFO - Epoch 14 slot turn accuracy : 0.9727
+2020-12-25 03:16:25,294 - root - INFO - Epoch 14 slot turn F1: 0.9132
+2020-12-25 03:16:25,294 - root - INFO - Epoch 14 op accuracy : 0.9734
+2020-12-25 03:16:25,294 - root - INFO - Epoch 14 op F1 : {'delete': 0.014277215942891136, 'update': 0.7941144882397164, 'dontcare': 0.26760563380281693, 'carryover': 0.986048520488195}
+2020-12-25 03:16:25,294 - root - INFO - Epoch 14 op hit count : {'delete': 12, 'update': 7394, 'dontcare': 76, 'carryover': 207755}
+2020-12-25 03:16:25,294 - root - INFO - Epoch 14 op all count : {'delete': 1665, 'update': 10559, 'dontcare': 418, 'carryover': 208488}
+2020-12-25 03:16:25,294 - root - INFO - Final Joint Accuracy : 0.3500
+2020-12-25 03:16:25,294 - root - INFO - Final slot turn F1 : 0.8995
+2020-12-25 03:16:25,294 - root - INFO - Latency Per Prediction : 28.359806 ms
+2020-12-25 03:16:25,294 - root - INFO - -----------------------------
+
+2020-12-25 03:16:27,345 - root - INFO - Best Score : {'epoch': 14, 'joint_acc': 0.5263871930538597, 'slot_acc': 0.9726812282367364, 'slot_f1': 0.9132148200715972, 'op_acc': 0.9733505177949152, 'op_f1': {'delete': 0.014277215942891136, 'update': 0.7941144882397164, 'dontcare': 0.26760563380281693, 'carryover': 0.986048520488195}, 'final_slot_f1': 0.8994602860392493}
+2020-12-25 03:16:27,346 - root - INFO - 
+
+2020-12-25 03:16:28,321 - root - INFO - [15/30] [0/3437] mean_loss : 0.176, state_loss : 0.041, gen_loss : 0.060, dom_loss : 0.048
+2020-12-25 03:17:48,334 - root - INFO - [15/30] [200/3437] mean_loss : 0.273, state_loss : 0.037, gen_loss : 0.246, dom_loss : 0.056
+2020-12-25 03:19:09,255 - root - INFO - [15/30] [400/3437] mean_loss : 0.268, state_loss : 0.051, gen_loss : 0.693, dom_loss : 0.012
+2020-12-25 03:20:29,558 - root - INFO - [15/30] [600/3437] mean_loss : 0.274, state_loss : 0.071, gen_loss : 0.254, dom_loss : 0.001
+2020-12-25 03:21:48,239 - root - INFO - [15/30] [800/3437] mean_loss : 0.266, state_loss : 0.054, gen_loss : 0.172, dom_loss : 0.011
+2020-12-25 03:23:08,407 - root - INFO - [15/30] [1000/3437] mean_loss : 0.259, state_loss : 0.079, gen_loss : 0.102, dom_loss : 0.003
+2020-12-25 03:24:28,499 - root - INFO - [15/30] [1200/3437] mean_loss : 0.255, state_loss : 0.039, gen_loss : 0.038, dom_loss : 0.002
+2020-12-25 03:25:49,797 - root - INFO - [15/30] [1400/3437] mean_loss : 0.275, state_loss : 0.021, gen_loss : 0.143, dom_loss : 0.002
+2020-12-25 03:27:10,902 - root - INFO - [15/30] [1600/3437] mean_loss : 0.263, state_loss : 0.067, gen_loss : 0.252, dom_loss : 0.001
+2020-12-25 03:28:31,005 - root - INFO - [15/30] [1800/3437] mean_loss : 0.238, state_loss : 0.064, gen_loss : 0.133, dom_loss : 0.000
+2020-12-25 03:29:51,104 - root - INFO - [15/30] [2000/3437] mean_loss : 0.246, state_loss : 0.050, gen_loss : 0.105, dom_loss : 0.001
+2020-12-25 03:31:10,801 - root - INFO - [15/30] [2200/3437] mean_loss : 0.261, state_loss : 0.033, gen_loss : 0.214, dom_loss : 0.029
+2020-12-25 03:32:31,385 - root - INFO - [15/30] [2400/3437] mean_loss : 0.252, state_loss : 0.061, gen_loss : 0.306, dom_loss : 0.000
+2020-12-25 03:33:51,608 - root - INFO - [15/30] [2600/3437] mean_loss : 0.279, state_loss : 0.074, gen_loss : 0.184, dom_loss : 0.499
+2020-12-25 03:35:12,834 - root - INFO - [15/30] [2800/3437] mean_loss : 0.267, state_loss : 0.079, gen_loss : 0.096, dom_loss : 0.001
+2020-12-25 03:36:34,077 - root - INFO - [15/30] [3000/3437] mean_loss : 0.269, state_loss : 0.020, gen_loss : 0.094, dom_loss : 0.001
+2020-12-25 03:37:54,179 - root - INFO - [15/30] [3200/3437] mean_loss : 0.276, state_loss : 0.146, gen_loss : 0.014, dom_loss : 0.004
+2020-12-25 03:39:16,007 - root - INFO - [15/30] [3400/3437] mean_loss : 0.298, state_loss : 0.030, gen_loss : 0.008, dom_loss : 0.000
+2020-12-25 03:43:29,441 - root - INFO - ------------------------------
+2020-12-25 03:43:29,441 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 03:43:29,441 - root - INFO - Epoch 15 joint accuracy : 0.5271
+2020-12-25 03:43:29,442 - root - INFO - Epoch 15 slot turn accuracy : 0.9729
+2020-12-25 03:43:29,442 - root - INFO - Epoch 15 slot turn F1: 0.9144
+2020-12-25 03:43:29,442 - root - INFO - Epoch 15 op accuracy : 0.9735
+2020-12-25 03:43:29,442 - root - INFO - Epoch 15 op F1 : {'delete': 0.02053388090349076, 'update': 0.809544421599394, 'dontcare': 0.2545454545454546, 'carryover': 0.9861285536233605}
+2020-12-25 03:43:29,442 - root - INFO - Epoch 15 op hit count : {'delete': 20, 'update': 7481, 'dontcare': 77, 'carryover': 207691}
+2020-12-25 03:43:29,442 - root - INFO - Epoch 15 op all count : {'delete': 1920, 'update': 10275, 'dontcare': 445, 'carryover': 208490}
+2020-12-25 03:43:29,442 - root - INFO - Final Joint Accuracy : 0.3500
+2020-12-25 03:43:29,442 - root - INFO - Final slot turn F1 : 0.9006
+2020-12-25 03:43:29,442 - root - INFO - Latency Per Prediction : 28.634478 ms
+2020-12-25 03:43:29,442 - root - INFO - -----------------------------
+
+2020-12-25 03:43:31,721 - root - INFO - Best Score : {'epoch': 15, 'joint_acc': 0.5270655270655271, 'slot_acc': 0.9728847284402371, 'slot_f1': 0.9143690673384269, 'op_acc': 0.973495229050739, 'op_f1': {'delete': 0.02053388090349076, 'update': 0.809544421599394, 'dontcare': 0.2545454545454546, 'carryover': 0.9861285536233605}, 'final_slot_f1': 0.9005829146501754}
+2020-12-25 03:43:31,722 - root - INFO - 
+
+2020-12-25 03:43:32,646 - root - INFO - [16/30] [0/3437] mean_loss : 0.598, state_loss : 0.144, gen_loss : 0.163, dom_loss : 0.181
+2020-12-25 03:44:53,658 - root - INFO - [16/30] [200/3437] mean_loss : 0.241, state_loss : 0.027, gen_loss : 0.402, dom_loss : 0.003
+2020-12-25 03:46:13,708 - root - INFO - [16/30] [400/3437] mean_loss : 0.224, state_loss : 0.021, gen_loss : 0.114, dom_loss : 0.001
+2020-12-25 03:47:33,301 - root - INFO - [16/30] [600/3437] mean_loss : 0.253, state_loss : 0.024, gen_loss : 0.268, dom_loss : 0.002
+2020-12-25 03:48:56,327 - root - INFO - [16/30] [800/3437] mean_loss : 0.239, state_loss : 0.089, gen_loss : 0.240, dom_loss : 0.000
+2020-12-25 03:50:17,248 - root - INFO - [16/30] [1000/3437] mean_loss : 0.260, state_loss : 0.056, gen_loss : 0.272, dom_loss : 0.000
+2020-12-25 03:51:37,679 - root - INFO - [16/30] [1200/3437] mean_loss : 0.259, state_loss : 0.112, gen_loss : 0.456, dom_loss : 0.018
+2020-12-25 03:52:57,297 - root - INFO - [16/30] [1400/3437] mean_loss : 0.264, state_loss : 0.068, gen_loss : 0.008, dom_loss : 0.074
+2020-12-25 03:54:17,979 - root - INFO - [16/30] [1600/3437] mean_loss : 0.261, state_loss : 0.083, gen_loss : 0.242, dom_loss : 0.072
+2020-12-25 03:55:39,756 - root - INFO - [16/30] [1800/3437] mean_loss : 0.297, state_loss : 0.108, gen_loss : 0.515, dom_loss : 0.001
+2020-12-25 03:56:59,247 - root - INFO - [16/30] [2000/3437] mean_loss : 0.265, state_loss : 0.067, gen_loss : 0.167, dom_loss : 0.001
+2020-12-25 03:58:19,330 - root - INFO - [16/30] [2200/3437] mean_loss : 0.256, state_loss : 0.116, gen_loss : 0.201, dom_loss : 0.143
+2020-12-25 03:59:40,334 - root - INFO - [16/30] [2400/3437] mean_loss : 0.260, state_loss : 0.039, gen_loss : 0.204, dom_loss : 0.079
+2020-12-25 04:00:59,593 - root - INFO - [16/30] [2600/3437] mean_loss : 0.271, state_loss : 0.090, gen_loss : 0.035, dom_loss : 0.013
+2020-12-25 04:02:19,551 - root - INFO - [16/30] [2800/3437] mean_loss : 0.236, state_loss : 0.044, gen_loss : 0.317, dom_loss : 0.000
+2020-12-25 04:03:40,001 - root - INFO - [16/30] [3000/3437] mean_loss : 0.247, state_loss : 0.087, gen_loss : 0.155, dom_loss : 0.002
+2020-12-25 04:05:00,791 - root - INFO - [16/30] [3200/3437] mean_loss : 0.247, state_loss : 0.046, gen_loss : 0.014, dom_loss : 0.001
+2020-12-25 04:06:21,495 - root - INFO - [16/30] [3400/3437] mean_loss : 0.271, state_loss : 0.066, gen_loss : 0.150, dom_loss : 0.001
+2020-12-25 04:10:37,289 - root - INFO - ------------------------------
+2020-12-25 04:10:37,289 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 04:10:37,289 - root - INFO - Epoch 16 joint accuracy : 0.5314
+2020-12-25 04:10:37,289 - root - INFO - Epoch 16 slot turn accuracy : 0.9731
+2020-12-25 04:10:37,289 - root - INFO - Epoch 16 slot turn F1: 0.9154
+2020-12-25 04:10:37,290 - root - INFO - Epoch 16 op accuracy : 0.9738
+2020-12-25 04:10:37,290 - root - INFO - Epoch 16 op F1 : {'delete': 0.016569200779727095, 'update': 0.8148790803600476, 'dontcare': 0.32085561497326204, 'carryover': 0.9862893365463372}
+2020-12-25 04:10:37,290 - root - INFO - Epoch 16 op hit count : {'delete': 17, 'update': 7514, 'dontcare': 90, 'carryover': 207715}
+2020-12-25 04:10:37,290 - root - INFO - Epoch 16 op all count : {'delete': 2031, 'update': 10148, 'dontcare': 379, 'carryover': 208572}
+2020-12-25 04:10:37,290 - root - INFO - Final Joint Accuracy : 0.3490
+2020-12-25 04:10:37,290 - root - INFO - Final slot turn F1 : 0.9025
+2020-12-25 04:10:37,290 - root - INFO - Latency Per Prediction : 28.991850 ms
+2020-12-25 04:10:37,290 - root - INFO - -----------------------------
+
+2020-12-25 04:10:39,405 - root - INFO - Best Score : {'epoch': 16, 'joint_acc': 0.531406864740198, 'slot_acc': 0.9731424953646718, 'slot_f1': 0.9154218763649795, 'op_acc': 0.9737982182426179, 'op_f1': {'delete': 0.016569200779727095, 'update': 0.8148790803600476, 'dontcare': 0.32085561497326204, 'carryover': 0.9862893365463372}, 'final_slot_f1': 0.9024733394287038}
+2020-12-25 04:10:39,405 - root - INFO - 
+
+2020-12-25 04:10:40,432 - root - INFO - [17/30] [0/3437] mean_loss : 0.494, state_loss : 0.159, gen_loss : 0.322, dom_loss : 0.046
+2020-12-25 04:12:00,490 - root - INFO - [17/30] [200/3437] mean_loss : 0.247, state_loss : 0.031, gen_loss : 0.104, dom_loss : 0.004
+2020-12-25 04:13:19,527 - root - INFO - [17/30] [400/3437] mean_loss : 0.242, state_loss : 0.030, gen_loss : 0.006, dom_loss : 0.050
+2020-12-25 04:14:40,028 - root - INFO - [17/30] [600/3437] mean_loss : 0.256, state_loss : 0.076, gen_loss : 0.270, dom_loss : 0.000
+2020-12-25 04:16:00,670 - root - INFO - [17/30] [800/3437] mean_loss : 0.230, state_loss : 0.055, gen_loss : 0.173, dom_loss : 0.001
+2020-12-25 04:17:20,971 - root - INFO - [17/30] [1000/3437] mean_loss : 0.221, state_loss : 0.030, gen_loss : 0.293, dom_loss : 0.000
+2020-12-25 04:18:42,329 - root - INFO - [17/30] [1200/3437] mean_loss : 0.203, state_loss : 0.030, gen_loss : 0.058, dom_loss : 0.000
+2020-12-25 04:20:03,461 - root - INFO - [17/30] [1400/3437] mean_loss : 0.239, state_loss : 0.061, gen_loss : 0.200, dom_loss : 0.000
+2020-12-25 04:21:24,781 - root - INFO - [17/30] [1600/3437] mean_loss : 0.228, state_loss : 0.143, gen_loss : 0.057, dom_loss : 0.000
+2020-12-25 04:22:45,087 - root - INFO - [17/30] [1800/3437] mean_loss : 0.218, state_loss : 0.049, gen_loss : 0.004, dom_loss : 0.001
+2020-12-25 04:24:05,974 - root - INFO - [17/30] [2000/3437] mean_loss : 0.244, state_loss : 0.047, gen_loss : 0.109, dom_loss : 0.000
+2020-12-25 04:25:28,039 - root - INFO - [17/30] [2200/3437] mean_loss : 0.237, state_loss : 0.033, gen_loss : 0.010, dom_loss : 0.001
+2020-12-25 04:26:48,738 - root - INFO - [17/30] [2400/3437] mean_loss : 0.220, state_loss : 0.064, gen_loss : 0.079, dom_loss : 0.000
+2020-12-25 04:28:09,785 - root - INFO - [17/30] [2600/3437] mean_loss : 0.260, state_loss : 0.097, gen_loss : 0.048, dom_loss : 0.000
+2020-12-25 04:29:31,211 - root - INFO - [17/30] [2800/3437] mean_loss : 0.232, state_loss : 0.061, gen_loss : 0.041, dom_loss : 0.001
+2020-12-25 04:30:51,827 - root - INFO - [17/30] [3000/3437] mean_loss : 0.255, state_loss : 0.045, gen_loss : 0.077, dom_loss : 0.001
+2020-12-25 04:32:12,426 - root - INFO - [17/30] [3200/3437] mean_loss : 0.234, state_loss : 0.038, gen_loss : 0.040, dom_loss : 0.000
+2020-12-25 04:33:32,654 - root - INFO - [17/30] [3400/3437] mean_loss : 0.256, state_loss : 0.045, gen_loss : 0.106, dom_loss : 0.003
+2020-12-25 04:37:48,043 - root - INFO - ------------------------------
+2020-12-25 04:37:48,043 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 04:37:48,044 - root - INFO - Epoch 17 joint accuracy : 0.5371
+2020-12-25 04:37:48,044 - root - INFO - Epoch 17 slot turn accuracy : 0.9737
+2020-12-25 04:37:48,044 - root - INFO - Epoch 17 slot turn F1: 0.9174
+2020-12-25 04:37:48,044 - root - INFO - Epoch 17 op accuracy : 0.9742
+2020-12-25 04:37:48,044 - root - INFO - Epoch 17 op F1 : {'delete': 0.02593516209476309, 'update': 0.8156965052448503, 'dontcare': 0.325, 'carryover': 0.9865177927158103}
+2020-12-25 04:37:48,044 - root - INFO - Epoch 17 op hit count : {'delete': 26, 'update': 7504, 'dontcare': 91, 'carryover': 207808}
+2020-12-25 04:37:48,044 - root - INFO - Epoch 17 op all count : {'delete': 1970, 'update': 10162, 'dontcare': 356, 'carryover': 208642}
+2020-12-25 04:37:48,044 - root - INFO - Final Joint Accuracy : 0.3650
+2020-12-25 04:37:48,044 - root - INFO - Final slot turn F1 : 0.9066
+2020-12-25 04:37:48,044 - root - INFO - Latency Per Prediction : 28.868090 ms
+2020-12-25 04:37:48,044 - root - INFO - -----------------------------
+
+2020-12-25 04:37:49,956 - root - INFO - Best Score : {'epoch': 17, 'joint_acc': 0.5371048704382038, 'slot_acc': 0.973671595893768, 'slot_f1': 0.9173774984451726, 'op_acc': 0.9742187853298476, 'op_f1': {'delete': 0.02593516209476309, 'update': 0.8156965052448503, 'dontcare': 0.325, 'carryover': 0.9865177927158103}, 'final_slot_f1': 0.9066386995425366}
+2020-12-25 04:37:49,957 - root - INFO - 
+
+2020-12-25 04:37:51,001 - root - INFO - [18/30] [0/3437] mean_loss : 0.176, state_loss : 0.094, gen_loss : 0.129, dom_loss : 0.000
+2020-12-25 04:39:12,318 - root - INFO - [18/30] [200/3437] mean_loss : 0.215, state_loss : 0.025, gen_loss : 0.100, dom_loss : 0.000
+2020-12-25 04:40:33,835 - root - INFO - [18/30] [400/3437] mean_loss : 0.221, state_loss : 0.069, gen_loss : 0.019, dom_loss : 0.002
+2020-12-25 04:41:54,661 - root - INFO - [18/30] [600/3437] mean_loss : 0.243, state_loss : 0.062, gen_loss : 0.007, dom_loss : 0.001
+2020-12-25 04:43:15,245 - root - INFO - [18/30] [800/3437] mean_loss : 0.218, state_loss : 0.036, gen_loss : 0.043, dom_loss : 0.060
+2020-12-25 04:44:35,996 - root - INFO - [18/30] [1000/3437] mean_loss : 0.228, state_loss : 0.059, gen_loss : 0.142, dom_loss : 0.000
+2020-12-25 04:45:57,049 - root - INFO - [18/30] [1200/3437] mean_loss : 0.234, state_loss : 0.063, gen_loss : 0.284, dom_loss : 0.000
+2020-12-25 04:47:18,501 - root - INFO - [18/30] [1400/3437] mean_loss : 0.223, state_loss : 0.084, gen_loss : 0.025, dom_loss : 0.000
+2020-12-25 04:48:37,160 - root - INFO - [18/30] [1600/3437] mean_loss : 0.227, state_loss : 0.097, gen_loss : 0.054, dom_loss : 0.067
+2020-12-25 04:49:58,442 - root - INFO - [18/30] [1800/3437] mean_loss : 0.208, state_loss : 0.052, gen_loss : 0.366, dom_loss : 0.002
+2020-12-25 04:51:19,041 - root - INFO - [18/30] [2000/3437] mean_loss : 0.226, state_loss : 0.066, gen_loss : 0.140, dom_loss : 0.000
+2020-12-25 04:52:39,035 - root - INFO - [18/30] [2200/3437] mean_loss : 0.243, state_loss : 0.053, gen_loss : 0.094, dom_loss : 0.030
+2020-12-25 04:54:00,290 - root - INFO - [18/30] [2400/3437] mean_loss : 0.224, state_loss : 0.027, gen_loss : 0.018, dom_loss : 0.002
+2020-12-25 04:55:20,359 - root - INFO - [18/30] [2600/3437] mean_loss : 0.219, state_loss : 0.041, gen_loss : 0.105, dom_loss : 0.003
+2020-12-25 04:56:41,449 - root - INFO - [18/30] [2800/3437] mean_loss : 0.224, state_loss : 0.032, gen_loss : 0.072, dom_loss : 0.000
+2020-12-25 04:58:01,359 - root - INFO - [18/30] [3000/3437] mean_loss : 0.221, state_loss : 0.035, gen_loss : 0.035, dom_loss : 0.000
+2020-12-25 04:59:20,321 - root - INFO - [18/30] [3200/3437] mean_loss : 0.238, state_loss : 0.048, gen_loss : 0.116, dom_loss : 0.000
+2020-12-25 05:00:40,143 - root - INFO - [18/30] [3400/3437] mean_loss : 0.229, state_loss : 0.085, gen_loss : 0.064, dom_loss : 0.297
+2020-12-25 05:04:55,802 - root - INFO - ------------------------------
+2020-12-25 05:04:55,803 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 05:04:55,803 - root - INFO - Epoch 18 joint accuracy : 0.5356
+2020-12-25 05:04:55,803 - root - INFO - Epoch 18 slot turn accuracy : 0.9735
+2020-12-25 05:04:55,803 - root - INFO - Epoch 18 slot turn F1: 0.9166
+2020-12-25 05:04:55,803 - root - INFO - Epoch 18 op accuracy : 0.9741
+2020-12-25 05:04:55,803 - root - INFO - Epoch 18 op F1 : {'delete': 0.01885014137606032, 'update': 0.8223993013863116, 'dontcare': 0.29845626072041165, 'carryover': 0.9864516787621104}
+2020-12-25 05:04:55,803 - root - INFO - Epoch 18 op hit count : {'delete': 20, 'update': 7534, 'dontcare': 87, 'carryover': 207763}
+2020-12-25 05:04:55,803 - root - INFO - Epoch 18 op all count : {'delete': 2097, 'update': 9998, 'dontcare': 415, 'carryover': 208620}
+2020-12-25 05:04:55,803 - root - INFO - Final Joint Accuracy : 0.3640
+2020-12-25 05:04:55,803 - root - INFO - Final slot turn F1 : 0.9068
+2020-12-25 05:04:55,804 - root - INFO - Latency Per Prediction : 28.902806 ms
+2020-12-25 05:04:55,804 - root - INFO - -----------------------------
+
+2020-12-25 05:04:56,030 - root - INFO - Best Score : {'epoch': 17, 'joint_acc': 0.5371048704382038, 'slot_acc': 0.973671595893768, 'slot_f1': 0.9173774984451726, 'op_acc': 0.9742187853298476, 'op_f1': {'delete': 0.02593516209476309, 'update': 0.8156965052448503, 'dontcare': 0.325, 'carryover': 0.9865177927158103}, 'final_slot_f1': 0.9066386995425366}
+2020-12-25 05:04:56,030 - root - INFO - 
+
+2020-12-25 05:04:56,920 - root - INFO - [19/30] [0/3437] mean_loss : 0.069, state_loss : 0.066, gen_loss : 0.035, dom_loss : 0.000
+2020-12-25 05:06:18,505 - root - INFO - [19/30] [200/3437] mean_loss : 0.211, state_loss : 0.063, gen_loss : 0.017, dom_loss : 0.012
+2020-12-25 05:07:38,195 - root - INFO - [19/30] [400/3437] mean_loss : 0.210, state_loss : 0.078, gen_loss : 0.045, dom_loss : 0.027
+2020-12-25 05:08:58,563 - root - INFO - [19/30] [600/3437] mean_loss : 0.214, state_loss : 0.129, gen_loss : 0.089, dom_loss : 0.000
+2020-12-25 05:10:18,245 - root - INFO - [19/30] [800/3437] mean_loss : 0.226, state_loss : 0.011, gen_loss : 0.062, dom_loss : 0.000
+2020-12-25 05:11:37,681 - root - INFO - [19/30] [1000/3437] mean_loss : 0.223, state_loss : 0.029, gen_loss : 0.131, dom_loss : 0.001
+2020-12-25 05:12:56,142 - root - INFO - [19/30] [1200/3437] mean_loss : 0.213, state_loss : 0.085, gen_loss : 0.277, dom_loss : 0.012
+2020-12-25 05:14:17,027 - root - INFO - [19/30] [1400/3437] mean_loss : 0.225, state_loss : 0.095, gen_loss : 0.193, dom_loss : 0.000
+2020-12-25 05:15:37,186 - root - INFO - [19/30] [1600/3437] mean_loss : 0.216, state_loss : 0.091, gen_loss : 0.226, dom_loss : 0.000
+2020-12-25 05:16:57,052 - root - INFO - [19/30] [1800/3437] mean_loss : 0.221, state_loss : 0.141, gen_loss : 0.485, dom_loss : 0.145
+2020-12-25 05:18:17,772 - root - INFO - [19/30] [2000/3437] mean_loss : 0.205, state_loss : 0.033, gen_loss : 0.056, dom_loss : 0.034
+2020-12-25 05:19:38,048 - root - INFO - [19/30] [2200/3437] mean_loss : 0.230, state_loss : 0.068, gen_loss : 0.052, dom_loss : 0.000
+2020-12-25 05:20:58,282 - root - INFO - [19/30] [2400/3437] mean_loss : 0.222, state_loss : 0.030, gen_loss : 0.005, dom_loss : 0.000
+2020-12-25 05:22:20,092 - root - INFO - [19/30] [2600/3437] mean_loss : 0.229, state_loss : 0.032, gen_loss : 0.153, dom_loss : 0.002
+2020-12-25 05:23:40,590 - root - INFO - [19/30] [2800/3437] mean_loss : 0.238, state_loss : 0.020, gen_loss : 0.036, dom_loss : 0.000
+2020-12-25 05:25:01,394 - root - INFO - [19/30] [3000/3437] mean_loss : 0.226, state_loss : 0.043, gen_loss : 0.084, dom_loss : 0.002
+2020-12-25 05:26:21,053 - root - INFO - [19/30] [3200/3437] mean_loss : 0.209, state_loss : 0.031, gen_loss : 0.002, dom_loss : 0.001
+2020-12-25 05:27:41,019 - root - INFO - [19/30] [3400/3437] mean_loss : 0.238, state_loss : 0.029, gen_loss : 0.202, dom_loss : 0.005
+2020-12-25 05:31:53,492 - root - INFO - ------------------------------
+2020-12-25 05:31:53,493 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 05:31:53,493 - root - INFO - Epoch 19 joint accuracy : 0.5509
+2020-12-25 05:31:53,493 - root - INFO - Epoch 19 slot turn accuracy : 0.9745
+2020-12-25 05:31:53,493 - root - INFO - Epoch 19 slot turn F1: 0.9204
+2020-12-25 05:31:53,493 - root - INFO - Epoch 19 op accuracy : 0.9750
+2020-12-25 05:31:53,493 - root - INFO - Epoch 19 op F1 : {'delete': 0.017250673854447438, 'update': 0.8214227220614729, 'dontcare': 0.26245847176079734, 'carryover': 0.9869509307545209}
+2020-12-25 05:31:53,493 - root - INFO - Epoch 19 op hit count : {'delete': 16, 'update': 7523, 'dontcare': 79, 'carryover': 207993}
+2020-12-25 05:31:53,493 - root - INFO - Epoch 19 op all count : {'delete': 1831, 'update': 10092, 'dontcare': 433, 'carryover': 208774}
+2020-12-25 05:31:53,493 - root - INFO - Final Joint Accuracy : 0.3780
+2020-12-25 05:31:53,493 - root - INFO - Final slot turn F1 : 0.9079
+2020-12-25 05:31:53,493 - root - INFO - Latency Per Prediction : 28.600811 ms
+2020-12-25 05:31:53,493 - root - INFO - -----------------------------
+
+2020-12-25 05:31:55,739 - root - INFO - Best Score : {'epoch': 19, 'joint_acc': 0.5509428842762176, 'slot_acc': 0.9744675078007952, 'slot_f1': 0.9204063342617456, 'op_acc': 0.9750418305973413, 'op_f1': {'delete': 0.017250673854447438, 'update': 0.8214227220614729, 'dontcare': 0.26245847176079734, 'carryover': 0.9869509307545209}, 'final_slot_f1': 0.9078792960769249}
+2020-12-25 05:31:55,739 - root - INFO - 
+
+2020-12-25 05:31:56,692 - root - INFO - [20/30] [0/3437] mean_loss : 0.149, state_loss : 0.043, gen_loss : 0.127, dom_loss : 0.000
+2020-12-25 05:33:17,234 - root - INFO - [20/30] [200/3437] mean_loss : 0.192, state_loss : 0.016, gen_loss : 0.011, dom_loss : 0.000
+2020-12-25 05:34:38,174 - root - INFO - [20/30] [400/3437] mean_loss : 0.227, state_loss : 0.019, gen_loss : 0.027, dom_loss : 0.000
+2020-12-25 05:35:58,891 - root - INFO - [20/30] [600/3437] mean_loss : 0.209, state_loss : 0.140, gen_loss : 0.116, dom_loss : 0.000
+2020-12-25 05:37:18,911 - root - INFO - [20/30] [800/3437] mean_loss : 0.203, state_loss : 0.100, gen_loss : 0.066, dom_loss : 0.002
+2020-12-25 05:38:39,199 - root - INFO - [20/30] [1000/3437] mean_loss : 0.198, state_loss : 0.087, gen_loss : 0.015, dom_loss : 0.000
+2020-12-25 05:40:00,550 - root - INFO - [20/30] [1200/3437] mean_loss : 0.216, state_loss : 0.046, gen_loss : 0.073, dom_loss : 0.000
+2020-12-25 05:41:21,009 - root - INFO - [20/30] [1400/3437] mean_loss : 0.207, state_loss : 0.036, gen_loss : 0.002, dom_loss : 0.000
+2020-12-25 05:42:42,338 - root - INFO - [20/30] [1600/3437] mean_loss : 0.198, state_loss : 0.034, gen_loss : 0.069, dom_loss : 0.001
+2020-12-25 05:44:04,083 - root - INFO - [20/30] [1800/3437] mean_loss : 0.214, state_loss : 0.024, gen_loss : 0.052, dom_loss : 0.017
+2020-12-25 05:45:25,417 - root - INFO - [20/30] [2000/3437] mean_loss : 0.191, state_loss : 0.061, gen_loss : 0.289, dom_loss : 0.001
+2020-12-25 05:46:46,628 - root - INFO - [20/30] [2200/3437] mean_loss : 0.189, state_loss : 0.065, gen_loss : 0.160, dom_loss : 0.000
+2020-12-25 05:48:07,970 - root - INFO - [20/30] [2400/3437] mean_loss : 0.209, state_loss : 0.023, gen_loss : 0.100, dom_loss : 0.000
+2020-12-25 05:49:29,066 - root - INFO - [20/30] [2600/3437] mean_loss : 0.210, state_loss : 0.069, gen_loss : 0.217, dom_loss : 0.001
+2020-12-25 05:50:48,730 - root - INFO - [20/30] [2800/3437] mean_loss : 0.199, state_loss : 0.076, gen_loss : 0.029, dom_loss : 0.001
+2020-12-25 05:52:10,428 - root - INFO - [20/30] [3000/3437] mean_loss : 0.226, state_loss : 0.051, gen_loss : 0.082, dom_loss : 0.000
+2020-12-25 05:53:30,141 - root - INFO - [20/30] [3200/3437] mean_loss : 0.206, state_loss : 0.036, gen_loss : 0.001, dom_loss : 0.002
+2020-12-25 05:54:51,238 - root - INFO - [20/30] [3400/3437] mean_loss : 0.225, state_loss : 0.038, gen_loss : 0.107, dom_loss : 0.000
+2020-12-25 05:59:11,896 - root - INFO - ------------------------------
+2020-12-25 05:59:11,897 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 05:59:11,897 - root - INFO - Epoch 20 joint accuracy : 0.5450
+2020-12-25 05:59:11,897 - root - INFO - Epoch 20 slot turn accuracy : 0.9743
+2020-12-25 05:59:11,897 - root - INFO - Epoch 20 slot turn F1: 0.9211
+2020-12-25 05:59:11,897 - root - INFO - Epoch 20 op accuracy : 0.9750
+2020-12-25 05:59:11,897 - root - INFO - Epoch 20 op F1 : {'delete': 0.015915119363395226, 'update': 0.8211573138079887, 'dontcare': 0.2784380305602716, 'carryover': 0.9869105662123208}
+2020-12-25 05:59:11,897 - root - INFO - Epoch 20 op hit count : {'delete': 15, 'update': 7514, 'dontcare': 82, 'carryover': 207984}
+2020-12-25 05:59:11,898 - root - INFO - Epoch 20 op all count : {'delete': 1864, 'update': 10106, 'dontcare': 431, 'carryover': 208729}
+2020-12-25 05:59:11,898 - root - INFO - Final Joint Accuracy : 0.3730
+2020-12-25 05:59:11,898 - root - INFO - Final slot turn F1 : 0.9088
+2020-12-25 05:59:11,898 - root - INFO - Latency Per Prediction : 29.462798 ms
+2020-12-25 05:59:11,898 - root - INFO - -----------------------------
+
+2020-12-25 05:59:12,138 - root - INFO - Best Score : {'epoch': 19, 'joint_acc': 0.5509428842762176, 'slot_acc': 0.9744675078007952, 'slot_f1': 0.9204063342617456, 'op_acc': 0.9750418305973413, 'op_f1': {'delete': 0.017250673854447438, 'update': 0.8214227220614729, 'dontcare': 0.26245847176079734, 'carryover': 0.9869509307545209}, 'final_slot_f1': 0.9078792960769249}
+2020-12-25 05:59:12,138 - root - INFO - 
+
+2020-12-25 05:59:13,043 - root - INFO - [21/30] [0/3437] mean_loss : 0.247, state_loss : 0.028, gen_loss : 0.193, dom_loss : 0.020
+2020-12-25 06:00:35,249 - root - INFO - [21/30] [200/3437] mean_loss : 0.208, state_loss : 0.023, gen_loss : 0.117, dom_loss : 0.052
+2020-12-25 06:01:55,465 - root - INFO - [21/30] [400/3437] mean_loss : 0.201, state_loss : 0.052, gen_loss : 0.055, dom_loss : 0.000
+2020-12-25 06:03:15,679 - root - INFO - [21/30] [600/3437] mean_loss : 0.188, state_loss : 0.058, gen_loss : 0.005, dom_loss : 0.000
+2020-12-25 06:04:35,906 - root - INFO - [21/30] [800/3437] mean_loss : 0.213, state_loss : 0.078, gen_loss : 0.128, dom_loss : 0.162
+2020-12-25 06:05:54,948 - root - INFO - [21/30] [1000/3437] mean_loss : 0.215, state_loss : 0.032, gen_loss : 0.280, dom_loss : 0.000
+2020-12-25 06:07:16,284 - root - INFO - [21/30] [1200/3437] mean_loss : 0.191, state_loss : 0.034, gen_loss : 0.027, dom_loss : 0.000
+2020-12-25 06:08:36,572 - root - INFO - [21/30] [1400/3437] mean_loss : 0.186, state_loss : 0.027, gen_loss : 0.206, dom_loss : 0.001
+2020-12-25 06:09:58,102 - root - INFO - [21/30] [1600/3437] mean_loss : 0.192, state_loss : 0.062, gen_loss : 0.031, dom_loss : 0.000
+2020-12-25 06:11:19,908 - root - INFO - [21/30] [1800/3437] mean_loss : 0.184, state_loss : 0.093, gen_loss : 0.130, dom_loss : 0.001
+2020-12-25 06:12:40,343 - root - INFO - [21/30] [2000/3437] mean_loss : 0.209, state_loss : 0.037, gen_loss : 0.010, dom_loss : 0.000
+2020-12-25 06:13:59,556 - root - INFO - [21/30] [2200/3437] mean_loss : 0.200, state_loss : 0.063, gen_loss : 0.066, dom_loss : 0.002
+2020-12-25 06:15:21,198 - root - INFO - [21/30] [2400/3437] mean_loss : 0.187, state_loss : 0.099, gen_loss : 0.212, dom_loss : 0.001
+2020-12-25 06:16:42,625 - root - INFO - [21/30] [2600/3437] mean_loss : 0.198, state_loss : 0.035, gen_loss : 0.109, dom_loss : 0.000
+2020-12-25 06:18:03,257 - root - INFO - [21/30] [2800/3437] mean_loss : 0.176, state_loss : 0.027, gen_loss : 0.025, dom_loss : 0.100
+2020-12-25 06:19:24,260 - root - INFO - [21/30] [3000/3437] mean_loss : 0.201, state_loss : 0.131, gen_loss : 0.167, dom_loss : 0.095
+2020-12-25 06:20:43,959 - root - INFO - [21/30] [3200/3437] mean_loss : 0.203, state_loss : 0.063, gen_loss : 0.032, dom_loss : 0.001
+2020-12-25 06:22:04,332 - root - INFO - [21/30] [3400/3437] mean_loss : 0.200, state_loss : 0.048, gen_loss : 0.077, dom_loss : 0.210
+2020-12-25 06:26:21,358 - root - INFO - ------------------------------
+2020-12-25 06:26:21,358 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 06:26:21,359 - root - INFO - Epoch 21 joint accuracy : 0.5458
+2020-12-25 06:26:21,359 - root - INFO - Epoch 21 slot turn accuracy : 0.9743
+2020-12-25 06:26:21,359 - root - INFO - Epoch 21 slot turn F1: 0.9214
+2020-12-25 06:26:21,359 - root - INFO - Epoch 21 op accuracy : 0.9749
+2020-12-25 06:26:21,359 - root - INFO - Epoch 21 op F1 : {'delete': 0.014925373134328358, 'update': 0.8197366264138573, 'dontcare': 0.28620102214650767, 'carryover': 0.9868753202877371}
+2020-12-25 06:26:21,359 - root - INFO - Epoch 21 op hit count : {'delete': 14, 'update': 7501, 'dontcare': 84, 'carryover': 207982}
+2020-12-25 06:26:21,359 - root - INFO - Epoch 21 op all count : {'delete': 1858, 'update': 10118, 'dontcare': 411, 'carryover': 208743}
+2020-12-25 06:26:21,359 - root - INFO - Final Joint Accuracy : 0.3670
+2020-12-25 06:26:21,359 - root - INFO - Final slot turn F1 : 0.9099
+2020-12-25 06:26:21,359 - root - INFO - Latency Per Prediction : 28.790065 ms
+2020-12-25 06:26:21,359 - root - INFO - -----------------------------
+
+2020-12-25 06:26:21,587 - root - INFO - Best Score : {'epoch': 19, 'joint_acc': 0.5509428842762176, 'slot_acc': 0.9744675078007952, 'slot_f1': 0.9204063342617456, 'op_acc': 0.9750418305973413, 'op_f1': {'delete': 0.017250673854447438, 'update': 0.8214227220614729, 'dontcare': 0.26245847176079734, 'carryover': 0.9869509307545209}, 'final_slot_f1': 0.9078792960769249}
+2020-12-25 06:26:21,587 - root - INFO - 
+
+2020-12-25 06:26:22,426 - root - INFO - [22/30] [0/3437] mean_loss : 0.394, state_loss : 0.041, gen_loss : 0.243, dom_loss : 0.065
+2020-12-25 06:27:42,786 - root - INFO - [22/30] [200/3437] mean_loss : 0.196, state_loss : 0.052, gen_loss : 0.134, dom_loss : 0.002
+2020-12-25 06:29:02,356 - root - INFO - [22/30] [400/3437] mean_loss : 0.190, state_loss : 0.095, gen_loss : 0.016, dom_loss : 0.000
+2020-12-25 06:30:23,333 - root - INFO - [22/30] [600/3437] mean_loss : 0.179, state_loss : 0.042, gen_loss : 0.070, dom_loss : 0.001
+2020-12-25 06:31:44,166 - root - INFO - [22/30] [800/3437] mean_loss : 0.180, state_loss : 0.038, gen_loss : 0.077, dom_loss : 0.000
+2020-12-25 06:33:04,517 - root - INFO - [22/30] [1000/3437] mean_loss : 0.175, state_loss : 0.042, gen_loss : 0.049, dom_loss : 0.010
+2020-12-25 06:34:24,362 - root - INFO - [22/30] [1200/3437] mean_loss : 0.169, state_loss : 0.021, gen_loss : 0.049, dom_loss : 0.000
+2020-12-25 06:35:43,933 - root - INFO - [22/30] [1400/3437] mean_loss : 0.216, state_loss : 0.052, gen_loss : 0.003, dom_loss : 0.000
+2020-12-25 06:37:04,839 - root - INFO - [22/30] [1600/3437] mean_loss : 0.187, state_loss : 0.039, gen_loss : 0.082, dom_loss : 0.000
+2020-12-25 06:38:25,484 - root - INFO - [22/30] [1800/3437] mean_loss : 0.187, state_loss : 0.091, gen_loss : 0.341, dom_loss : 0.000
+2020-12-25 06:39:45,064 - root - INFO - [22/30] [2000/3437] mean_loss : 0.199, state_loss : 0.067, gen_loss : 0.055, dom_loss : 0.032
+2020-12-25 06:41:04,265 - root - INFO - [22/30] [2200/3437] mean_loss : 0.178, state_loss : 0.045, gen_loss : 0.071, dom_loss : 0.070
+2020-12-25 06:42:24,428 - root - INFO - [22/30] [2400/3437] mean_loss : 0.208, state_loss : 0.064, gen_loss : 0.064, dom_loss : 0.002
+2020-12-25 06:43:44,107 - root - INFO - [22/30] [2600/3437] mean_loss : 0.180, state_loss : 0.020, gen_loss : 0.005, dom_loss : 0.000
+2020-12-25 06:45:03,435 - root - INFO - [22/30] [2800/3437] mean_loss : 0.186, state_loss : 0.030, gen_loss : 0.059, dom_loss : 0.000
+2020-12-25 06:46:24,490 - root - INFO - [22/30] [3000/3437] mean_loss : 0.198, state_loss : 0.056, gen_loss : 0.390, dom_loss : 0.000
+2020-12-25 06:47:45,032 - root - INFO - [22/30] [3200/3437] mean_loss : 0.195, state_loss : 0.031, gen_loss : 0.041, dom_loss : 0.000
+2020-12-25 06:49:05,387 - root - INFO - [22/30] [3400/3437] mean_loss : 0.184, state_loss : 0.029, gen_loss : 0.001, dom_loss : 0.000
+2020-12-25 06:53:19,953 - root - INFO - ------------------------------
+2020-12-25 06:53:19,954 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 06:53:19,954 - root - INFO - Epoch 22 joint accuracy : 0.5455
+2020-12-25 06:53:19,954 - root - INFO - Epoch 22 slot turn accuracy : 0.9741
+2020-12-25 06:53:19,954 - root - INFO - Epoch 22 slot turn F1: 0.9211
+2020-12-25 06:53:19,954 - root - INFO - Epoch 22 op accuracy : 0.9746
+2020-12-25 06:53:19,954 - root - INFO - Epoch 22 op F1 : {'delete': 0.014117647058823528, 'update': 0.8290434114483289, 'dontcare': 0.2900505902192243, 'carryover': 0.9867393270214396}
+2020-12-25 06:53:19,954 - root - INFO - Epoch 22 op hit count : {'delete': 15, 'update': 7553, 'dontcare': 86, 'carryover': 207867}
+2020-12-25 06:53:19,954 - root - INFO - Epoch 22 op all count : {'delete': 2103, 'update': 9904, 'dontcare': 410, 'carryover': 208713}
+2020-12-25 06:53:19,954 - root - INFO - Final Joint Accuracy : 0.3820
+2020-12-25 06:53:19,954 - root - INFO - Final slot turn F1 : 0.9104
+2020-12-25 06:53:19,954 - root - INFO - Latency Per Prediction : 28.792584 ms
+2020-12-25 06:53:19,954 - root - INFO - -----------------------------
+
+2020-12-25 06:53:20,187 - root - INFO - Best Score : {'epoch': 19, 'joint_acc': 0.5509428842762176, 'slot_acc': 0.9744675078007952, 'slot_f1': 0.9204063342617456, 'op_acc': 0.9750418305973413, 'op_f1': {'delete': 0.017250673854447438, 'update': 0.8214227220614729, 'dontcare': 0.26245847176079734, 'carryover': 0.9869509307545209}, 'final_slot_f1': 0.9078792960769249}
+2020-12-25 06:53:20,187 - root - INFO - 
+
+2020-12-25 06:53:21,024 - root - INFO - [23/30] [0/3437] mean_loss : 0.195, state_loss : 0.041, gen_loss : 0.174, dom_loss : 0.000
+2020-12-25 06:54:42,265 - root - INFO - [23/30] [200/3437] mean_loss : 0.189, state_loss : 0.036, gen_loss : 0.066, dom_loss : 0.000
+2020-12-25 06:56:01,700 - root - INFO - [23/30] [400/3437] mean_loss : 0.170, state_loss : 0.088, gen_loss : 0.096, dom_loss : 0.004
+2020-12-25 06:57:21,792 - root - INFO - [23/30] [600/3437] mean_loss : 0.151, state_loss : 0.084, gen_loss : 0.003, dom_loss : 0.000
+2020-12-25 06:58:41,948 - root - INFO - [23/30] [800/3437] mean_loss : 0.191, state_loss : 0.034, gen_loss : 0.165, dom_loss : 0.000
+2020-12-25 07:00:02,416 - root - INFO - [23/30] [1000/3437] mean_loss : 0.189, state_loss : 0.039, gen_loss : 0.109, dom_loss : 0.000
+2020-12-25 07:01:22,883 - root - INFO - [23/30] [1200/3437] mean_loss : 0.201, state_loss : 0.061, gen_loss : 0.056, dom_loss : 0.000
+2020-12-25 07:02:43,694 - root - INFO - [23/30] [1400/3437] mean_loss : 0.184, state_loss : 0.042, gen_loss : 0.094, dom_loss : 0.001
+2020-12-25 07:04:03,510 - root - INFO - [23/30] [1600/3437] mean_loss : 0.196, state_loss : 0.024, gen_loss : 0.062, dom_loss : 0.000
+2020-12-25 07:05:24,577 - root - INFO - [23/30] [1800/3437] mean_loss : 0.174, state_loss : 0.018, gen_loss : 0.066, dom_loss : 0.000
+2020-12-25 07:06:43,561 - root - INFO - [23/30] [2000/3437] mean_loss : 0.174, state_loss : 0.034, gen_loss : 0.029, dom_loss : 0.001
+2020-12-25 07:08:02,918 - root - INFO - [23/30] [2200/3437] mean_loss : 0.198, state_loss : 0.058, gen_loss : 0.037, dom_loss : 0.000
+2020-12-25 07:09:22,609 - root - INFO - [23/30] [2400/3437] mean_loss : 0.218, state_loss : 0.090, gen_loss : 0.316, dom_loss : 0.048
+2020-12-25 07:10:41,444 - root - INFO - [23/30] [2600/3437] mean_loss : 0.185, state_loss : 0.029, gen_loss : 0.078, dom_loss : 0.001
+2020-12-25 07:12:00,161 - root - INFO - [23/30] [2800/3437] mean_loss : 0.181, state_loss : 0.010, gen_loss : 0.025, dom_loss : 0.000
+2020-12-25 07:13:20,826 - root - INFO - [23/30] [3000/3437] mean_loss : 0.183, state_loss : 0.031, gen_loss : 0.006, dom_loss : 0.000
+2020-12-25 07:14:41,427 - root - INFO - [23/30] [3200/3437] mean_loss : 0.183, state_loss : 0.030, gen_loss : 0.034, dom_loss : 0.001
+2020-12-25 07:16:03,295 - root - INFO - [23/30] [3400/3437] mean_loss : 0.169, state_loss : 0.038, gen_loss : 0.002, dom_loss : 0.000
+2020-12-25 07:20:19,796 - root - INFO - ------------------------------
+2020-12-25 07:20:19,796 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 07:20:19,796 - root - INFO - Epoch 23 joint accuracy : 0.5531
+2020-12-25 07:20:19,796 - root - INFO - Epoch 23 slot turn accuracy : 0.9751
+2020-12-25 07:20:19,797 - root - INFO - Epoch 23 slot turn F1: 0.9244
+2020-12-25 07:20:19,797 - root - INFO - Epoch 23 op accuracy : 0.9757
+2020-12-25 07:20:19,797 - root - INFO - Epoch 23 op F1 : {'delete': 0.019562715765247412, 'update': 0.8226266169699626, 'dontcare': 0.24872231686541738, 'carryover': 0.9872963852678858}
+2020-12-25 07:20:19,797 - root - INFO - Epoch 23 op hit count : {'delete': 17, 'update': 7504, 'dontcare': 73, 'carryover': 208167}
+2020-12-25 07:20:19,797 - root - INFO - Epoch 23 op all count : {'delete': 1713, 'update': 10051, 'dontcare': 458, 'carryover': 208908}
+2020-12-25 07:20:19,797 - root - INFO - Final Joint Accuracy : 0.3770
+2020-12-25 07:20:19,797 - root - INFO - Final slot turn F1 : 0.9128
+2020-12-25 07:20:19,797 - root - INFO - Latency Per Prediction : 28.999825 ms
+2020-12-25 07:20:19,797 - root - INFO - -----------------------------
+
+2020-12-25 07:20:21,862 - root - INFO - Best Score : {'epoch': 23, 'joint_acc': 0.5531135531135531, 'slot_acc': 0.9751367973589739, 'slot_f1': 0.9244123837228959, 'op_acc': 0.9757201646090081, 'op_f1': {'delete': 0.019562715765247412, 'update': 0.8226266169699626, 'dontcare': 0.24872231686541738, 'carryover': 0.9872963852678858}, 'final_slot_f1': 0.9127885307692348}
+2020-12-25 07:20:21,862 - root - INFO - 
+
+2020-12-25 07:20:22,954 - root - INFO - [24/30] [0/3437] mean_loss : 0.242, state_loss : 0.059, gen_loss : 0.212, dom_loss : 0.000
+2020-12-25 07:21:43,437 - root - INFO - [24/30] [200/3437] mean_loss : 0.177, state_loss : 0.089, gen_loss : 0.057, dom_loss : 0.000
+2020-12-25 07:23:04,467 - root - INFO - [24/30] [400/3437] mean_loss : 0.187, state_loss : 0.028, gen_loss : 0.070, dom_loss : 0.000
+2020-12-25 07:24:24,190 - root - INFO - [24/30] [600/3437] mean_loss : 0.180, state_loss : 0.058, gen_loss : 0.163, dom_loss : 0.006
+2020-12-25 07:25:44,307 - root - INFO - [24/30] [800/3437] mean_loss : 0.150, state_loss : 0.047, gen_loss : 0.039, dom_loss : 0.000
+2020-12-25 07:27:04,464 - root - INFO - [24/30] [1000/3437] mean_loss : 0.168, state_loss : 0.037, gen_loss : 0.301, dom_loss : 0.000
+2020-12-25 07:28:23,033 - root - INFO - [24/30] [1200/3437] mean_loss : 0.157, state_loss : 0.144, gen_loss : 0.018, dom_loss : 0.000
+2020-12-25 07:29:43,793 - root - INFO - [24/30] [1400/3437] mean_loss : 0.169, state_loss : 0.023, gen_loss : 0.168, dom_loss : 0.000
+2020-12-25 07:31:04,180 - root - INFO - [24/30] [1600/3437] mean_loss : 0.177, state_loss : 0.057, gen_loss : 0.357, dom_loss : 0.000
+2020-12-25 07:32:24,397 - root - INFO - [24/30] [1800/3437] mean_loss : 0.165, state_loss : 0.033, gen_loss : 0.061, dom_loss : 0.000
+2020-12-25 07:33:44,941 - root - INFO - [24/30] [2000/3437] mean_loss : 0.176, state_loss : 0.065, gen_loss : 0.098, dom_loss : 0.002
+2020-12-25 07:35:05,292 - root - INFO - [24/30] [2200/3437] mean_loss : 0.180, state_loss : 0.078, gen_loss : 0.329, dom_loss : 0.000
+2020-12-25 07:36:24,623 - root - INFO - [24/30] [2400/3437] mean_loss : 0.166, state_loss : 0.067, gen_loss : 0.064, dom_loss : 0.001
+2020-12-25 07:37:45,241 - root - INFO - [24/30] [2600/3437] mean_loss : 0.177, state_loss : 0.044, gen_loss : 0.076, dom_loss : 0.001
+2020-12-25 07:39:04,068 - root - INFO - [24/30] [2800/3437] mean_loss : 0.165, state_loss : 0.046, gen_loss : 0.286, dom_loss : 0.036
+2020-12-25 07:40:24,457 - root - INFO - [24/30] [3000/3437] mean_loss : 0.165, state_loss : 0.076, gen_loss : 0.026, dom_loss : 0.000
+2020-12-25 07:41:43,786 - root - INFO - [24/30] [3200/3437] mean_loss : 0.169, state_loss : 0.117, gen_loss : 0.102, dom_loss : 0.000
+2020-12-25 07:43:06,468 - root - INFO - [24/30] [3400/3437] mean_loss : 0.181, state_loss : 0.045, gen_loss : 0.165, dom_loss : 0.000
+2020-12-25 07:47:21,009 - root - INFO - ------------------------------
+2020-12-25 07:47:21,010 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 07:47:21,010 - root - INFO - Epoch 24 joint accuracy : 0.5509
+2020-12-25 07:47:21,010 - root - INFO - Epoch 24 slot turn accuracy : 0.9744
+2020-12-25 07:47:21,010 - root - INFO - Epoch 24 slot turn F1: 0.9224
+2020-12-25 07:47:21,011 - root - INFO - Epoch 24 op accuracy : 0.9750
+2020-12-25 07:47:21,011 - root - INFO - Epoch 24 op F1 : {'delete': 0.015873015873015872, 'update': 0.8256227758007118, 'dontcare': 0.3275261324041812, 'carryover': 0.9869080812994626}
+2020-12-25 07:47:21,011 - root - INFO - Epoch 24 op hit count : {'delete': 16, 'update': 7540, 'dontcare': 94, 'carryover': 207944}
+2020-12-25 07:47:21,011 - root - INFO - Epoch 24 op all count : {'delete': 1994, 'update': 10012, 'dontcare': 372, 'carryover': 208752}
+2020-12-25 07:47:21,011 - root - INFO - Final Joint Accuracy : 0.3820
+2020-12-25 07:47:21,011 - root - INFO - Final slot turn F1 : 0.9126
+2020-12-25 07:47:21,011 - root - INFO - Latency Per Prediction : 28.869649 ms
+2020-12-25 07:47:21,011 - root - INFO - -----------------------------
+
+2020-12-25 07:47:21,250 - root - INFO - Best Score : {'epoch': 23, 'joint_acc': 0.5531135531135531, 'slot_acc': 0.9751367973589739, 'slot_f1': 0.9244123837228959, 'op_acc': 0.9757201646090081, 'op_f1': {'delete': 0.019562715765247412, 'update': 0.8226266169699626, 'dontcare': 0.24872231686541738, 'carryover': 0.9872963852678858}, 'final_slot_f1': 0.9127885307692348}
+2020-12-25 07:47:21,250 - root - INFO - 
+
+2020-12-25 07:47:22,154 - root - INFO - [25/30] [0/3437] mean_loss : 0.136, state_loss : 0.030, gen_loss : 0.047, dom_loss : 0.037
+2020-12-25 07:48:44,480 - root - INFO - [25/30] [200/3437] mean_loss : 0.157, state_loss : 0.031, gen_loss : 0.183, dom_loss : 0.000
+2020-12-25 07:50:04,545 - root - INFO - [25/30] [400/3437] mean_loss : 0.166, state_loss : 0.155, gen_loss : 0.310, dom_loss : 0.000
+2020-12-25 07:51:25,076 - root - INFO - [25/30] [600/3437] mean_loss : 0.196, state_loss : 0.038, gen_loss : 0.058, dom_loss : 0.000
+2020-12-25 07:52:45,446 - root - INFO - [25/30] [800/3437] mean_loss : 0.165, state_loss : 0.021, gen_loss : 0.041, dom_loss : 0.000
+2020-12-25 07:54:05,602 - root - INFO - [25/30] [1000/3437] mean_loss : 0.156, state_loss : 0.029, gen_loss : 0.001, dom_loss : 0.000
+2020-12-25 07:55:26,273 - root - INFO - [25/30] [1200/3437] mean_loss : 0.158, state_loss : 0.015, gen_loss : 0.025, dom_loss : 0.000
+2020-12-25 07:56:48,066 - root - INFO - [25/30] [1400/3437] mean_loss : 0.161, state_loss : 0.059, gen_loss : 0.011, dom_loss : 0.000
+2020-12-25 07:58:10,305 - root - INFO - [25/30] [1600/3437] mean_loss : 0.156, state_loss : 0.046, gen_loss : 0.099, dom_loss : 0.026
+2020-12-25 07:59:32,005 - root - INFO - [25/30] [1800/3437] mean_loss : 0.168, state_loss : 0.029, gen_loss : 0.070, dom_loss : 0.001
+2020-12-25 08:00:52,822 - root - INFO - [25/30] [2000/3437] mean_loss : 0.173, state_loss : 0.045, gen_loss : 0.234, dom_loss : 0.000
+2020-12-25 08:02:13,569 - root - INFO - [25/30] [2200/3437] mean_loss : 0.157, state_loss : 0.065, gen_loss : 0.066, dom_loss : 0.000
+2020-12-25 08:03:35,253 - root - INFO - [25/30] [2400/3437] mean_loss : 0.187, state_loss : 0.105, gen_loss : 0.148, dom_loss : 0.001
+2020-12-25 08:04:55,095 - root - INFO - [25/30] [2600/3437] mean_loss : 0.163, state_loss : 0.026, gen_loss : 0.212, dom_loss : 0.000
+2020-12-25 08:06:16,473 - root - INFO - [25/30] [2800/3437] mean_loss : 0.168, state_loss : 0.022, gen_loss : 0.097, dom_loss : 0.000
+2020-12-25 08:07:36,579 - root - INFO - [25/30] [3000/3437] mean_loss : 0.172, state_loss : 0.076, gen_loss : 0.182, dom_loss : 0.000
+2020-12-25 08:08:57,819 - root - INFO - [25/30] [3200/3437] mean_loss : 0.156, state_loss : 0.034, gen_loss : 0.089, dom_loss : 0.000
+2020-12-25 08:10:17,328 - root - INFO - [25/30] [3400/3437] mean_loss : 0.177, state_loss : 0.054, gen_loss : 0.050, dom_loss : 0.000
+2020-12-25 08:14:40,751 - root - INFO - ------------------------------
+2020-12-25 08:14:40,751 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 08:14:40,751 - root - INFO - Epoch 25 joint accuracy : 0.5493
+2020-12-25 08:14:40,752 - root - INFO - Epoch 25 slot turn accuracy : 0.9747
+2020-12-25 08:14:40,752 - root - INFO - Epoch 25 slot turn F1: 0.9233
+2020-12-25 08:14:40,752 - root - INFO - Epoch 25 op accuracy : 0.9753
+2020-12-25 08:14:40,752 - root - INFO - Epoch 25 op F1 : {'delete': 0.02044989775051125, 'update': 0.8267880649407635, 'dontcare': 0.2945205479452055, 'carryover': 0.9870838552936264}
+2020-12-25 08:14:40,752 - root - INFO - Epoch 25 op hit count : {'delete': 20, 'update': 7537, 'dontcare': 86, 'carryover': 208022}
+2020-12-25 08:14:40,752 - root - INFO - Epoch 25 op all count : {'delete': 1931, 'update': 9988, 'dontcare': 409, 'carryover': 208802}
+2020-12-25 08:14:40,752 - root - INFO - Final Joint Accuracy : 0.3770
+2020-12-25 08:14:40,752 - root - INFO - Final slot turn F1 : 0.9133
+2020-12-25 08:14:40,752 - root - INFO - Latency Per Prediction : 30.001791 ms
+2020-12-25 08:14:40,752 - root - INFO - -----------------------------
+
+2020-12-25 08:14:40,991 - root - INFO - Best Score : {'epoch': 23, 'joint_acc': 0.5531135531135531, 'slot_acc': 0.9751367973589739, 'slot_f1': 0.9244123837228959, 'op_acc': 0.9757201646090081, 'op_f1': {'delete': 0.019562715765247412, 'update': 0.8226266169699626, 'dontcare': 0.24872231686541738, 'carryover': 0.9872963852678858}, 'final_slot_f1': 0.9127885307692348}
+2020-12-25 08:14:40,991 - root - INFO - 
+
+2020-12-25 08:14:41,854 - root - INFO - [26/30] [0/3437] mean_loss : 0.128, state_loss : 0.085, gen_loss : 0.084, dom_loss : 0.001
+2020-12-25 08:16:02,175 - root - INFO - [26/30] [200/3437] mean_loss : 0.169, state_loss : 0.031, gen_loss : 0.111, dom_loss : 0.000
+2020-12-25 08:17:21,678 - root - INFO - [26/30] [400/3437] mean_loss : 0.148, state_loss : 0.066, gen_loss : 0.010, dom_loss : 0.000
+2020-12-25 08:18:41,132 - root - INFO - [26/30] [600/3437] mean_loss : 0.162, state_loss : 0.044, gen_loss : 0.045, dom_loss : 0.000
+2020-12-25 08:20:01,046 - root - INFO - [26/30] [800/3437] mean_loss : 0.177, state_loss : 0.026, gen_loss : 0.075, dom_loss : 0.000
+2020-12-25 08:21:20,706 - root - INFO - [26/30] [1000/3437] mean_loss : 0.162, state_loss : 0.055, gen_loss : 0.120, dom_loss : 0.000
+2020-12-25 08:22:40,388 - root - INFO - [26/30] [1200/3437] mean_loss : 0.159, state_loss : 0.087, gen_loss : 0.085, dom_loss : 0.232
+2020-12-25 08:24:00,147 - root - INFO - [26/30] [1400/3437] mean_loss : 0.146, state_loss : 0.116, gen_loss : 0.081, dom_loss : 0.001
+2020-12-25 08:25:19,431 - root - INFO - [26/30] [1600/3437] mean_loss : 0.167, state_loss : 0.043, gen_loss : 0.200, dom_loss : 0.000
+2020-12-25 08:26:38,852 - root - INFO - [26/30] [1800/3437] mean_loss : 0.166, state_loss : 0.054, gen_loss : 0.075, dom_loss : 0.005
+2020-12-25 08:27:59,546 - root - INFO - [26/30] [2000/3437] mean_loss : 0.159, state_loss : 0.025, gen_loss : 0.141, dom_loss : 0.000
+2020-12-25 08:29:19,441 - root - INFO - [26/30] [2200/3437] mean_loss : 0.159, state_loss : 0.014, gen_loss : 0.002, dom_loss : 0.000
+2020-12-25 08:30:39,576 - root - INFO - [26/30] [2400/3437] mean_loss : 0.170, state_loss : 0.018, gen_loss : 0.010, dom_loss : 0.000
+2020-12-25 08:31:59,667 - root - INFO - [26/30] [2600/3437] mean_loss : 0.154, state_loss : 0.048, gen_loss : 0.276, dom_loss : 0.000
+2020-12-25 08:33:19,753 - root - INFO - [26/30] [2800/3437] mean_loss : 0.150, state_loss : 0.136, gen_loss : 0.037, dom_loss : 0.104
+2020-12-25 08:34:39,899 - root - INFO - [26/30] [3000/3437] mean_loss : 0.151, state_loss : 0.060, gen_loss : 0.168, dom_loss : 0.000
+2020-12-25 08:35:59,827 - root - INFO - [26/30] [3200/3437] mean_loss : 0.172, state_loss : 0.099, gen_loss : 0.052, dom_loss : 0.001
+2020-12-25 08:37:20,595 - root - INFO - [26/30] [3400/3437] mean_loss : 0.166, state_loss : 0.045, gen_loss : 0.006, dom_loss : 0.001
+2020-12-25 08:41:34,684 - root - INFO - ------------------------------
+2020-12-25 08:41:34,684 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 08:41:34,684 - root - INFO - Epoch 26 joint accuracy : 0.5432
+2020-12-25 08:41:34,685 - root - INFO - Epoch 26 slot turn accuracy : 0.9743
+2020-12-25 08:41:34,685 - root - INFO - Epoch 26 slot turn F1: 0.9219
+2020-12-25 08:41:34,685 - root - INFO - Epoch 26 op accuracy : 0.9748
+2020-12-25 08:41:34,685 - root - INFO - Epoch 26 op F1 : {'delete': 0.01958863858961802, 'update': 0.8245287154756685, 'dontcare': 0.32986111111111116, 'carryover': 0.98683892034533}
+2020-12-25 08:41:34,685 - root - INFO - Epoch 26 op hit count : {'delete': 20, 'update': 7523, 'dontcare': 95, 'carryover': 207924}
+2020-12-25 08:41:34,685 - root - INFO - Epoch 26 op all count : {'delete': 2016, 'update': 10000, 'dontcare': 366, 'carryover': 208748}
+2020-12-25 08:41:34,685 - root - INFO - Final Joint Accuracy : 0.3640
+2020-12-25 08:41:34,685 - root - INFO - Final slot turn F1 : 0.9102
+2020-12-25 08:41:34,685 - root - INFO - Latency Per Prediction : 28.713772 ms
+2020-12-25 08:41:34,685 - root - INFO - -----------------------------
+
+2020-12-25 08:41:34,917 - root - INFO - Best Score : {'epoch': 23, 'joint_acc': 0.5531135531135531, 'slot_acc': 0.9751367973589739, 'slot_f1': 0.9244123837228959, 'op_acc': 0.9757201646090081, 'op_f1': {'delete': 0.019562715765247412, 'update': 0.8226266169699626, 'dontcare': 0.24872231686541738, 'carryover': 0.9872963852678858}, 'final_slot_f1': 0.9127885307692348}
+2020-12-25 08:41:34,917 - root - INFO - 
+
+2020-12-25 08:41:35,779 - root - INFO - [27/30] [0/3437] mean_loss : 0.134, state_loss : 0.032, gen_loss : 0.118, dom_loss : 0.000
+2020-12-25 08:42:55,406 - root - INFO - [27/30] [200/3437] mean_loss : 0.164, state_loss : 0.066, gen_loss : 0.278, dom_loss : 0.067
+2020-12-25 08:44:14,574 - root - INFO - [27/30] [400/3437] mean_loss : 0.142, state_loss : 0.062, gen_loss : 0.136, dom_loss : 0.090
+2020-12-25 08:45:34,040 - root - INFO - [27/30] [600/3437] mean_loss : 0.162, state_loss : 0.044, gen_loss : 0.124, dom_loss : 0.015
+2020-12-25 08:46:54,847 - root - INFO - [27/30] [800/3437] mean_loss : 0.146, state_loss : 0.038, gen_loss : 0.090, dom_loss : 0.000
+2020-12-25 08:48:14,770 - root - INFO - [27/30] [1000/3437] mean_loss : 0.153, state_loss : 0.050, gen_loss : 0.120, dom_loss : 0.001
+2020-12-25 08:49:33,441 - root - INFO - [27/30] [1200/3437] mean_loss : 0.157, state_loss : 0.022, gen_loss : 0.053, dom_loss : 0.001
+2020-12-25 08:50:53,953 - root - INFO - [27/30] [1400/3437] mean_loss : 0.154, state_loss : 0.077, gen_loss : 0.282, dom_loss : 0.093
+2020-12-25 08:52:13,335 - root - INFO - [27/30] [1600/3437] mean_loss : 0.147, state_loss : 0.033, gen_loss : 0.082, dom_loss : 0.000
+2020-12-25 08:53:34,370 - root - INFO - [27/30] [1800/3437] mean_loss : 0.157, state_loss : 0.038, gen_loss : 0.002, dom_loss : 0.000
+2020-12-25 08:54:54,101 - root - INFO - [27/30] [2000/3437] mean_loss : 0.170, state_loss : 0.036, gen_loss : 0.035, dom_loss : 0.001
+2020-12-25 08:56:14,253 - root - INFO - [27/30] [2200/3437] mean_loss : 0.160, state_loss : 0.064, gen_loss : 0.054, dom_loss : 0.000
+2020-12-25 08:57:34,448 - root - INFO - [27/30] [2400/3437] mean_loss : 0.153, state_loss : 0.051, gen_loss : 0.085, dom_loss : 0.000
+2020-12-25 08:58:55,172 - root - INFO - [27/30] [2600/3437] mean_loss : 0.143, state_loss : 0.027, gen_loss : 0.069, dom_loss : 0.000
+2020-12-25 09:00:16,278 - root - INFO - [27/30] [2800/3437] mean_loss : 0.172, state_loss : 0.048, gen_loss : 0.045, dom_loss : 0.000
+2020-12-25 09:01:36,547 - root - INFO - [27/30] [3000/3437] mean_loss : 0.166, state_loss : 0.059, gen_loss : 0.229, dom_loss : 0.002
+2020-12-25 09:02:57,178 - root - INFO - [27/30] [3200/3437] mean_loss : 0.167, state_loss : 0.059, gen_loss : 0.177, dom_loss : 0.000
+2020-12-25 09:04:17,826 - root - INFO - [27/30] [3400/3437] mean_loss : 0.140, state_loss : 0.027, gen_loss : 0.004, dom_loss : 0.000
+2020-12-25 09:08:37,732 - root - INFO - ------------------------------
+2020-12-25 09:08:37,732 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 09:08:37,732 - root - INFO - Epoch 27 joint accuracy : 0.5496
+2020-12-25 09:08:37,732 - root - INFO - Epoch 27 slot turn accuracy : 0.9749
+2020-12-25 09:08:37,732 - root - INFO - Epoch 27 slot turn F1: 0.9238
+2020-12-25 09:08:37,733 - root - INFO - Epoch 27 op accuracy : 0.9755
+2020-12-25 09:08:37,733 - root - INFO - Epoch 27 op F1 : {'delete': 0.02125506072874494, 'update': 0.8276808253759192, 'dontcare': 0.34458259325044405, 'carryover': 0.9871814642502118}
+2020-12-25 09:08:37,733 - root - INFO - Epoch 27 op hit count : {'delete': 21, 'update': 7541, 'dontcare': 97, 'carryover': 208048}
+2020-12-25 09:08:37,733 - root - INFO - Epoch 27 op all count : {'delete': 1946, 'update': 9983, 'dontcare': 358, 'carryover': 208843}
+2020-12-25 09:08:37,733 - root - INFO - Final Joint Accuracy : 0.3720
+2020-12-25 09:08:37,733 - root - INFO - Final slot turn F1 : 0.9127
+2020-12-25 09:08:37,733 - root - INFO - Latency Per Prediction : 29.516769 ms
+2020-12-25 09:08:37,733 - root - INFO - -----------------------------
+
+2020-12-25 09:08:37,960 - root - INFO - Best Score : {'epoch': 23, 'joint_acc': 0.5531135531135531, 'slot_acc': 0.9751367973589739, 'slot_f1': 0.9244123837228959, 'op_acc': 0.9757201646090081, 'op_f1': {'delete': 0.019562715765247412, 'update': 0.8226266169699626, 'dontcare': 0.24872231686541738, 'carryover': 0.9872963852678858}, 'final_slot_f1': 0.9127885307692348}
+2020-12-25 09:08:37,960 - root - INFO - 
+
+2020-12-25 09:08:38,837 - root - INFO - [28/30] [0/3437] mean_loss : 0.048, state_loss : 0.043, gen_loss : 0.026, dom_loss : 0.000
+2020-12-25 09:09:59,864 - root - INFO - [28/30] [200/3437] mean_loss : 0.156, state_loss : 0.041, gen_loss : 0.261, dom_loss : 0.069
+2020-12-25 09:11:21,568 - root - INFO - [28/30] [400/3437] mean_loss : 0.141, state_loss : 0.022, gen_loss : 0.228, dom_loss : 0.000
+2020-12-25 09:12:41,561 - root - INFO - [28/30] [600/3437] mean_loss : 0.150, state_loss : 0.043, gen_loss : 0.011, dom_loss : 0.000
+2020-12-25 09:14:02,047 - root - INFO - [28/30] [800/3437] mean_loss : 0.145, state_loss : 0.057, gen_loss : 0.271, dom_loss : 0.001
+2020-12-25 09:15:22,444 - root - INFO - [28/30] [1000/3437] mean_loss : 0.161, state_loss : 0.048, gen_loss : 0.113, dom_loss : 0.000
+2020-12-25 09:16:43,867 - root - INFO - [28/30] [1200/3437] mean_loss : 0.158, state_loss : 0.053, gen_loss : 0.055, dom_loss : 0.001
+2020-12-25 09:18:03,957 - root - INFO - [28/30] [1400/3437] mean_loss : 0.148, state_loss : 0.027, gen_loss : 0.137, dom_loss : 0.000
+2020-12-25 09:19:24,787 - root - INFO - [28/30] [1600/3437] mean_loss : 0.162, state_loss : 0.038, gen_loss : 0.118, dom_loss : 0.000
+2020-12-25 09:20:45,975 - root - INFO - [28/30] [1800/3437] mean_loss : 0.136, state_loss : 0.026, gen_loss : 0.084, dom_loss : 0.023
+2020-12-25 09:22:06,937 - root - INFO - [28/30] [2000/3437] mean_loss : 0.177, state_loss : 0.099, gen_loss : 0.381, dom_loss : 0.020
+2020-12-25 09:23:27,726 - root - INFO - [28/30] [2200/3437] mean_loss : 0.153, state_loss : 0.021, gen_loss : 0.446, dom_loss : 0.000
+2020-12-25 09:24:48,472 - root - INFO - [28/30] [2400/3437] mean_loss : 0.150, state_loss : 0.056, gen_loss : 0.001, dom_loss : 0.000
+2020-12-25 09:26:09,435 - root - INFO - [28/30] [2600/3437] mean_loss : 0.151, state_loss : 0.029, gen_loss : 0.059, dom_loss : 0.001
+2020-12-25 09:27:27,745 - root - INFO - [28/30] [2800/3437] mean_loss : 0.164, state_loss : 0.023, gen_loss : 0.002, dom_loss : 0.000
+2020-12-25 09:28:48,312 - root - INFO - [28/30] [3000/3437] mean_loss : 0.154, state_loss : 0.069, gen_loss : 0.014, dom_loss : 0.001
+2020-12-25 09:30:08,982 - root - INFO - [28/30] [3200/3437] mean_loss : 0.154, state_loss : 0.028, gen_loss : 0.118, dom_loss : 0.000
+2020-12-25 09:31:27,550 - root - INFO - [28/30] [3400/3437] mean_loss : 0.137, state_loss : 0.060, gen_loss : 0.075, dom_loss : 0.204
+2020-12-25 09:35:59,976 - root - INFO - ------------------------------
+2020-12-25 09:35:59,976 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 09:35:59,976 - root - INFO - Epoch 28 joint accuracy : 0.5547
+2020-12-25 09:35:59,976 - root - INFO - Epoch 28 slot turn accuracy : 0.9749
+2020-12-25 09:35:59,976 - root - INFO - Epoch 28 slot turn F1: 0.9236
+2020-12-25 09:35:59,977 - root - INFO - Epoch 28 op accuracy : 0.9755
+2020-12-25 09:35:59,977 - root - INFO - Epoch 28 op F1 : {'delete': 0.02066115702479339, 'update': 0.8280821165879899, 'dontcare': 0.28668941979522183, 'carryover': 0.9871749857658001}
+2020-12-25 09:35:59,977 - root - INFO - Epoch 28 op hit count : {'delete': 20, 'update': 7543, 'dontcare': 84, 'carryover': 208057}
+2020-12-25 09:35:59,977 - root - INFO - Epoch 28 op all count : {'delete': 1912, 'update': 9978, 'dontcare': 407, 'carryover': 208833}
+2020-12-25 09:35:59,977 - root - INFO - Final Joint Accuracy : 0.3820
+2020-12-25 09:35:59,977 - root - INFO - Final slot turn F1 : 0.9131
+2020-12-25 09:35:59,977 - root - INFO - Latency Per Prediction : 31.136261 ms
+2020-12-25 09:35:59,977 - root - INFO - -----------------------------
+
+2020-12-25 09:36:01,953 - root - INFO - Best Score : {'epoch': 28, 'joint_acc': 0.5547415547415547, 'slot_acc': 0.9749152082484948, 'slot_f1': 0.9235527674649325, 'op_acc': 0.9754623976845742, 'op_f1': {'delete': 0.02066115702479339, 'update': 0.8280821165879899, 'dontcare': 0.28668941979522183, 'carryover': 0.9871749857658001}, 'final_slot_f1': 0.9130942972617726}
+2020-12-25 09:36:01,953 - root - INFO - 
+
+2020-12-25 09:36:02,973 - root - INFO - [29/30] [0/3437] mean_loss : 0.115, state_loss : 0.080, gen_loss : 0.075, dom_loss : 0.000
+2020-12-25 09:37:23,122 - root - INFO - [29/30] [200/3437] mean_loss : 0.146, state_loss : 0.020, gen_loss : 0.001, dom_loss : 0.000
+2020-12-25 09:38:43,483 - root - INFO - [29/30] [400/3437] mean_loss : 0.136, state_loss : 0.040, gen_loss : 0.121, dom_loss : 0.000
+2020-12-25 09:40:04,442 - root - INFO - [29/30] [600/3437] mean_loss : 0.136, state_loss : 0.037, gen_loss : 0.070, dom_loss : 0.035
+2020-12-25 09:41:24,179 - root - INFO - [29/30] [800/3437] mean_loss : 0.141, state_loss : 0.063, gen_loss : 0.029, dom_loss : 0.000
+2020-12-25 09:42:43,735 - root - INFO - [29/30] [1000/3437] mean_loss : 0.155, state_loss : 0.069, gen_loss : 0.069, dom_loss : 0.000
+2020-12-25 09:44:04,702 - root - INFO - [29/30] [1200/3437] mean_loss : 0.145, state_loss : 0.040, gen_loss : 0.005, dom_loss : 0.000
+2020-12-25 09:45:24,024 - root - INFO - [29/30] [1400/3437] mean_loss : 0.136, state_loss : 0.087, gen_loss : 0.161, dom_loss : 0.000
+2020-12-25 09:46:43,834 - root - INFO - [29/30] [1600/3437] mean_loss : 0.151, state_loss : 0.019, gen_loss : 0.003, dom_loss : 0.000
+2020-12-25 09:48:04,635 - root - INFO - [29/30] [1800/3437] mean_loss : 0.149, state_loss : 0.023, gen_loss : 0.049, dom_loss : 0.000
+2020-12-25 09:49:25,359 - root - INFO - [29/30] [2000/3437] mean_loss : 0.158, state_loss : 0.070, gen_loss : 0.031, dom_loss : 0.000
+2020-12-25 09:50:44,606 - root - INFO - [29/30] [2200/3437] mean_loss : 0.142, state_loss : 0.075, gen_loss : 0.119, dom_loss : 0.002
+2020-12-25 09:52:05,293 - root - INFO - [29/30] [2400/3437] mean_loss : 0.153, state_loss : 0.068, gen_loss : 0.051, dom_loss : 0.000
+2020-12-25 09:53:25,048 - root - INFO - [29/30] [2600/3437] mean_loss : 0.165, state_loss : 0.024, gen_loss : 0.180, dom_loss : 0.000
+2020-12-25 09:54:46,598 - root - INFO - [29/30] [2800/3437] mean_loss : 0.154, state_loss : 0.041, gen_loss : 0.063, dom_loss : 0.000
+2020-12-25 09:56:06,899 - root - INFO - [29/30] [3000/3437] mean_loss : 0.161, state_loss : 0.045, gen_loss : 0.014, dom_loss : 0.000
+2020-12-25 09:57:27,062 - root - INFO - [29/30] [3200/3437] mean_loss : 0.144, state_loss : 0.051, gen_loss : 0.041, dom_loss : 0.000
+2020-12-25 09:58:46,719 - root - INFO - [29/30] [3400/3437] mean_loss : 0.139, state_loss : 0.087, gen_loss : 0.176, dom_loss : 0.000
+2020-12-25 10:03:05,685 - root - INFO - ------------------------------
+2020-12-25 10:03:05,685 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 10:03:05,685 - root - INFO - Epoch 29 joint accuracy : 0.5532
+2020-12-25 10:03:05,685 - root - INFO - Epoch 29 slot turn accuracy : 0.9750
+2020-12-25 10:03:05,685 - root - INFO - Epoch 29 slot turn F1: 0.9241
+2020-12-25 10:03:05,685 - root - INFO - Epoch 29 op accuracy : 0.9756
+2020-12-25 10:03:05,686 - root - INFO - Epoch 29 op F1 : {'delete': 0.02103049421661409, 'update': 0.8270750988142291, 'dontcare': 0.29809358752166376, 'carryover': 0.9872356576091469}
+2020-12-25 10:03:05,686 - root - INFO - Epoch 29 op hit count : {'delete': 20, 'update': 7533, 'dontcare': 86, 'carryover': 208092}
+2020-12-25 10:03:05,686 - root - INFO - Epoch 29 op all count : {'delete': 1878, 'update': 10007, 'dontcare': 389, 'carryover': 208856}
+2020-12-25 10:03:05,686 - root - INFO - Final Joint Accuracy : 0.3790
+2020-12-25 10:03:05,686 - root - INFO - Final slot turn F1 : 0.9135
+2020-12-25 10:03:05,686 - root - INFO - Latency Per Prediction : 29.277987 ms
+2020-12-25 10:03:05,686 - root - INFO - -----------------------------
+
+2020-12-25 10:03:05,940 - root - INFO - Best Score : {'epoch': 28, 'joint_acc': 0.5547415547415547, 'slot_acc': 0.9749152082484948, 'slot_f1': 0.9235527674649325, 'op_acc': 0.9754623976845742, 'op_f1': {'delete': 0.02066115702479339, 'update': 0.8280821165879899, 'dontcare': 0.28668941979522183, 'carryover': 0.9871749857658001}, 'final_slot_f1': 0.9130942972617726}
+2020-12-25 10:03:05,941 - root - INFO - 
+
+2020-12-25 10:03:06,819 - root - INFO - [30/30] [0/3437] mean_loss : 0.053, state_loss : 0.035, gen_loss : 0.036, dom_loss : 0.000
+2020-12-25 10:04:28,625 - root - INFO - [30/30] [200/3437] mean_loss : 0.155, state_loss : 0.018, gen_loss : 0.193, dom_loss : 0.001
+2020-12-25 10:05:48,817 - root - INFO - [30/30] [400/3437] mean_loss : 0.151, state_loss : 0.115, gen_loss : 0.119, dom_loss : 0.001
+2020-12-25 10:07:09,655 - root - INFO - [30/30] [600/3437] mean_loss : 0.139, state_loss : 0.079, gen_loss : 0.072, dom_loss : 0.000
+2020-12-25 10:08:30,211 - root - INFO - [30/30] [800/3437] mean_loss : 0.142, state_loss : 0.038, gen_loss : 0.060, dom_loss : 0.081
+2020-12-25 10:09:49,212 - root - INFO - [30/30] [1000/3437] mean_loss : 0.140, state_loss : 0.099, gen_loss : 0.062, dom_loss : 0.000
+2020-12-25 10:11:09,664 - root - INFO - [30/30] [1200/3437] mean_loss : 0.140, state_loss : 0.086, gen_loss : 0.478, dom_loss : 0.000
+2020-12-25 10:12:29,906 - root - INFO - [30/30] [1400/3437] mean_loss : 0.158, state_loss : 0.032, gen_loss : 0.051, dom_loss : 0.000
+2020-12-25 10:13:50,226 - root - INFO - [30/30] [1600/3437] mean_loss : 0.147, state_loss : 0.073, gen_loss : 0.034, dom_loss : 0.000
+2020-12-25 10:15:11,189 - root - INFO - [30/30] [1800/3437] mean_loss : 0.158, state_loss : 0.037, gen_loss : 0.145, dom_loss : 0.000
+2020-12-25 10:16:31,786 - root - INFO - [30/30] [2000/3437] mean_loss : 0.153, state_loss : 0.009, gen_loss : 0.001, dom_loss : 0.000
+2020-12-25 10:17:51,950 - root - INFO - [30/30] [2200/3437] mean_loss : 0.141, state_loss : 0.068, gen_loss : 0.042, dom_loss : 0.000
+2020-12-25 10:19:13,675 - root - INFO - [30/30] [2400/3437] mean_loss : 0.152, state_loss : 0.064, gen_loss : 0.002, dom_loss : 0.000
+2020-12-25 10:20:34,710 - root - INFO - [30/30] [2600/3437] mean_loss : 0.144, state_loss : 0.052, gen_loss : 0.001, dom_loss : 0.000
+2020-12-25 10:21:53,919 - root - INFO - [30/30] [2800/3437] mean_loss : 0.136, state_loss : 0.036, gen_loss : 0.023, dom_loss : 0.000
+2020-12-25 10:23:13,902 - root - INFO - [30/30] [3000/3437] mean_loss : 0.156, state_loss : 0.081, gen_loss : 0.189, dom_loss : 0.001
+2020-12-25 10:24:33,706 - root - INFO - [30/30] [3200/3437] mean_loss : 0.152, state_loss : 0.037, gen_loss : 0.231, dom_loss : 0.000
+2020-12-25 10:25:52,793 - root - INFO - [30/30] [3400/3437] mean_loss : 0.146, state_loss : 0.017, gen_loss : 0.092, dom_loss : 0.001
+2020-12-25 10:30:09,470 - root - INFO - ------------------------------
+2020-12-25 10:30:09,471 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 10:30:09,471 - root - INFO - Epoch 30 joint accuracy : 0.5526
+2020-12-25 10:30:09,471 - root - INFO - Epoch 30 slot turn accuracy : 0.9751
+2020-12-25 10:30:09,471 - root - INFO - Epoch 30 slot turn F1: 0.9239
+2020-12-25 10:30:09,472 - root - INFO - Epoch 30 op accuracy : 0.9756
+2020-12-25 10:30:09,472 - root - INFO - Epoch 30 op F1 : {'delete': 0.020931449502878074, 'update': 0.8276581722319859, 'dontcare': 0.3050259965337955, 'carryover': 0.9872522321640367}
+2020-12-25 10:30:09,472 - root - INFO - Epoch 30 op hit count : {'delete': 20, 'update': 7535, 'dontcare': 88, 'carryover': 208095}
+2020-12-25 10:30:09,472 - root - INFO - Epoch 30 op all count : {'delete': 1886, 'update': 9987, 'dontcare': 384, 'carryover': 208873}
+2020-12-25 10:30:09,472 - root - INFO - Final Joint Accuracy : 0.3790
+2020-12-25 10:30:09,472 - root - INFO - Final slot turn F1 : 0.9130
+2020-12-25 10:30:09,472 - root - INFO - Latency Per Prediction : 29.008728 ms
+2020-12-25 10:30:09,473 - root - INFO - -----------------------------
+
+2020-12-25 10:30:09,789 - root - INFO - Best Score : {'epoch': 28, 'joint_acc': 0.5547415547415547, 'slot_acc': 0.9749152082484948, 'slot_f1': 0.9235527674649325, 'op_acc': 0.9754623976845742, 'op_f1': {'delete': 0.02066115702479339, 'update': 0.8280821165879899, 'dontcare': 0.28668941979522183, 'carryover': 0.9871749857658001}, 'final_slot_f1': 0.9130942972617726}
+2020-12-25 10:30:09,790 - root - INFO - 
+
+2020-12-25 10:30:09,790 - root - INFO - Test using best model...
+2020-12-25 10:34:15,074 - root - INFO - ------------------------------
+2020-12-25 10:34:15,074 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 10:34:15,074 - root - INFO - Epoch 28 joint accuracy : 0.5259
+2020-12-25 10:34:15,074 - root - INFO - Epoch 28 slot turn accuracy : 0.9736
+2020-12-25 10:34:15,075 - root - INFO - Epoch 28 slot turn F1: 0.9178
+2020-12-25 10:34:15,075 - root - INFO - Epoch 28 op accuracy : 0.9741
+2020-12-25 10:34:15,075 - root - INFO - Epoch 28 op F1 : {'delete': 0.02808988764044944, 'update': 0.7980553477935678, 'dontcare': 0.3020706455542022, 'carryover': 0.9864716931399112}
+2020-12-25 10:34:15,075 - root - INFO - Epoch 28 op hit count : {'delete': 20, 'update': 7469, 'dontcare': 124, 'carryover': 207710}
+2020-12-25 10:34:15,075 - root - INFO - Epoch 28 op all count : {'delete': 1396, 'update': 10658, 'dontcare': 629, 'carryover': 208357}
+2020-12-25 10:34:15,076 - root - INFO - Final Joint Accuracy : 0.3544
+2020-12-25 10:34:15,076 - root - INFO - Final slot turn F1 : 0.9078
+2020-12-25 10:34:15,076 - root - INFO - Latency Per Prediction : 28.990427 ms
+2020-12-25 10:34:15,076 - root - INFO - -----------------------------
+
+2020-12-25 10:38:28,079 - root - INFO - ------------------------------
+2020-12-25 10:38:28,080 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: False, is_gt_gen: True
+2020-12-25 10:38:28,080 - root - INFO - Epoch 28 joint accuracy : 0.5517
+2020-12-25 10:38:28,080 - root - INFO - Epoch 28 slot turn accuracy : 0.9759
+2020-12-25 10:38:28,080 - root - INFO - Epoch 28 slot turn F1: 0.9296
+2020-12-25 10:38:28,080 - root - INFO - Epoch 28 op accuracy : 0.9758
+2020-12-25 10:38:28,080 - root - INFO - Epoch 28 op F1 : {'delete': 0.02808988764044944, 'update': 0.8137863443319178, 'dontcare': 0.3020706455542022, 'carryover': 0.9873371469787814}
+2020-12-25 10:38:28,080 - root - INFO - Epoch 28 op hit count : {'delete': 20, 'update': 7473, 'dontcare': 124, 'carryover': 208066}
+2020-12-25 10:38:28,080 - root - INFO - Epoch 28 op all count : {'delete': 1396, 'update': 10300, 'dontcare': 629, 'carryover': 208715}
+2020-12-25 10:38:28,080 - root - INFO - Final Joint Accuracy : 0.3834
+2020-12-25 10:38:28,080 - root - INFO - Final slot turn F1 : 0.9213
+2020-12-25 10:38:28,080 - root - INFO - Latency Per Prediction : 30.502670 ms
+2020-12-25 10:38:28,081 - root - INFO - -----------------------------
+
+2020-12-25 10:42:24,643 - root - INFO - ------------------------------
+2020-12-25 10:42:24,643 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: True, is_gt_gen: False
+2020-12-25 10:42:24,644 - root - INFO - Epoch 28 joint accuracy : 0.8070
+2020-12-25 10:42:24,644 - root - INFO - Epoch 28 slot turn accuracy : 0.9917
+2020-12-25 10:42:24,644 - root - INFO - Epoch 28 slot turn F1: 0.9659
+2020-12-25 10:42:24,644 - root - INFO - Epoch 28 op accuracy : 0.9923
+2020-12-25 10:42:24,644 - root - INFO - Epoch 28 op F1 : {'delete': 0.17054263565891473, 'update': 0.9141000962463908, 'dontcare': 0.5794392523364486, 'carryover': 0.9960484726958642}
+2020-12-25 10:42:24,644 - root - INFO - Epoch 28 op hit count : {'delete': 11, 'update': 7598, 'dontcare': 124, 'carryover': 211610}
+2020-12-25 10:42:24,644 - root - INFO - Epoch 28 op all count : {'delete': 109, 'update': 8399, 'dontcare': 235, 'carryover': 212297}
+2020-12-25 10:42:24,644 - root - INFO - Final Joint Accuracy : 0.9479
+2020-12-25 10:42:24,644 - root - INFO - Final slot turn F1 : 0.9947
+2020-12-25 10:42:24,644 - root - INFO - Latency Per Prediction : 28.399876 ms
+2020-12-25 10:42:24,644 - root - INFO - -----------------------------
+
+2020-12-25 10:46:22,334 - root - INFO - ------------------------------
+2020-12-25 10:46:22,334 - root - INFO - op_code: 4, is_gt_op: False, is_gt_p_state: True, is_gt_gen: True
+2020-12-25 10:46:22,334 - root - INFO - Epoch 28 joint accuracy : 0.8226
+2020-12-25 10:46:22,334 - root - INFO - Epoch 28 slot turn accuracy : 0.9925
+2020-12-25 10:46:22,334 - root - INFO - Epoch 28 slot turn F1: 0.9708
+2020-12-25 10:46:22,335 - root - INFO - Epoch 28 op accuracy : 0.9923
+2020-12-25 10:46:22,335 - root - INFO - Epoch 28 op F1 : {'delete': 0.17054263565891473, 'update': 0.9141000962463908, 'dontcare': 0.5794392523364486, 'carryover': 0.9960484726958642}
+2020-12-25 10:46:22,335 - root - INFO - Epoch 28 op hit count : {'delete': 11, 'update': 7598, 'dontcare': 124, 'carryover': 211610}
+2020-12-25 10:46:22,335 - root - INFO - Epoch 28 op all count : {'delete': 109, 'update': 8399, 'dontcare': 235, 'carryover': 212297}
+2020-12-25 10:46:22,335 - root - INFO - Final Joint Accuracy : 0.9499
+2020-12-25 10:46:22,335 - root - INFO - Final slot turn F1 : 0.9953
+2020-12-25 10:46:22,335 - root - INFO - Latency Per Prediction : 28.513921 ms
+2020-12-25 10:46:22,336 - root - INFO - -----------------------------
+
+2020-12-25 10:50:28,158 - root - INFO - ------------------------------
+2020-12-25 10:50:28,159 - root - INFO - op_code: 4, is_gt_op: True, is_gt_p_state: False, is_gt_gen: False
+2020-12-25 10:50:28,159 - root - INFO - Epoch 28 joint accuracy : 0.9054
+2020-12-25 10:50:28,159 - root - INFO - Epoch 28 slot turn accuracy : 0.9963
+2020-12-25 10:50:28,159 - root - INFO - Epoch 28 slot turn F1: 0.9823
+2020-12-25 10:50:28,159 - root - INFO - Epoch 28 op accuracy : 1.0000
+2020-12-25 10:50:28,159 - root - INFO - Epoch 28 op F1 : {'delete': 1.0, 'update': 1.0, 'dontcare': 1.0, 'carryover': 1.0}
+2020-12-25 10:50:28,159 - root - INFO - Epoch 28 op hit count : {'delete': 109, 'update': 8970, 'dontcare': 235, 'carryover': 211726}
+2020-12-25 10:50:28,159 - root - INFO - Epoch 28 op all count : {'delete': 109, 'update': 8970, 'dontcare': 235, 'carryover': 211726}
+2020-12-25 10:50:28,159 - root - INFO - Final Joint Accuracy : 0.8559
+2020-12-25 10:50:28,159 - root - INFO - Final slot turn F1 : 0.9789
+2020-12-25 10:50:28,160 - root - INFO - Latency Per Prediction : 29.625238 ms
+2020-12-25 10:50:28,160 - root - INFO - -----------------------------
+
+2020-12-25 10:54:31,832 - root - INFO - ------------------------------
+2020-12-25 10:54:31,832 - root - INFO - op_code: 4, is_gt_op: True, is_gt_p_state: True, is_gt_gen: False
+2020-12-25 10:54:31,832 - root - INFO - Epoch 28 joint accuracy : 0.9653
+2020-12-25 10:54:31,832 - root - INFO - Epoch 28 slot turn accuracy : 0.9987
+2020-12-25 10:54:31,832 - root - INFO - Epoch 28 slot turn F1: 0.9920
+2020-12-25 10:54:31,832 - root - INFO - Epoch 28 op accuracy : 1.0000
+2020-12-25 10:54:31,833 - root - INFO - Epoch 28 op F1 : {'delete': 1.0, 'update': 1.0, 'dontcare': 1.0, 'carryover': 1.0}
+2020-12-25 10:54:31,833 - root - INFO - Epoch 28 op hit count : {'delete': 109, 'update': 8399, 'dontcare': 235, 'carryover': 212297}
+2020-12-25 10:54:31,833 - root - INFO - Epoch 28 op all count : {'delete': 109, 'update': 8399, 'dontcare': 235, 'carryover': 212297}
+2020-12-25 10:54:31,833 - root - INFO - Final Joint Accuracy : 0.9890
+2020-12-25 10:54:31,833 - root - INFO - Final slot turn F1 : 0.9981
+2020-12-25 10:54:31,833 - root - INFO - Latency Per Prediction : 29.303890 ms
+2020-12-25 10:54:31,833 - root - INFO - -----------------------------
+
+2020-12-25 10:58:31,968 - root - INFO - ------------------------------
+2020-12-25 10:58:31,969 - root - INFO - op_code: 4, is_gt_op: True, is_gt_p_state: False, is_gt_gen: True
+2020-12-25 10:58:31,969 - root - INFO - Epoch 28 joint accuracy : 1.0000
+2020-12-25 10:58:31,969 - root - INFO - Epoch 28 slot turn accuracy : 1.0000
+2020-12-25 10:58:31,969 - root - INFO - Epoch 28 slot turn F1: 1.0000
+2020-12-25 10:58:31,969 - root - INFO - Epoch 28 op accuracy : 1.0000
+2020-12-25 10:58:31,969 - root - INFO - Epoch 28 op F1 : {'delete': 1.0, 'update': 1.0, 'dontcare': 1.0, 'carryover': 1.0}
+2020-12-25 10:58:31,970 - root - INFO - Epoch 28 op hit count : {'delete': 109, 'update': 8399, 'dontcare': 235, 'carryover': 212297}
+2020-12-25 10:58:31,970 - root - INFO - Epoch 28 op all count : {'delete': 109, 'update': 8399, 'dontcare': 235, 'carryover': 212297}
+2020-12-25 10:58:31,970 - root - INFO - Final Joint Accuracy : 1.0000
+2020-12-25 10:58:31,970 - root - INFO - Final slot turn F1 : 1.0000
+2020-12-25 10:58:31,970 - root - INFO - Latency Per Prediction : 28.863011 ms
+2020-12-25 10:58:31,970 - root - INFO - -----------------------------
+
+2020-12-25 11:02:31,647 - root - INFO - ------------------------------
+2020-12-25 11:02:31,647 - root - INFO - op_code: 4, is_gt_op: True, is_gt_p_state: True, is_gt_gen: True
+2020-12-25 11:02:31,647 - root - INFO - Epoch 28 joint accuracy : 1.0000
+2020-12-25 11:02:31,648 - root - INFO - Epoch 28 slot turn accuracy : 1.0000
+2020-12-25 11:02:31,648 - root - INFO - Epoch 28 slot turn F1: 1.0000
+2020-12-25 11:02:31,648 - root - INFO - Epoch 28 op accuracy : 1.0000
+2020-12-25 11:02:31,648 - root - INFO - Epoch 28 op F1 : {'delete': 1.0, 'update': 1.0, 'dontcare': 1.0, 'carryover': 1.0}
+2020-12-25 11:02:31,648 - root - INFO - Epoch 28 op hit count : {'delete': 109, 'update': 8399, 'dontcare': 235, 'carryover': 212297}
+2020-12-25 11:02:31,648 - root - INFO - Epoch 28 op all count : {'delete': 109, 'update': 8399, 'dontcare': 235, 'carryover': 212297}
+2020-12-25 11:02:31,648 - root - INFO - Final Joint Accuracy : 1.0000
+2020-12-25 11:02:31,649 - root - INFO - Final slot turn F1 : 1.0000
+2020-12-25 11:02:31,649 - root - INFO - Latency Per Prediction : 28.790727 ms
+2020-12-25 11:02:31,649 - root - INFO - -----------------------------
+

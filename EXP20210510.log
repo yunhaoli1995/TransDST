@@ -1,0 +1,439 @@
+I0510 10:01:31.480826 140029993363200 TransDST_train.py:283] pytorch version: 1.4.0
+I0510 10:01:31.481069 140029993363200 TransDST_train.py:284] Namespace(batch_size=32, bert_ckpt_path='assets/pytorch_model.bin', bert_config_path='assets/bert_config_base_uncased.json', data_root='data/mwz2.1/', dec_lr=0.0001, dec_warmup=0.1, decoder_dropout=0.1, dev_data='dev_dials.json', dev_data_path='data/mwz2.1/dev_dials.json', enc_lr=4e-05, enc_warmup=0.1, eval_epoch=1, exp_dir='experiments', grad_accumulation=1, max_seq_length=256, mode='train', model='TransDST', n_epochs=10, n_history=1, not_shuffle_state=False, num_decoder_layers=2, num_workers=4, ontology_data='data/mwz2.1/ontology.json', op_code='2', random_seed=42, save_dir='experiments/TransDST_05-10-10-01_bs32_declayers2_enclr4e-05_declr0.0001_sd42', shuffle_p=0.5, shuffle_state=True, slot_token='[SLOT]', test_data='test_dials.json', test_data_path='data/mwz2.1/test_dials.json', train_data='train_dials.json', train_data_path='data/mwz2.1/train_dials.json', vocab_path='assets/TransDST_vocabV2.txt', word_dropout=0.1)
+I0510 10:01:31.490056 140029993363200 TransDST_train.py:78] {'update': 0, 'carryover': 1}
+I0510 10:01:31.565903 140029993363200 data_utils.py:476] Encoding data into data/mwz2.1/train_dials_TransDST2.data.........
+  0%|          | 0/8420 [00:00<?, ?it/s]  8%|▊         | 691/8420 [00:30<05:36, 23.00it/s]  8%|▊         | 691/8420 [00:50<05:36, 23.00it/s] 16%|█▋        | 1385/8420 [01:00<05:05, 23.03it/s] 16%|█▋        | 1385/8420 [01:20<05:05, 23.03it/s] 24%|██▍       | 2045/8420 [01:30<04:40, 22.71it/s] 24%|██▍       | 2045/8420 [01:50<04:40, 22.71it/s] 32%|███▏      | 2714/8420 [02:00<04:12, 22.58it/s] 32%|███▏      | 2714/8420 [02:20<04:12, 22.58it/s] 40%|████      | 3384/8420 [02:30<03:43, 22.50it/s] 40%|████      | 3384/8420 [02:50<03:43, 22.50it/s] 48%|████▊     | 4082/8420 [03:00<03:10, 22.72it/s] 48%|████▊     | 4082/8420 [03:20<03:10, 22.72it/s] 56%|█████▌    | 4736/8420 [03:30<02:44, 22.40it/s] 56%|█████▌    | 4736/8420 [03:50<02:44, 22.40it/s] 64%|██████▍   | 5389/8420 [04:00<02:16, 22.20it/s] 64%|██████▍   | 5389/8420 [04:20<02:16, 22.20it/s] 72%|███████▏  | 6069/8420 [04:30<01:45, 22.33it/s] 72%|███████▏  | 6069/8420 [04:50<01:45, 22.33it/s] 80%|███████▉  | 6716/8420 [05:00<01:17, 22.09it/s] 80%|███████▉  | 6716/8420 [05:20<01:17, 22.09it/s] 88%|████████▊ | 7391/8420 [05:30<00:46, 22.20it/s] 88%|████████▊ | 7391/8420 [05:50<00:46, 22.20it/s] 96%|█████████▌| 8061/8420 [06:00<00:16, 22.24it/s]100%|██████████| 8420/8420 [06:16<00:00, 22.39it/s]
+I0510 10:08:03.697906 140029993363200 TransDST_train.py:98] # train examples 54984
+I0510 10:08:03.698394 140029993363200 data_utils.py:476] Encoding data into data/mwz2.1/dev_dials_TransDST2.data.........
+  0%|          | 0/1000 [00:00<?, ?it/s] 61%|██████    | 606/1000 [00:30<00:19, 20.19it/s] 61%|██████    | 606/1000 [00:40<00:19, 20.19it/s]100%|██████████| 1000/1000 [00:49<00:00, 20.09it/s]
+I0510 10:08:57.560981 140029993363200 TransDST_train.py:106] # dev examples 7371
+I0510 10:08:57.561435 140029993363200 data_utils.py:476] Encoding data into data/mwz2.1/test_dials_TransDST2.data.........
+  0%|          | 0/999 [00:00<?, ?it/s] 55%|█████▍    | 545/999 [00:30<00:24, 18.16it/s] 55%|█████▍    | 545/999 [00:40<00:24, 18.16it/s]100%|██████████| 999/999 [00:50<00:00, 19.61it/s]
+I0510 10:09:50.434856 140029993363200 TransDST_train.py:114] # test examples 7368
+I0510 10:10:06.102556 140029993363200 TransDST_train.py:47] Input ids: [101, 1045, 100, 2195, 4499, 2008, 3113, 2008, 9181, 1010, 2073, 2024, 100, 15971, 2013, 1029, 1025, 1045, 2097, 2022, 2975, 2414, 5465, 2892, 1012, 102, 19817, 16048, 2620, 2487, 2097, 2022, 15971, 2414, 5465, 100, 100, 2539, 1024, 2459, 1010, 2052, 2017, 2066, 2000, 100, 1037, 2835, 1029, 1025, 2748, 1010, 100, 2017, 100, 2064, 2017, 100, 2009, 2005, 1017, 2111, 1998, 3073, 1996, 4431, 2193, 2005, 2033, 1029, 102, 1, 8432, 2181, 1011, 2, 1, 8432, 2171, 1011, 2, 1, 8432, 2828, 1011, 2, 1, 3309, 2181, 1011, 2, 1, 3309, 2338, 2154, 1011, 2, 1, 3309, 2338, 2111, 1011, 2, 1, 3309, 2338, 2994, 1011, 2, 1, 3309, 4274, 1011, 2, 1, 3309, 2171, 1011, 2, 1, 3309, 5581, 1011, 2, 1, 3309, 3976, 24388, 2063, 1011, 2, 1, 3309, 3340, 1011, 2, 1, 3309, 2828, 1011, 2, 1, 4825, 2181, 1011, 2, 1, 4825, 2338, 2154, 1011, 2, 1, 4825, 2338, 2111, 1011, 2, 1, 4825, 2338, 2051, 1011, 2, 1, 4825, 2833, 1011, 2, 1, 4825, 2171, 1011, 2, 1, 4825, 3976, 24388, 2063, 1011, 2, 1, 10095, 7180, 3762, 1011, 2, 1, 10095, 6712, 1011, 2, 1, 10095, 7688, 1011, 2, 1, 10095, 2681, 4017, 1011, 2, 1, 3345, 7180, 3762, 1011, 2, 1, 3345, 2338, 2111, 1011, 2, 1, 3345, 2154, 1011, 4465, 1, 3345, 6712, 1011, 2414, 5465, 2892, 1, 3345, 7688, 1011, 4729, 1, 3345, 2681, 4017, 1011, 2539, 1024, 2321, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+I0510 10:10:06.104721 140029993363200 TransDST_train.py:48] Input sequence: [CLS] i [UNK] several trains that meet that criteria, where are [UNK] departing from? ; i will be leaving london kings cross. [SEP] tr1681 will be departing london kings [UNK] [UNK] 19 : 17, would you like to [UNK] a seat? ; yes, [UNK] you [UNK] can you [UNK] it for 3 people and provide the reference number for me? [SEP] [SLOT] attraction area - [NULL] [SLOT] attraction name - [NULL] [SLOT] attraction type - [NULL] [SLOT] hotel area - [NULL] [SLOT] hotel book day - [NULL] [SLOT] hotel book people - [NULL] [SLOT] hotel book stay - [NULL] [SLOT] hotel internet - [NULL] [SLOT] hotel name - [NULL] [SLOT] hotel parking - [NULL] [SLOT] hotel pricerange - [NULL] [SLOT] hotel stars - [NULL] [SLOT] hotel type - [NULL] [SLOT] restaurant area - [NULL] [SLOT] restaurant book day - [NULL] [SLOT] restaurant book people - [NULL] [SLOT] restaurant book time - [NULL] [SLOT] restaurant food - [NULL] [SLOT] restaurant name - [NULL] [SLOT] restaurant pricerange - [NULL] [SLOT] taxi arriveby - [NULL] [SLOT] taxi departure - [NULL] [SLOT] taxi destination - [NULL] [SLOT] taxi leaveat - [NULL] [SLOT] train arriveby - [NULL] [SLOT] train book people - [NULL] [SLOT] train day - sunday [SLOT] train departure - london kings cross [SLOT] train destination - cambridge [SLOT] train leaveat - 19 : 15 [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+I0510 10:10:06.105079 140029993363200 TransDST_train.py:50] [SLOT]_0: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.105230 140029993363200 TransDST_train.py:50] [SLOT]_1: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.105358 140029993363200 TransDST_train.py:50] [SLOT]_2: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.105480 140029993363200 TransDST_train.py:50] [SLOT]_3: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.105598 140029993363200 TransDST_train.py:50] [SLOT]_4: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.105715 140029993363200 TransDST_train.py:50] [SLOT]_5: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.105830 140029993363200 TransDST_train.py:50] [SLOT]_6: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.105947 140029993363200 TransDST_train.py:50] [SLOT]_7: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106064 140029993363200 TransDST_train.py:50] [SLOT]_8: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106181 140029993363200 TransDST_train.py:50] [SLOT]_9: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106297 140029993363200 TransDST_train.py:50] [SLOT]_10: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106412 140029993363200 TransDST_train.py:50] [SLOT]_11: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106527 140029993363200 TransDST_train.py:50] [SLOT]_12: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106644 140029993363200 TransDST_train.py:50] [SLOT]_13: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106768 140029993363200 TransDST_train.py:50] [SLOT]_14: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106882 140029993363200 TransDST_train.py:50] [SLOT]_15: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.106997 140029993363200 TransDST_train.py:50] [SLOT]_16: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.107112 140029993363200 TransDST_train.py:50] [SLOT]_17: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.107225 140029993363200 TransDST_train.py:50] [SLOT]_18: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.107341 140029993363200 TransDST_train.py:50] [SLOT]_19: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.107595 140029993363200 TransDST_train.py:50] [SLOT]_20: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.107740 140029993363200 TransDST_train.py:50] [SLOT]_21: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.107858 140029993363200 TransDST_train.py:50] [SLOT]_22: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.107973 140029993363200 TransDST_train.py:50] [SLOT]_23: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.108089 140029993363200 TransDST_train.py:50] [SLOT]_24: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.108206 140029993363200 TransDST_train.py:50] [SLOT]_25: [SLOT] 3 [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.108322 140029993363200 TransDST_train.py:50] [SLOT]_26: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.108453 140029993363200 TransDST_train.py:50] [SLOT]_27: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.108577 140029993363200 TransDST_train.py:50] [SLOT]_28: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.108693 140029993363200 TransDST_train.py:50] [SLOT]_29: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.108840 140029993363200 TransDST_train.py:47] Input ids: [101, 1025, 100, 2342, 2393, 4531, 1037, 2173, 2008, 4240, 3009, 2833, 1998, 2003, 2284, 1999, 1996, 2803, 1010, 2064, 2017, 2393, 2033, 1029, 102, 2474, 11937, 15782, 1998, 2474, 10958, 4143, 3710, 3009, 2833, 1999, 1996, 2803, 100, 2237, 1012, 2054, 3976, 2846, 2052, 2017, 100, 1012, 1025, 3976, 2846, 2003, 2025, 2019, 3277, 1012, 2064, 2017, 2338, 2033, 2012, 1996, 1015, 2007, 1996, 2087, 3340, 3531, 100, 6928, 2012, 2322, 1024, 100, 100, 1018, 2111, 3531, 1012, 102, 1, 3345, 6712, 1011, 2, 1, 3309, 2338, 2111, 1011, 2, 1, 3309, 3340, 1011, 2, 1, 4825, 2338, 2051, 1011, 2, 1, 3345, 2154, 1011, 2, 1, 3309, 2828, 1011, 2, 1, 10095, 7180, 3762, 1011, 2, 1, 4825, 2338, 2111, 1011, 2, 1, 3309, 3976, 24388, 2063, 1011, 2, 1, 4825, 2338, 2154, 1011, 2, 1, 4825, 3976, 24388, 2063, 1011, 2, 1, 10095, 7688, 1011, 2, 1, 3309, 5581, 1011, 2, 1, 3345, 2681, 4017, 1011, 2, 1, 3345, 7180, 3762, 1011, 2, 1, 3309, 2338, 2994, 1011, 2, 1, 3345, 2338, 2111, 1011, 2, 1, 8432, 2181, 1011, 2, 1, 8432, 2171, 1011, 2, 1, 4825, 2181, 1011, 2803, 1, 4825, 2171, 1011, 2, 1, 8432, 2828, 1011, 2, 1, 4825, 2833, 1011, 3009, 1, 10095, 6712, 1011, 2, 1, 3309, 2181, 1011, 2, 1, 10095, 2681, 4017, 1011, 2, 1, 3309, 2338, 2154, 1011, 2, 1, 3345, 7688, 1011, 2, 1, 3309, 4274, 1011, 2, 1, 3309, 2171, 1011, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+I0510 10:10:06.109502 140029993363200 TransDST_train.py:48] Input sequence: [CLS] ; [UNK] need help finding a place that serves spanish food and is located in the centre, can you help me? [SEP] la tasca and la raza serve spanish food in the centre [UNK] town. what price range would you [UNK]. ; price range is not an issue. can you book me at the 1 with the most stars please [UNK] monday at 20 : [UNK] [UNK] 4 people please. [SEP] [SLOT] train departure - [NULL] [SLOT] hotel book people - [NULL] [SLOT] hotel stars - [NULL] [SLOT] restaurant book time - [NULL] [SLOT] train day - [NULL] [SLOT] hotel type - [NULL] [SLOT] taxi arriveby - [NULL] [SLOT] restaurant book people - [NULL] [SLOT] hotel pricerange - [NULL] [SLOT] restaurant book day - [NULL] [SLOT] restaurant pricerange - [NULL] [SLOT] taxi destination - [NULL] [SLOT] hotel parking - [NULL] [SLOT] train leaveat - [NULL] [SLOT] train arriveby - [NULL] [SLOT] hotel book stay - [NULL] [SLOT] train book people - [NULL] [SLOT] attraction area - [NULL] [SLOT] attraction name - [NULL] [SLOT] restaurant area - centre [SLOT] restaurant name - [NULL] [SLOT] attraction type - [NULL] [SLOT] restaurant food - spanish [SLOT] taxi departure - [NULL] [SLOT] hotel area - [NULL] [SLOT] taxi leaveat - [NULL] [SLOT] hotel book day - [NULL] [SLOT] train destination - [NULL] [SLOT] hotel internet - [NULL] [SLOT] hotel name - [NULL] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+I0510 10:10:06.109673 140029993363200 TransDST_train.py:50] [SLOT]_0: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.109801 140029993363200 TransDST_train.py:50] [SLOT]_1: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.109924 140029993363200 TransDST_train.py:50] [SLOT]_2: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.110044 140029993363200 TransDST_train.py:50] [SLOT]_3: [SLOT] 20 : 00 [EOS] [PAD]
+I0510 10:10:06.110162 140029993363200 TransDST_train.py:50] [SLOT]_4: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.110279 140029993363200 TransDST_train.py:50] [SLOT]_5: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.110397 140029993363200 TransDST_train.py:50] [SLOT]_6: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.110512 140029993363200 TransDST_train.py:50] [SLOT]_7: [SLOT] 4 [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.110629 140029993363200 TransDST_train.py:50] [SLOT]_8: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.110743 140029993363200 TransDST_train.py:50] [SLOT]_9: [SLOT] monday [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.110871 140029993363200 TransDST_train.py:50] [SLOT]_10: [SLOT] dontcare [EOS] [PAD]
+I0510 10:10:06.110989 140029993363200 TransDST_train.py:50] [SLOT]_11: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.111104 140029993363200 TransDST_train.py:50] [SLOT]_12: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.111219 140029993363200 TransDST_train.py:50] [SLOT]_13: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.111334 140029993363200 TransDST_train.py:50] [SLOT]_14: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.111450 140029993363200 TransDST_train.py:50] [SLOT]_15: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.111565 140029993363200 TransDST_train.py:50] [SLOT]_16: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.111679 140029993363200 TransDST_train.py:50] [SLOT]_17: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.111794 140029993363200 TransDST_train.py:50] [SLOT]_18: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.111908 140029993363200 TransDST_train.py:50] [SLOT]_19: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112021 140029993363200 TransDST_train.py:50] [SLOT]_20: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112136 140029993363200 TransDST_train.py:50] [SLOT]_21: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112251 140029993363200 TransDST_train.py:50] [SLOT]_22: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112364 140029993363200 TransDST_train.py:50] [SLOT]_23: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112496 140029993363200 TransDST_train.py:50] [SLOT]_24: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112617 140029993363200 TransDST_train.py:50] [SLOT]_25: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112734 140029993363200 TransDST_train.py:50] [SLOT]_26: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112849 140029993363200 TransDST_train.py:50] [SLOT]_27: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.112964 140029993363200 TransDST_train.py:50] [SLOT]_28: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.113079 140029993363200 TransDST_train.py:50] [SLOT]_29: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.113220 140029993363200 TransDST_train.py:47] Input ids: [101, 102, 1025, 1045, 2052, 2066, 2000, 100, 2000, 1037, 3004, 100, 2237, 1012, 2129, 2116, 2024, 2045, 1998, 2073, 2024, 2027, 1029, 102, 1, 8432, 2181, 1011, 2, 1, 8432, 2171, 1011, 2, 1, 8432, 2828, 1011, 2, 1, 3309, 2181, 1011, 2, 1, 3309, 2338, 2154, 1011, 2, 1, 3309, 2338, 2111, 1011, 2, 1, 3309, 2338, 2994, 1011, 2, 1, 3309, 4274, 1011, 2, 1, 3309, 2171, 1011, 2, 1, 3309, 5581, 1011, 2, 1, 3309, 3976, 24388, 2063, 1011, 2, 1, 3309, 3340, 1011, 2, 1, 3309, 2828, 1011, 2, 1, 4825, 2181, 1011, 2, 1, 4825, 2338, 2154, 1011, 2, 1, 4825, 2338, 2111, 1011, 2, 1, 4825, 2338, 2051, 1011, 2, 1, 4825, 2833, 1011, 2, 1, 4825, 2171, 1011, 2, 1, 4825, 3976, 24388, 2063, 1011, 2, 1, 10095, 7180, 3762, 1011, 2, 1, 10095, 6712, 1011, 2, 1, 10095, 7688, 1011, 2, 1, 10095, 2681, 4017, 1011, 2, 1, 3345, 7180, 3762, 1011, 2, 1, 3345, 2338, 2111, 1011, 2, 1, 3345, 2154, 1011, 2, 1, 3345, 6712, 1011, 2, 1, 3345, 7688, 1011, 2, 1, 3345, 2681, 4017, 1011, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+I0510 10:10:06.113814 140029993363200 TransDST_train.py:48] Input sequence: [CLS] [SEP] ; i would like to [UNK] to a theatre [UNK] town. how many are there and where are they? [SEP] [SLOT] attraction area - [NULL] [SLOT] attraction name - [NULL] [SLOT] attraction type - [NULL] [SLOT] hotel area - [NULL] [SLOT] hotel book day - [NULL] [SLOT] hotel book people - [NULL] [SLOT] hotel book stay - [NULL] [SLOT] hotel internet - [NULL] [SLOT] hotel name - [NULL] [SLOT] hotel parking - [NULL] [SLOT] hotel pricerange - [NULL] [SLOT] hotel stars - [NULL] [SLOT] hotel type - [NULL] [SLOT] restaurant area - [NULL] [SLOT] restaurant book day - [NULL] [SLOT] restaurant book people - [NULL] [SLOT] restaurant book time - [NULL] [SLOT] restaurant food - [NULL] [SLOT] restaurant name - [NULL] [SLOT] restaurant pricerange - [NULL] [SLOT] taxi arriveby - [NULL] [SLOT] taxi departure - [NULL] [SLOT] taxi destination - [NULL] [SLOT] taxi leaveat - [NULL] [SLOT] train arriveby - [NULL] [SLOT] train book people - [NULL] [SLOT] train day - [NULL] [SLOT] train departure - [NULL] [SLOT] train destination - [NULL] [SLOT] train leaveat - [NULL] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+I0510 10:10:06.113974 140029993363200 TransDST_train.py:50] [SLOT]_0: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.114100 140029993363200 TransDST_train.py:50] [SLOT]_1: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.114221 140029993363200 TransDST_train.py:50] [SLOT]_2: [SLOT] theatre [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.114341 140029993363200 TransDST_train.py:50] [SLOT]_3: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.114457 140029993363200 TransDST_train.py:50] [SLOT]_4: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.114573 140029993363200 TransDST_train.py:50] [SLOT]_5: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.114687 140029993363200 TransDST_train.py:50] [SLOT]_6: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.114802 140029993363200 TransDST_train.py:50] [SLOT]_7: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.114917 140029993363200 TransDST_train.py:50] [SLOT]_8: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115034 140029993363200 TransDST_train.py:50] [SLOT]_9: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115155 140029993363200 TransDST_train.py:50] [SLOT]_10: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115270 140029993363200 TransDST_train.py:50] [SLOT]_11: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115388 140029993363200 TransDST_train.py:50] [SLOT]_12: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115509 140029993363200 TransDST_train.py:50] [SLOT]_13: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115625 140029993363200 TransDST_train.py:50] [SLOT]_14: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115739 140029993363200 TransDST_train.py:50] [SLOT]_15: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115853 140029993363200 TransDST_train.py:50] [SLOT]_16: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.115967 140029993363200 TransDST_train.py:50] [SLOT]_17: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.116081 140029993363200 TransDST_train.py:50] [SLOT]_18: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.116194 140029993363200 TransDST_train.py:50] [SLOT]_19: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.116310 140029993363200 TransDST_train.py:50] [SLOT]_20: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.116439 140029993363200 TransDST_train.py:50] [SLOT]_21: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.116557 140029993363200 TransDST_train.py:50] [SLOT]_22: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.116671 140029993363200 TransDST_train.py:50] [SLOT]_23: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.116786 140029993363200 TransDST_train.py:50] [SLOT]_24: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.116902 140029993363200 TransDST_train.py:50] [SLOT]_25: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.117018 140029993363200 TransDST_train.py:50] [SLOT]_26: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.117138 140029993363200 TransDST_train.py:50] [SLOT]_27: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.117257 140029993363200 TransDST_train.py:50] [SLOT]_28: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.117373 140029993363200 TransDST_train.py:50] [SLOT]_29: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.117514 140029993363200 TransDST_train.py:47] Input ids: [101, 1025, 7592, 1010, 1045, 2572, 2559, 2005, 1037, 4825, 2170, 3309, 4241, 100, 20377, 13181, 1012, 102, 100, 2031, 1996, 3309, 4241, 19354, 1998, 20377, 13181, 2284, 100, 16528, 2683, 8398, 7853, 2395, 1012, 2037, 3042, 2193, 2003, 5890, 19317, 16703, 22907, 22394, 2692, 1012, 2003, 2045, 2505, 2842, 2017, 2052, 2066, 2000, 2113, 1029, 1025, 2748, 1010, 2079, 2017, 4148, 100, 2113, 2054, 2037, 3976, 2846, 2003, 1029, 102, 1, 3345, 6712, 1011, 2, 1, 3345, 2154, 1011, 2, 1, 3309, 4274, 1011, 2, 1, 10095, 2681, 4017, 1011, 2, 1, 4825, 2181, 1011, 2, 1, 8432, 2181, 1011, 2, 1, 10095, 7180, 3762, 1011, 2, 1, 4825, 2338, 2111, 1011, 2, 1, 3309, 2338, 2111, 1011, 2, 1, 3309, 5581, 1011, 2, 1, 3345, 2681, 4017, 1011, 2, 1, 4825, 2171, 1011, 3309, 4241, 19354, 1998, 20377, 13181, 1, 4825, 2833, 1011, 2, 1, 3345, 7688, 1011, 2, 1, 4825, 2338, 2051, 1011, 2, 1, 10095, 7688, 1011, 2, 1, 4825, 2338, 2154, 1011, 2, 1, 8432, 2171, 1011, 2, 1, 3309, 2171, 1011, 2, 1, 4825, 3976, 24388, 2063, 1011, 2, 1, 10095, 6712, 1011, 2, 1, 3309, 3340, 1011, 2, 1, 3345, 2338, 2111, 1011, 2, 1, 3309, 2828, 1011, 2, 1, 8432, 2828, 1011, 2, 1, 3309, 2181, 1011, 2, 1, 3309, 3976, 24388, 2063, 1011, 2, 1, 3345, 7180, 3762, 1011, 2, 1, 3309, 2338, 2994, 1011, 2, 1, 3309, 2338, 2154, 1011, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+I0510 10:10:06.118183 140029993363200 TransDST_train.py:48] Input sequence: [CLS] ; hello, i am looking for a restaurant called hotel du [UNK] bistro. [SEP] [UNK] have the hotel du vin and bistro located [UNK] 1519 trumpington street. their phone number is 01223227330. is there anything else you would like to know? ; yes, do you happen [UNK] know what their price range is? [SEP] [SLOT] train departure - [NULL] [SLOT] train day - [NULL] [SLOT] hotel internet - [NULL] [SLOT] taxi leaveat - [NULL] [SLOT] restaurant area - [NULL] [SLOT] attraction area - [NULL] [SLOT] taxi arriveby - [NULL] [SLOT] restaurant book people - [NULL] [SLOT] hotel book people - [NULL] [SLOT] hotel parking - [NULL] [SLOT] train leaveat - [NULL] [SLOT] restaurant name - hotel du vin and bistro [SLOT] restaurant food - [NULL] [SLOT] train destination - [NULL] [SLOT] restaurant book time - [NULL] [SLOT] taxi destination - [NULL] [SLOT] restaurant book day - [NULL] [SLOT] attraction name - [NULL] [SLOT] hotel name - [NULL] [SLOT] restaurant pricerange - [NULL] [SLOT] taxi departure - [NULL] [SLOT] hotel stars - [NULL] [SLOT] train book people - [NULL] [SLOT] hotel type - [NULL] [SLOT] attraction type - [NULL] [SLOT] hotel area - [NULL] [SLOT] hotel pricerange - [NULL] [SLOT] train arriveby - [NULL] [SLOT] hotel book stay - [NULL] [SLOT] hotel book day - [NULL] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD] [PAD]
+I0510 10:10:06.118355 140029993363200 TransDST_train.py:50] [SLOT]_0: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.118481 140029993363200 TransDST_train.py:50] [SLOT]_1: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.118599 140029993363200 TransDST_train.py:50] [SLOT]_2: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.118716 140029993363200 TransDST_train.py:50] [SLOT]_3: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.118832 140029993363200 TransDST_train.py:50] [SLOT]_4: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.118947 140029993363200 TransDST_train.py:50] [SLOT]_5: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119062 140029993363200 TransDST_train.py:50] [SLOT]_6: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119176 140029993363200 TransDST_train.py:50] [SLOT]_7: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119291 140029993363200 TransDST_train.py:50] [SLOT]_8: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119406 140029993363200 TransDST_train.py:50] [SLOT]_9: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119520 140029993363200 TransDST_train.py:50] [SLOT]_10: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119637 140029993363200 TransDST_train.py:50] [SLOT]_11: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119749 140029993363200 TransDST_train.py:50] [SLOT]_12: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119863 140029993363200 TransDST_train.py:50] [SLOT]_13: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.119976 140029993363200 TransDST_train.py:50] [SLOT]_14: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.120092 140029993363200 TransDST_train.py:50] [SLOT]_15: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.120207 140029993363200 TransDST_train.py:50] [SLOT]_16: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.120321 140029993363200 TransDST_train.py:50] [SLOT]_17: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.123584 140029993363200 TransDST_train.py:50] [SLOT]_18: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.123808 140029993363200 TransDST_train.py:50] [SLOT]_19: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.123955 140029993363200 TransDST_train.py:50] [SLOT]_20: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.124087 140029993363200 TransDST_train.py:50] [SLOT]_21: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.124212 140029993363200 TransDST_train.py:50] [SLOT]_22: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.124333 140029993363200 TransDST_train.py:50] [SLOT]_23: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.124491 140029993363200 TransDST_train.py:50] [SLOT]_24: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.124616 140029993363200 TransDST_train.py:50] [SLOT]_25: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.124739 140029993363200 TransDST_train.py:50] [SLOT]_26: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.124857 140029993363200 TransDST_train.py:50] [SLOT]_27: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.124973 140029993363200 TransDST_train.py:50] [SLOT]_28: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+I0510 10:10:06.125090 140029993363200 TransDST_train.py:50] [SLOT]_29: [SLOT] [CarryOver] [EOS] [PAD] [PAD] [PAD]
+/home/lyh/miniconda3/lib/python3.6/site-packages/torch/nn/parallel/_functions.py:61: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+I0510 10:10:25.583491 140029993363200 TransDST_train.py:195] [1/10] [0/1719] mean_loss : 10.12130
+I0510 10:12:37.859390 140029993363200 TransDST_train.py:195] [1/10] [200/1719] mean_loss : 3.08550
+I0510 10:14:53.944849 140029993363200 TransDST_train.py:195] [1/10] [400/1719] mean_loss : 0.38360
+I0510 10:17:06.585132 140029993363200 TransDST_train.py:195] [1/10] [600/1719] mean_loss : 0.33195
+I0510 10:19:19.964833 140029993363200 TransDST_train.py:195] [1/10] [800/1719] mean_loss : 0.28361
+I0510 10:21:25.215495 140029993363200 TransDST_train.py:195] [1/10] [1000/1719] mean_loss : 0.24338
+I0510 10:23:37.661393 140029993363200 TransDST_train.py:195] [1/10] [1200/1719] mean_loss : 0.19096
+I0510 10:25:51.992255 140029993363200 TransDST_train.py:195] [1/10] [1400/1719] mean_loss : 0.14384
+I0510 10:28:04.098605 140029993363200 TransDST_train.py:195] [1/10] [1600/1719] mean_loss : 0.11128
+  0%|          | 0/7371 [00:00<?, ?it/s] 36%|███▌      | 2659/7371 [02:00<03:32, 22.15it/s] 36%|███▌      | 2659/7371 [02:10<03:32, 22.15it/s] 72%|███████▏  | 5294/7371 [04:00<01:34, 22.09it/s] 72%|███████▏  | 5294/7371 [04:10<01:34, 22.09it/s]100%|██████████| 7371/7371 [05:30<00:00, 22.31it/s]
+I0510 10:34:52.543609 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 10:34:52.543983 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 10:34:52.544057 140029993363200 TransDST_evaluation.py:198] Epoch 1 joint accuracy : 0.1198
+I0510 10:34:52.544115 140029993363200 TransDST_evaluation.py:199] Epoch 1 slot turn accuracy : 0.9078
+I0510 10:34:52.544170 140029993363200 TransDST_evaluation.py:200] Epoch 1 slot turn F1: 0.6130
+I0510 10:34:52.544223 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.0140
+I0510 10:34:52.544274 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.5627
+I0510 10:34:52.544324 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 37.062820 ms
+I0510 10:34:52.544387 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 10:34:53.432481 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 1, 'joint_acc': 0.11979378646045313, 'slot_acc': 0.9078460634015915, 'slot_f1': 0.6129648910902651, 'final_slot_f1': 0.5627371476131695}
+I0510 10:34:53.432699 140029993363200 TransDST_train.py:206] 
+
+hotel 0.13795594077284218 0.9374503430841666
+train 0.011875654907439748 0.9241238793806308
+restaurant 0.18207185211021973 0.9496453900709462
+attraction 0.3302713987473904 0.9727627000696043
+taxi 0.0 0.9036435253569596
+I0510 10:34:55.785218 140029993363200 TransDST_train.py:195] [2/10] [0/1719] mean_loss : 0.08077
+I0510 10:37:07.589234 140029993363200 TransDST_train.py:195] [2/10] [200/1719] mean_loss : 0.07292
+I0510 10:39:19.860491 140029993363200 TransDST_train.py:195] [2/10] [400/1719] mean_loss : 0.05856
+I0510 10:41:32.211437 140029993363200 TransDST_train.py:195] [2/10] [600/1719] mean_loss : 0.05024
+I0510 10:43:47.548508 140029993363200 TransDST_train.py:195] [2/10] [800/1719] mean_loss : 0.04371
+I0510 10:46:00.297289 140029993363200 TransDST_train.py:195] [2/10] [1000/1719] mean_loss : 0.03770
+I0510 10:48:12.816731 140029993363200 TransDST_train.py:195] [2/10] [1200/1719] mean_loss : 0.03792
+I0510 10:50:28.595963 140029993363200 TransDST_train.py:195] [2/10] [1400/1719] mean_loss : 0.03488
+I0510 10:52:40.378116 140029993363200 TransDST_train.py:195] [2/10] [1600/1719] mean_loss : 0.03402
+  0%|          | 0/7371 [00:00<?, ?it/s] 34%|███▍      | 2523/7371 [02:00<03:50, 21.02it/s] 34%|███▍      | 2523/7371 [02:10<03:50, 21.02it/s] 68%|██████▊   | 5003/7371 [04:00<01:53, 20.91it/s] 68%|██████▊   | 5003/7371 [04:20<01:53, 20.91it/s]100%|██████████| 7371/7371 [05:54<00:00, 20.80it/s]
+I0510 10:59:52.889854 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 10:59:52.890244 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 10:59:52.890324 140029993363200 TransDST_evaluation.py:198] Epoch 2 joint accuracy : 0.4600
+I0510 10:59:52.890408 140029993363200 TransDST_evaluation.py:199] Epoch 2 slot turn accuracy : 0.9672
+I0510 10:59:52.890469 140029993363200 TransDST_evaluation.py:200] Epoch 2 slot turn F1: 0.8941
+I0510 10:59:52.890524 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.2710
+I0510 10:59:52.890577 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.8770
+I0510 10:59:52.890633 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 40.307853 ms
+I0510 10:59:52.890706 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 10:59:55.927216 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 2, 'joint_acc': 0.4600461267127934, 'slot_acc': 0.9671731560619955, 'slot_f1': 0.8940937190918125, 'final_slot_f1': 0.8769947579184711}
+I0510 10:59:55.927582 140029993363200 TransDST_train.py:206] 
+
+hotel 0.4084507042253521 0.9674130251595209
+train 0.7527069507509605 0.9899871929211843
+restaurant 0.5490059295430764 0.9806650389489695
+attraction 0.6137787056367432 0.9859568545581155
+taxi 0.2658788774002954 0.9628754308222509
+I0510 10:59:58.600230 140029993363200 TransDST_train.py:195] [3/10] [0/1719] mean_loss : 0.03117
+I0510 11:02:14.248111 140029993363200 TransDST_train.py:195] [3/10] [200/1719] mean_loss : 0.03013
+I0510 11:04:26.425574 140029993363200 TransDST_train.py:195] [3/10] [400/1719] mean_loss : 0.02869
+I0510 11:06:41.713588 140029993363200 TransDST_train.py:195] [3/10] [600/1719] mean_loss : 0.02928
+I0510 11:08:54.360573 140029993363200 TransDST_train.py:195] [3/10] [800/1719] mean_loss : 0.02801
+I0510 11:11:06.586237 140029993363200 TransDST_train.py:195] [3/10] [1000/1719] mean_loss : 0.02890
+I0510 11:13:26.831437 140029993363200 TransDST_train.py:195] [3/10] [1200/1719] mean_loss : 0.02788
+I0510 11:15:36.453181 140029993363200 TransDST_train.py:195] [3/10] [1400/1719] mean_loss : 0.02661
+I0510 11:17:52.235925 140029993363200 TransDST_train.py:195] [3/10] [1600/1719] mean_loss : 0.02598
+  0%|          | 0/7371 [00:00<?, ?it/s] 34%|███▍      | 2540/7371 [02:00<03:48, 21.17it/s] 34%|███▍      | 2540/7371 [02:10<03:48, 21.17it/s] 69%|██████▊   | 5058/7371 [04:00<01:49, 21.11it/s] 69%|██████▊   | 5058/7371 [04:10<01:49, 21.11it/s]100%|██████████| 7371/7371 [05:49<00:00, 21.11it/s]
+I0510 11:24:55.906701 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 11:24:55.907052 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 11:24:55.907121 140029993363200 TransDST_evaluation.py:198] Epoch 3 joint accuracy : 0.5185
+I0510 11:24:55.907176 140029993363200 TransDST_evaluation.py:199] Epoch 3 slot turn accuracy : 0.9728
+I0510 11:24:55.907247 140029993363200 TransDST_evaluation.py:200] Epoch 3 slot turn F1: 0.9171
+I0510 11:24:55.907300 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3400
+I0510 11:24:55.907353 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9044
+I0510 11:24:55.907404 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 39.583162 ms
+I0510 11:24:55.907454 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 11:24:58.498591 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 3, 'joint_acc': 0.5185185185185185, 'slot_acc': 0.9728440283995374, 'slot_f1': 0.9171115293605616, 'final_slot_f1': 0.9043614597762528}
+I0510 11:24:58.498958 140029993363200 TransDST_train.py:206] 
+
+hotel 0.4405922715781871 0.971265198025777
+train 0.809989521480964 0.9926301082780354
+restaurant 0.6281827694454133 0.9843622834554213
+attraction 0.6868475991649269 0.9886847599164994
+taxi 0.41654357459379615 0.9713441654357441
+I0510 11:25:01.066010 140029993363200 TransDST_train.py:195] [4/10] [0/1719] mean_loss : 0.02853
+I0510 11:27:15.686147 140029993363200 TransDST_train.py:195] [4/10] [200/1719] mean_loss : 0.02457
+I0510 11:29:28.710473 140029993363200 TransDST_train.py:195] [4/10] [400/1719] mean_loss : 0.02485
+I0510 11:31:42.666398 140029993363200 TransDST_train.py:195] [4/10] [600/1719] mean_loss : 0.02428
+I0510 11:33:58.402250 140029993363200 TransDST_train.py:195] [4/10] [800/1719] mean_loss : 0.02328
+I0510 11:36:11.380029 140029993363200 TransDST_train.py:195] [4/10] [1000/1719] mean_loss : 0.02378
+I0510 11:38:24.233557 140029993363200 TransDST_train.py:195] [4/10] [1200/1719] mean_loss : 0.02402
+I0510 11:40:40.322434 140029993363200 TransDST_train.py:195] [4/10] [1400/1719] mean_loss : 0.02421
+I0510 11:42:54.279560 140029993363200 TransDST_train.py:195] [4/10] [1600/1719] mean_loss : 0.02390
+  0%|          | 0/7371 [00:00<?, ?it/s] 33%|███▎      | 2448/7371 [02:00<04:01, 20.39it/s] 33%|███▎      | 2448/7371 [02:20<04:01, 20.39it/s] 67%|██████▋   | 4953/7371 [04:00<01:57, 20.53it/s] 67%|██████▋   | 4953/7371 [04:20<01:57, 20.53it/s]100%|██████████| 7371/7371 [05:55<00:00, 20.71it/s]
+I0510 11:50:08.991319 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 11:50:08.991678 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 11:50:08.991751 140029993363200 TransDST_evaluation.py:198] Epoch 4 joint accuracy : 0.5178
+I0510 11:50:08.991810 140029993363200 TransDST_evaluation.py:199] Epoch 4 slot turn accuracy : 0.9726
+I0510 11:50:08.991866 140029993363200 TransDST_evaluation.py:200] Epoch 4 slot turn F1: 0.9187
+I0510 11:50:08.991919 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3390
+I0510 11:50:08.991970 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9068
+I0510 11:50:08.992021 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 40.523803 ms
+I0510 11:50:08.992079 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 11:50:09.315937 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 3, 'joint_acc': 0.5185185185185185, 'slot_acc': 0.9728440283995374, 'slot_f1': 0.9171115293605616, 'final_slot_f1': 0.9043614597762528}
+I0510 11:50:09.316222 140029993363200 TransDST_train.py:206] 
+
+hotel 0.4528710725893825 0.9711207415432909
+train 0.7844917918267551 0.991349400395861
+restaurant 0.6546913149633764 0.9857225903964738
+attraction 0.6425887265135699 0.986889352818379
+taxi 0.5036927621861153 0.97552929591334
+I0510 11:50:11.804322 140029993363200 TransDST_train.py:195] [5/10] [0/1719] mean_loss : 0.00968
+I0510 11:52:27.801937 140029993363200 TransDST_train.py:195] [5/10] [200/1719] mean_loss : 0.02089
+I0510 11:54:40.475821 140029993363200 TransDST_train.py:195] [5/10] [400/1719] mean_loss : 0.02141
+I0510 11:56:52.991637 140029993363200 TransDST_train.py:195] [5/10] [600/1719] mean_loss : 0.02105
+I0510 11:59:06.313589 140029993363200 TransDST_train.py:195] [5/10] [800/1719] mean_loss : 0.02103
+I0510 12:01:10.232338 140029993363200 TransDST_train.py:195] [5/10] [1000/1719] mean_loss : 0.02135
+I0510 12:03:23.299335 140029993363200 TransDST_train.py:195] [5/10] [1200/1719] mean_loss : 0.02148
+I0510 12:05:43.406188 140029993363200 TransDST_train.py:195] [5/10] [1400/1719] mean_loss : 0.02228
+I0510 12:07:54.283818 140029993363200 TransDST_train.py:195] [5/10] [1600/1719] mean_loss : 0.02165
+  0%|          | 0/7371 [00:00<?, ?it/s] 34%|███▍      | 2517/7371 [02:00<03:51, 20.96it/s] 34%|███▍      | 2517/7371 [02:20<03:51, 20.96it/s] 67%|██████▋   | 4933/7371 [04:00<01:57, 20.70it/s] 67%|██████▋   | 4933/7371 [04:20<01:57, 20.70it/s]100%|██████████| 7371/7371 [05:58<00:00, 20.58it/s]
+I0510 12:15:10.965499 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 12:15:10.965915 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 12:15:10.965997 140029993363200 TransDST_evaluation.py:198] Epoch 5 joint accuracy : 0.5290
+I0510 12:15:10.966058 140029993363200 TransDST_evaluation.py:199] Epoch 5 slot turn accuracy : 0.9738
+I0510 12:15:10.966114 140029993363200 TransDST_evaluation.py:200] Epoch 5 slot turn F1: 0.9226
+I0510 12:15:10.966188 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3520
+I0510 12:15:10.966249 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9126
+I0510 12:15:10.966301 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 40.801340 ms
+I0510 12:15:10.966351 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 12:15:16.271975 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 5, 'joint_acc': 0.5289648622981956, 'slot_acc': 0.9737665626554081, 'slot_f1': 0.9226362307193425, 'final_slot_f1': 0.912578662657908}
+I0510 12:15:16.272270 140029993363200 TransDST_train.py:206] 
+
+hotel 0.46551101480678947 0.9722884314433747
+train 0.8148794970310863 0.9928396786587543
+restaurant 0.6288803627485177 0.9845134286710933
+attraction 0.6772442588726514 0.9881976339596451
+taxi 0.5672082717872969 0.9791235844411593
+I0510 12:15:18.751496 140029993363200 TransDST_train.py:195] [6/10] [0/1719] mean_loss : 0.01358
+I0510 12:17:31.172437 140029993363200 TransDST_train.py:195] [6/10] [200/1719] mean_loss : 0.01929
+I0510 12:19:43.358644 140029993363200 TransDST_train.py:195] [6/10] [400/1719] mean_loss : 0.01986
+I0510 12:21:58.403688 140029993363200 TransDST_train.py:195] [6/10] [600/1719] mean_loss : 0.01995
+I0510 12:24:11.074172 140029993363200 TransDST_train.py:195] [6/10] [800/1719] mean_loss : 0.01828
+I0510 12:26:22.814290 140029993363200 TransDST_train.py:195] [6/10] [1000/1719] mean_loss : 0.01952
+I0510 12:28:37.741722 140029993363200 TransDST_train.py:195] [6/10] [1200/1719] mean_loss : 0.01925
+I0510 12:30:50.393731 140029993363200 TransDST_train.py:195] [6/10] [1400/1719] mean_loss : 0.01880
+I0510 12:33:02.597397 140029993363200 TransDST_train.py:195] [6/10] [1600/1719] mean_loss : 0.01905
+  0%|          | 0/7371 [00:00<?, ?it/s] 33%|███▎      | 2452/7371 [02:00<04:00, 20.43it/s] 33%|███▎      | 2452/7371 [02:11<04:00, 20.43it/s] 66%|██████▌   | 4847/7371 [04:00<02:04, 20.29it/s] 66%|██████▌   | 4847/7371 [04:11<02:04, 20.29it/s] 99%|█████████▉| 7300/7371 [06:00<00:03, 20.33it/s]100%|██████████| 7371/7371 [06:03<00:00, 20.27it/s]
+I0510 12:40:25.499849 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 12:40:25.500213 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 12:40:25.500288 140029993363200 TransDST_evaluation.py:198] Epoch 6 joint accuracy : 0.5153
+I0510 12:40:25.500348 140029993363200 TransDST_evaluation.py:199] Epoch 6 slot turn accuracy : 0.9725
+I0510 12:40:25.500416 140029993363200 TransDST_evaluation.py:200] Epoch 6 slot turn F1: 0.9217
+I0510 12:40:25.500470 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3310
+I0510 12:40:25.500521 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9099
+I0510 12:40:25.500572 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 41.516423 ms
+I0510 12:40:25.500622 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 12:40:25.765500 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 5, 'joint_acc': 0.5289648622981956, 'slot_acc': 0.9737665626554081, 'slot_f1': 0.9226362307193425, 'final_slot_f1': 0.912578662657908}
+I0510 12:40:25.765827 140029993363200 TransDST_train.py:206] 
+
+hotel 0.469844709281329 0.9715420729505369
+train 0.7506112469437652 0.9902666200954771
+restaurant 0.6410882455528427 0.9847924659923349
+attraction 0.6697286012526096 0.9878775226165697
+taxi 0.5657311669128509 0.979812900049235
+I0510 12:40:28.314059 140029993363200 TransDST_train.py:195] [7/10] [0/1719] mean_loss : 0.00861
+I0510 12:42:39.488318 140029993363200 TransDST_train.py:195] [7/10] [200/1719] mean_loss : 0.01765
+I0510 12:44:51.849677 140029993363200 TransDST_train.py:195] [7/10] [400/1719] mean_loss : 0.01766
+I0510 12:47:06.658827 140029993363200 TransDST_train.py:195] [7/10] [600/1719] mean_loss : 0.01773
+I0510 12:49:18.290726 140029993363200 TransDST_train.py:195] [7/10] [800/1719] mean_loss : 0.01718
+I0510 12:51:30.731729 140029993363200 TransDST_train.py:195] [7/10] [1000/1719] mean_loss : 0.01760
+I0510 12:53:43.641551 140029993363200 TransDST_train.py:195] [7/10] [1200/1719] mean_loss : 0.01700
+I0510 12:55:58.839218 140029993363200 TransDST_train.py:195] [7/10] [1400/1719] mean_loss : 0.01843
+I0510 12:58:11.759739 140029993363200 TransDST_train.py:195] [7/10] [1600/1719] mean_loss : 0.01764
+  0%|          | 0/7371 [00:00<?, ?it/s] 34%|███▍      | 2517/7371 [02:00<03:51, 20.96it/s] 34%|███▍      | 2517/7371 [02:20<03:51, 20.96it/s] 68%|██████▊   | 5007/7371 [04:00<01:53, 20.89it/s] 68%|██████▊   | 5007/7371 [04:20<01:53, 20.89it/s]100%|██████████| 7371/7371 [05:52<00:00, 20.89it/s]
+I0510 13:05:22.790084 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 13:05:22.790444 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 13:05:22.790517 140029993363200 TransDST_evaluation.py:198] Epoch 7 joint accuracy : 0.5424
+I0510 13:05:22.790576 140029993363200 TransDST_evaluation.py:199] Epoch 7 slot turn accuracy : 0.9748
+I0510 13:05:22.790632 140029993363200 TransDST_evaluation.py:200] Epoch 7 slot turn F1: 0.9279
+I0510 13:05:22.790685 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3710
+I0510 13:05:22.790738 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9196
+I0510 13:05:22.790789 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 40.147877 ms
+I0510 13:05:22.790838 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 13:05:25.456432 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 7, 'joint_acc': 0.5423958757292091, 'slot_acc': 0.9747750192194168, 'slot_f1': 0.9278972950265902, 'final_slot_f1': 0.9196367050301365}
+I0510 13:05:25.456730 140029993363200 TransDST_train.py:206] 
+
+hotel 0.48067894546767787 0.9733959311424228
+train 0.8103388054488299 0.992769821865181
+restaurant 0.6498081618416464 0.9855830717358526
+attraction 0.6713987473903966 0.9881141266527558
+taxi 0.6129985228951256 0.9814869522402737
+I0510 13:05:27.765594 140029993363200 TransDST_train.py:195] [8/10] [0/1719] mean_loss : 0.01287
+I0510 13:07:41.479454 140029993363200 TransDST_train.py:195] [8/10] [200/1719] mean_loss : 0.01658
+I0510 13:09:53.350469 140029993363200 TransDST_train.py:195] [8/10] [400/1719] mean_loss : 0.01579
+I0510 13:12:13.391019 140029993363200 TransDST_train.py:195] [8/10] [600/1719] mean_loss : 0.01480
+I0510 13:14:25.767796 140029993363200 TransDST_train.py:195] [8/10] [800/1719] mean_loss : 0.01597
+I0510 13:16:26.377817 140029993363200 TransDST_train.py:195] [8/10] [1000/1719] mean_loss : 0.01561
+I0510 13:18:35.909297 140029993363200 TransDST_train.py:195] [8/10] [1200/1719] mean_loss : 0.01652
+I0510 13:20:48.144711 140029993363200 TransDST_train.py:195] [8/10] [1400/1719] mean_loss : 0.01537
+I0510 13:23:02.606262 140029993363200 TransDST_train.py:195] [8/10] [1600/1719] mean_loss : 0.01491
+  0%|          | 0/7371 [00:00<?, ?it/s] 35%|███▍      | 2566/7371 [02:00<03:44, 21.38it/s] 35%|███▍      | 2566/7371 [02:20<03:44, 21.38it/s] 70%|██████▉   | 5147/7371 [04:00<01:43, 21.42it/s] 70%|██████▉   | 5147/7371 [04:20<01:43, 21.42it/s]100%|██████████| 7371/7371 [05:46<00:00, 21.25it/s]
+I0510 13:30:08.205658 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 13:30:08.206108 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 13:30:08.206198 140029993363200 TransDST_evaluation.py:198] Epoch 8 joint accuracy : 0.5531
+I0510 13:30:08.206271 140029993363200 TransDST_evaluation.py:199] Epoch 8 slot turn accuracy : 0.9755
+I0510 13:30:08.206338 140029993363200 TransDST_evaluation.py:200] Epoch 8 slot turn F1: 0.9296
+I0510 13:30:08.206401 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3890
+I0510 13:30:08.206463 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9201
+I0510 13:30:08.206526 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 39.465903 ms
+I0510 13:30:08.206585 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 13:30:10.765519 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 8, 'joint_acc': 0.5531135531135531, 'slot_acc': 0.9754850088182991, 'slot_f1': 0.9296420921460125, 'final_slot_f1': 0.9200800958682437}
+I0510 13:30:10.765891 140029993363200 TransDST_train.py:206] 
+
+hotel 0.49981942939689417 0.9749608763693397
+train 0.8092909535452323 0.9927116078705365
+restaurant 0.6550401116149285 0.9853040344146111
+attraction 0.7035490605427975 0.9892553931802428
+taxi 0.5997045790251108 0.9802560315115679
+I0510 13:30:13.364732 140029993363200 TransDST_train.py:195] [9/10] [0/1719] mean_loss : 0.01739
+I0510 13:32:27.589082 140029993363200 TransDST_train.py:195] [9/10] [200/1719] mean_loss : 0.01447
+I0510 13:34:39.413450 140029993363200 TransDST_train.py:195] [9/10] [400/1719] mean_loss : 0.01356
+I0510 13:36:51.829748 140029993363200 TransDST_train.py:195] [9/10] [600/1719] mean_loss : 0.01423
+I0510 13:39:07.282244 140029993363200 TransDST_train.py:195] [9/10] [800/1719] mean_loss : 0.01360
+I0510 13:41:23.588757 140029993363200 TransDST_train.py:195] [9/10] [1000/1719] mean_loss : 0.01421
+I0510 13:43:35.696753 140029993363200 TransDST_train.py:195] [9/10] [1200/1719] mean_loss : 0.01407
+I0510 13:45:50.859286 140029993363200 TransDST_train.py:195] [9/10] [1400/1719] mean_loss : 0.01411
+I0510 13:48:02.331395 140029993363200 TransDST_train.py:195] [9/10] [1600/1719] mean_loss : 0.01487
+  0%|          | 0/7371 [00:00<?, ?it/s] 34%|███▍      | 2510/7371 [02:00<03:52, 20.91it/s] 34%|███▍      | 2510/7371 [02:20<03:52, 20.91it/s] 68%|██████▊   | 5039/7371 [04:00<01:51, 20.96it/s] 68%|██████▊   | 5039/7371 [04:20<01:51, 20.96it/s]100%|██████████| 7371/7371 [05:48<00:00, 21.12it/s]
+I0510 13:55:10.033539 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 13:55:10.034001 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 13:55:10.034101 140029993363200 TransDST_evaluation.py:198] Epoch 9 joint accuracy : 0.5556
+I0510 13:55:10.034187 140029993363200 TransDST_evaluation.py:199] Epoch 9 slot turn accuracy : 0.9758
+I0510 13:55:10.034274 140029993363200 TransDST_evaluation.py:200] Epoch 9 slot turn F1: 0.9305
+I0510 13:55:10.034353 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3820
+I0510 13:55:10.034430 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9199
+I0510 13:55:10.034507 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 39.728885 ms
+I0510 13:55:10.034581 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 13:55:12.702996 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 9, 'joint_acc': 0.5555555555555556, 'slot_acc': 0.9757925202369235, 'slot_f1': 0.9305213593929536, 'final_slot_f1': 0.9199290710341818}
+I0510 13:55:12.703254 140029993363200 TransDST_train.py:206] 
+
+hotel 0.5005417118093174 0.9745154688816794
+train 0.8264058679706602 0.9932937478169794
+restaurant 0.6403906522497385 0.9850831298686288
+attraction 0.716910229645094 0.9896450939457259
+taxi 0.5908419497784343 0.9805514524864564
+I0510 13:55:15.255824 140029993363200 TransDST_train.py:195] [10/10] [0/1719] mean_loss : 0.01225
+I0510 13:57:28.855869 140029993363200 TransDST_train.py:195] [10/10] [200/1719] mean_loss : 0.01275
+I0510 13:59:40.671149 140029993363200 TransDST_train.py:195] [10/10] [400/1719] mean_loss : 0.01246
+I0510 14:01:53.793874 140029993363200 TransDST_train.py:195] [10/10] [600/1719] mean_loss : 0.01242
+I0510 14:04:11.886183 140029993363200 TransDST_train.py:195] [10/10] [800/1719] mean_loss : 0.01275
+I0510 14:06:24.860361 140029993363200 TransDST_train.py:195] [10/10] [1000/1719] mean_loss : 0.01261
+I0510 14:08:37.307184 140029993363200 TransDST_train.py:195] [10/10] [1200/1719] mean_loss : 0.01255
+I0510 14:10:49.299073 140029993363200 TransDST_train.py:195] [10/10] [1400/1719] mean_loss : 0.01277
+I0510 14:13:04.204202 140029993363200 TransDST_train.py:195] [10/10] [1600/1719] mean_loss : 0.01284
+  0%|          | 0/7371 [00:00<?, ?it/s] 33%|███▎      | 2466/7371 [02:00<03:58, 20.54it/s] 33%|███▎      | 2466/7371 [02:20<03:58, 20.54it/s] 67%|██████▋   | 4967/7371 [04:00<01:56, 20.62it/s] 67%|██████▋   | 4967/7371 [04:20<01:56, 20.62it/s]100%|██████████| 7371/7371 [05:55<00:00, 20.72it/s]
+I0510 14:20:18.307732 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 14:20:18.308167 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 14:20:18.308262 140029993363200 TransDST_evaluation.py:198] Epoch 10 joint accuracy : 0.5652
+I0510 14:20:18.308342 140029993363200 TransDST_evaluation.py:199] Epoch 10 slot turn accuracy : 0.9761
+I0510 14:20:18.308433 140029993363200 TransDST_evaluation.py:200] Epoch 10 slot turn F1: 0.9304
+I0510 14:20:18.308506 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3940
+I0510 14:20:18.308579 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9203
+I0510 14:20:18.308653 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 40.475611 ms
+I0510 14:20:18.308721 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+I0510 14:20:20.906579 140029993363200 TransDST_train.py:205] Best Score : {'epoch': 10, 'joint_acc': 0.5651878985212319, 'slot_acc': 0.9760638538415904, 'slot_f1': 0.9304211168017166, 'final_slot_f1': 0.9203420544544832}
+I0510 14:20:20.906862 140029993363200 TransDST_train.py:206] 
+
+I0510 14:20:20.906925 140029993363200 TransDST_train.py:209] Test using best model...
+  0%|          | 0/7368 [00:00<?, ?it/s] 34%|███▍      | 2501/7368 [02:00<03:53, 20.84it/s] 34%|███▍      | 2501/7368 [02:10<03:53, 20.84it/s] 68%|██████▊   | 4986/7368 [04:00<01:54, 20.80it/s] 68%|██████▊   | 4986/7368 [04:10<01:54, 20.80it/s]100%|██████████| 7368/7368 [05:51<00:00, 20.95it/s]
+I0510 14:26:17.301165 140029993363200 TransDST_evaluation.py:195] ------------------------------
+I0510 14:26:17.301590 140029993363200 TransDST_evaluation.py:197] op_code: 2, is_gt_op: False, is_gt_p_state: False, is_gt_gen: False
+I0510 14:26:17.301692 140029993363200 TransDST_evaluation.py:198] Epoch 10 joint accuracy : 0.5391
+I0510 14:26:17.301777 140029993363200 TransDST_evaluation.py:199] Epoch 10 slot turn accuracy : 0.9745
+I0510 14:26:17.301860 140029993363200 TransDST_evaluation.py:200] Epoch 10 slot turn F1: 0.9240
+I0510 14:26:17.301939 140029993363200 TransDST_evaluation.py:201] Final Joint Accuracy : 0.3734
+I0510 14:26:17.302016 140029993363200 TransDST_evaluation.py:202] Final slot turn F1 : 0.9167
+I0510 14:26:17.302093 140029993363200 TransDST_evaluation.py:203] Latency Per Prediction : 40.009023 ms
+I0510 14:26:17.302174 140029993363200 TransDST_evaluation.py:204] -----------------------------
+
+hotel 0.49837486457204766 0.9743228602383667
+train 0.8243101641634649 0.9932006054255486
+restaurant 0.6613184513428672 0.9856179514010079
+attraction 0.72901878914405 0.9901878914405073
+taxi 0.5923190546528804 0.98020679468242
+hotel 0.48763523956723337 0.9733127253992907
+train 0.7239742285520515 0.9878150785577106
+restaurant 0.6755725190839694 0.9865718251214517
+attraction 0.6859843814221126 0.9884367721605767
+taxi 0.6277258566978193 0.9818795430944942
