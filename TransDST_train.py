@@ -6,8 +6,7 @@ MIT license
 
 from Model.TransformerDST import TransformerDST, TransformerDSTV2, TransformerDSTV3, CompactTransformerDST
 from Model.transformers import BertTokenizer, AdamW, get_linear_schedule_with_warmup, BertConfig
-from utils.data_utils import TransDST_prepare_dataset, TransDSTMultiWozDataset, TransDSTInstance
-from utils.data_utils import make_slot_meta, domain2id, OP_SET
+from utils.data_utils import *
 from TransDST_evaluation import model_evaluation
 from tensorboardX import SummaryWriter
 
@@ -29,6 +28,12 @@ MODEL_DICT = {
     'TransDSTV2':TransformerDSTV2,
     'TransDSTV3':TransformerDSTV3,
 }
+Dataset = {
+    'TransDST':TransDSTMultiWozDataset,
+    'CompactTransformerDST':CompactTransDSTMultiWozDataset,
+    'TransDSTV2':TransDSTMultiWozDataset,
+    'TransDSTV3':TransDSTMultiWozDataset,
+}
 #set up log
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -41,14 +46,13 @@ logger.addHandler(file_handler)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def print_batch(batch, tokenizer):
-    input_ids, input_mask, segment_ids, state_position_ids, gen_ids = batch
     
-    for i in range(min(4, input_ids.size()[0])):
+    for i in range(min(4, batch['input_ids'].size()[0])):
         #input_ids
-        logger.info("Input ids: {}".format(str(input_ids[i].numpy().tolist())))
-        logging.info("Input sequence: {}".format(tokenizer.decode(input_ids[i])))
+        logger.info("Input ids: {}".format(str(batch['input_ids'][i].numpy().tolist())))
+        logging.info("Input sequence: {}".format(tokenizer.decode(batch['input_ids'][i])))
         for j in range(30):
-            logger.info("[SLOT]_{}: {}".format(j,tokenizer.decode(gen_ids[i][j])))
+            logger.info("[SLOT]_{}: {}".format(j,tokenizer.decode(batch['tgt_seq'][i][j])))
 
 def main(args):
     # 初始化tensorboard
@@ -84,17 +88,18 @@ def main(args):
                                             slot_meta=slot_meta,
                                             n_history=args.n_history,
                                             max_seq_length=args.max_seq_length,
-                                            op_code=args.op_code)
+                                            op_code=args.op_code,
+                                            args=args)
 
-    train_data = TransDSTMultiWozDataset(train_data_raw,
-                                        tokenizer,
-                                        slot_meta,
-                                        args.max_seq_length,
-                                        rng,
-                                        ontology,
-                                        args.word_dropout,
-                                        args.shuffle_state,
-                                        args.shuffle_p)
+    train_data = Dataset[args.model](train_data_raw,
+                                    tokenizer,
+                                    slot_meta,
+                                    args.max_seq_length,
+                                    rng,
+                                    ontology,
+                                    args.word_dropout,
+                                    args.shuffle_state,
+                                    args.shuffle_p)
 
     logger.info("# train examples {}".format(len(train_data_raw)))
 
@@ -103,7 +108,8 @@ def main(args):
                                             slot_meta=slot_meta,
                                             n_history=args.n_history,
                                             max_seq_length=args.max_seq_length,
-                                            op_code=args.op_code)
+                                            op_code=args.op_code,
+                                            args=args)
     logger.info("# dev examples {}".format(len(dev_data_raw)))
 
     test_data_raw = TransDST_prepare_dataset(data_path=args.test_data_path,
@@ -111,7 +117,8 @@ def main(args):
                                             slot_meta=slot_meta,
                                             n_history=args.n_history,
                                             max_seq_length=args.max_seq_length,
-                                            op_code=args.op_code)
+                                            op_code=args.op_code,
+                                            args=args)
     logger.info("# test examples {}".format(len(test_data_raw)))
     #-----------------------------------------------------------Prepare Model-----------------------------------------------------------#
     model_config = BertConfig.from_json_file(args.bert_config_path)
@@ -164,7 +171,7 @@ def main(args):
                 print_batch(batch, tokenizer)
                 print_batch_count -= 1
 
-            batch = [k:batch[k].to(device) for k in batch]
+            batch = {k:batch[k].to(device) for k in batch}
 
             loss = model(**batch)
             
@@ -210,7 +217,7 @@ def main(args):
     model.load_state_dict(ckpt)
     model.to(device)
 
-    model_evaluation(model, test_data_raw, tokenizer, slot_meta, best_epoch, args.op_code, args = args)
+    model_evaluation(model, test_data_raw, tokenizer, slot_meta, best_epoch, args.op_code, args = args, mode='Test')
 
 
 if __name__ == "__main__":
@@ -229,8 +236,8 @@ if __name__ == "__main__":
     parser.add_argument("--exp_dir", default='experiments', type=str)
 
     parser.add_argument("--mode",default="train",type=str)
-    parser.add_argument("--model",default="TransDST",type=str)
-
+    parser.add_argument("--model",default="TransDST",type=str,
+                        help="Model type, include: [TransDST, CompactTransDST,TransDSTV2, TransDSTV3]")
     # Model architecture
     parser.add_argument("--num_decoder_layers", default=2, type=int, help="Layers of transformer decoder")
     parser.add_argument("--decoder_dropout", default=0.1, type=float, help="Dropout rate of transformer decoder")

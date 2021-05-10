@@ -9,7 +9,6 @@ from utils.data_utils import make_slot_meta, domain2id, OP_SET, make_turn_label,
 from utils.eval_utils import compute_prf, compute_acc, per_domain_join_accuracy
 from Model.transformers import BertTokenizer, BertConfig
 from Model.TransformerDST import TransformerDST
-from Model.model import *
 
 import torch.nn as nn
 import torch
@@ -87,7 +86,7 @@ def main(args):
 
 
 def model_evaluation(model, test_data, tokenizer, slot_meta, epoch, op_code='4',
-                     is_gt_op=False, is_gt_p_state=False, is_gt_gen=False, args=None):
+                     is_gt_op=False, is_gt_p_state=False, is_gt_gen=False, args=None, mode='Val'):
     model.eval()
     op2id = OP_SET[op_code]
     id2op = {v: k for k, v in op2id.items()}
@@ -202,7 +201,10 @@ def model_evaluation(model, test_data, tokenizer, slot_meta, epoch, op_code='4',
     logging.info("Final slot turn F1 : {:.4f}".format(final_slot_F1_score))
     logging.info("Latency Per Prediction : %f ms" % latency)
     logging.info("-----------------------------\n")
-    path = os.path.join(args.save_dir, 'preds_%d.json' % epoch)
+    if mode == 'Test':
+        path = os.path.join(args.save_dir, '{}_preds_{}.json'.format('Test',epoch))
+    else:
+        path = os.path.join(args.save_dir, 'preds_%d.json' % epoch)
     json.dump(results, open(path,'w'), indent=2)
     per_domain_join_accuracy(results, slot_meta)
 

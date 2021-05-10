@@ -25,7 +25,7 @@ python3 create_data.py --main_dir $DOWNLOAD_PATH --target_path $TARGET_PATH --mw
 ### TransDST
 
 ```
-CUDA_VISIBLE_DEVICES="0,1,2,3" nohup python TransDST_train.py --data_root data/mwz2.1/ --op_code '3-1' --batch_size 32 --grad_accumulation 1  --dec_lr 1e-4 --num_decoder_layers 4 --model TransDST >log_copy.json &
+bash run.sh
 ```
 
 #### DDP code

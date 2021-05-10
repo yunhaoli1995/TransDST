@@ -27,7 +27,7 @@ def error():
             error[dial_id].append(e)
 
     json.dump(error, open('error.json','w'), indent=2)
-
+    
 
 def f(a,b,c,**args):
     return a+b+c
