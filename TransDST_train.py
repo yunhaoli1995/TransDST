@@ -3,7 +3,6 @@ SOM-DST
 Copyright (c) 2020-present NAVER Corp.
 MIT license
 """
-
 from Model.TransformerDST import TransformerDST, TransformerDSTV2, TransformerDSTV3, CompactTransformerDST
 from Model.transformers import BertTokenizer, AdamW, get_linear_schedule_with_warmup, BertConfig
 from utils.data_utils import *
@@ -24,13 +23,13 @@ import logging
 
 MODEL_DICT = {
     'TransDST':TransformerDST,
-    'CompactTransformerDST':CompactTransformerDST,
+    'CompactTransDST':CompactTransformerDST,
     'TransDSTV2':TransformerDSTV2,
     'TransDSTV3':TransformerDSTV3,
 }
 Dataset = {
     'TransDST':TransDSTMultiWozDataset,
-    'CompactTransformerDST':CompactTransDSTMultiWozDataset,
+    'CompactTransDST':CompactTransDSTMultiWozDataset,
     'TransDSTV2':TransDSTMultiWozDataset,
     'TransDSTV3':TransDSTMultiWozDataset,
 }
@@ -51,8 +50,8 @@ def print_batch(batch, tokenizer):
         #input_ids
         logger.info("Input ids: {}".format(str(batch['input_ids'][i].numpy().tolist())))
         logging.info("Input sequence: {}".format(tokenizer.decode(batch['input_ids'][i])))
-        for j in range(30):
-            logger.info("[SLOT]_{}: {}".format(j,tokenizer.decode(batch['tgt_seq'][i][j])))
+        # for j in range(30):
+        #     logger.info("[SLOT]_{}: {}".format(j,tokenizer.decode(batch['tgt_seq'][i][j])))
 
 def main(args):
     # 初始化tensorboard
@@ -236,7 +235,7 @@ if __name__ == "__main__":
     parser.add_argument("--exp_dir", default='experiments', type=str)
 
     parser.add_argument("--mode",default="train",type=str)
-    parser.add_argument("--model",default="TransDST",type=str,
+    parser.add_argument("--model",default="CompactTransDST",type=str,
                         help="Model type, include: [TransDST, CompactTransDST,TransDSTV2, TransDSTV3]")
     # Model architecture
     parser.add_argument("--num_decoder_layers", default=2, type=int, help="Layers of transformer decoder")
@@ -245,7 +244,7 @@ if __name__ == "__main__":
     # Training parameters
     parser.add_argument("--random_seed", default=42, type=int)
     parser.add_argument("--num_workers", default=4, type=int)
-    parser.add_argument("--batch_size", default=8, type=int)
+    parser.add_argument("--batch_size", default=16, type=int)
     parser.add_argument("--grad_accumulation", default=1, type=int)
 
     parser.add_argument("--enc_warmup", default=0.1, type=float)
@@ -255,7 +254,7 @@ if __name__ == "__main__":
     parser.add_argument("--n_epochs", default=30, type=int)
     parser.add_argument("--eval_epoch", default=1, type=int)
 
-    parser.add_argument("--op_code", default="4", type=str)
+    parser.add_argument("--op_code", default="2", type=str)
     parser.add_argument("--slot_token", default="[SLOT]", type=str)
     parser.add_argument("--not_shuffle_state", default=False, action='store_true')
     parser.add_argument("--shuffle_p", default=0.5, type=float)

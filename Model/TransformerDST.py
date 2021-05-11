@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 from .transformers import BertPreTrainedModel, BertModel, GPT2LMHeadModel, BertConfig
 from torch import Tensor
-from .transformer import TransformerDecoder, TransformerDecoderV2, TransformerDecoderV3
+from .transformer import CompactTransformerDecoder, TransformerDecoder, TransformerDecoderV2, TransformerDecoderV3
 
 class TransformerDST(nn.Module):
     '''
@@ -86,8 +86,24 @@ class CompactTransformerDST(nn.Module):
     '''
         我魔改的TransformerDST:先用bert对上下文X和对话状态[SLOT]_j slot-value进行双向编码
         然后对于第j个slot，取出对应的slot feature: h_{[SLOT]_j} 作为transformer decoder的第一个query feature: q0
-        将op和gen分开打包，以减少内存占用
-        前向传播时，分别计算op和gen
+        将op_ids和gen_ids分开打包,以减少内存占用,前向传播时,分开计算
+        在送入decoder前就要reshape
+        没啥用，就省了1g不到内存
+        Ex: 
+            gen_ids [
+                        [1,3,4,0,0],
+                        [1,3,4,0,0],
+                        [1,100,101,104,4],
+                        [1,3,4,0,0]
+                    ] 
+                    =>  [
+                            [1,3,4],
+                            [1,3,4],
+                            [1,3,4]
+                        ], 
+                        [
+                            [1,100,101,104,4]
+                        ]
         Input:
             input_ids: (B,Lk)
             token_type_ids: (B,Lk)
@@ -104,27 +120,28 @@ class CompactTransformerDST(nn.Module):
         self.config = config
         self.hidden_size = config.hidden_size
         self.encoder = BertModel.from_pretrained(bert_path, config=config)
-        self.decoder = TransformerDecoder(config,
-                                        self.encoder.embeddings.word_embeddings.weight, 
-                                        self.encoder.embeddings.position_embeddings.weight)
+        self.decoder = CompactTransformerDecoder(config,
+                                                self.encoder.embeddings.word_embeddings.weight, 
+                                                self.encoder.embeddings.position_embeddings.weight)
     
-    def prepare_input4decoder(self, enc_output, slot_positions, gen_idx, op_idx):
-        B,Lk,H = enc_output.size()
-        slot_pos = slot_positions[:, :, None].expand(-1, -1, H)
-        slot_features = torch.gather(enc_output, 1, slot_pos).view(-1,H)
-
-        gen_pos = gen_idx[:,None].expand(-1,H)
-        op_pos = op_idx[:,None].expand(-1,H)
-
+    def prepare_input4decoder(self, enc_output, input_ids, slot_features, gen_idx):
+        _, Lk, H = enc_output.size()
+        # Extract slot featrues
+        gen_pos = gen_idx[:,None].expand(-1,H)                  #(B1)->(B1,H)
         gen_features = torch.gather(slot_features,0,gen_pos)
-        op_features = torch.gather(slot_features,0,op_pos)
 
-        return gen_features, op_features
+        # Extract source sequence
+        gen_pos2 = gen_idx[:,None,None].expand(-1, Lk, H)
+        gen_pos3 = gen_idx[:,None].expand(-1,Lk)
+        enc_output_gen = torch.gather(enc_output,0,gen_pos2)
+        input_ids_gen = torch.gather(input_ids,0,gen_pos3)
 
-    def ComputeLoss(logits,tgt_seq):
+        return enc_output_gen, input_ids_gen, gen_features
+
+    def ComputeLoss(self, logits, tgt_seq):
         # Compute loss
         # Shift so that tokens < n predict n
-        shift_logits = logits[..., :-1, :].contiguous()
+        shift_logits = logits[..., :-1,:].contiguous()
         shift_labels = tgt_seq[..., 1:].contiguous()
         # Flatten the tokens
         loss = nn.functional.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), 
@@ -147,14 +164,41 @@ class CompactTransformerDST(nn.Module):
         return logits
  
     def forward(self, input_ids, token_type_ids, attention_mask, slot_positions, tgt_seq, op_ids, gen_idx, op_idx, **args):
+        '''
+            tgt_seq: (B1,Lq1)
+            op_ids: (B2,Lq2)
+        '''
         enc_output = self.encode(input_ids, token_type_ids, attention_mask)
-        gen_features, op_features = self.prepare_input4decoder(enc_output, slot_positions, gen_idx, op_idx)
-        logits1 = self.decode(tgt_seq, input_ids, enc_output, gen_features)
-        logits2 = self.decode(op_ids, input_ids, enc_output, op_features)
-        loss1 = self.ComputeLoss(tgt_seq, logits1)
-        loss2 = self.ComputeLoss(op_ids, logits2)
+        B1,Lq1 = tgt_seq.size()
+        B2,Lq2 = op_ids.size()
+
+        # Repeat source sequence
+        B,Lk,H = enc_output.size()
+        B,J = slot_positions.size()
+        # Collect features of each slot
+        slot_pos = slot_positions[:, :, None].expand(-1, -1, H)
+        slot_features = torch.gather(enc_output, 1, slot_pos).view(-1,H)
+        # Reapeat enc_output and input_ids J times
+        enc_output = enc_output.repeat(1,J,1).contiguous().view(B*J,Lk,-1)  #(B,Lk,H) -> (B*J,Lk,H)
+        input_ids = input_ids.repeat(1,J).contiguous().view(B*J,-1)         #(B,Lk) -> (B*J,Lk)
+
+        if B1 > 0:
+            enc_output_gen, input_ids_gen, gen_features = \
+                self.prepare_input4decoder(enc_output, input_ids, slot_features, gen_idx)
+            logits1 = self.decode(tgt_seq, input_ids_gen, enc_output_gen, gen_features)     #(B1,Lq1,V)
+            loss1 = self.ComputeLoss(logits1, tgt_seq)
+            
+            if B2 == 0: return loss1
         
-        return (loss1+loss2)/2
+        if B2 > 0:
+            enc_output_op, input_ids_op, op_features = \
+                self.prepare_input4decoder(enc_output, input_ids, slot_features, op_idx)
+            logits2 = self.decode(op_ids, input_ids_op, enc_output_op, op_features)         #(B2,Lq2,V)
+            loss2 = self.ComputeLoss(logits2, op_ids)
+
+            if B1 == 0: return loss2
+        
+        return (B1*Lq1*loss1+B2*Lq2*loss2)/(B1*Lq1+B2*Lq2)
 
 
     def generate(self, input_ids, token_type_ids, attention_mask, slot_positions, MAX_LENGTH=12, **args):
@@ -164,9 +208,13 @@ class CompactTransformerDST(nn.Module):
         B,Lk = input_ids.size()
         B,J =  slot_positions.size()          
         tgt_seq = torch.ones(B,J,1).to(input_ids.device).long()                     # (B,J,1)
+        # Reapeat enc_output and input_ids J times
+        enc_output = enc_output.repeat(1,J,1).contiguous().view(B*J,Lk,-1)  #(B,Lk,H) -> (B*J,Lk,H)
+        input_ids = input_ids.repeat(1,J).contiguous().view(B*J,-1)         #(B,Lk) -> (B*J,Lk)
         flag = torch.tensor([False]*J).to(input_ids.device)
         for i in range(MAX_LENGTH):
-            logits = self.decode(tgt_seq, input_ids, enc_output, slot_positions)    # (B,J,Lq,V)
+            logits = self.decode(tgt_seq, input_ids, enc_output, slot_positions)    # (B*J,Lq,V)
+            logits = logits.view(B,J,-1,logits.size(-1))                            # (B*J,Lq,V) -> (B,J,Lq,V)  
             _, w_idx = logits[...,-1,:].max(-1)                                     # (B,J)
             tgt_seq = torch.cat([tgt_seq, w_idx.unsqueeze(-1)], dim = -1)           # (B,J,Lq+1)
             flag = flag | (w_idx.squeeze(0) == self.config.eos_idx)

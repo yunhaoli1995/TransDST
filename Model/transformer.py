@@ -370,43 +370,35 @@ class CompactTransformerDecoder(nn.Module):
         
 
     def forward(self, tgt_seq, slot_features, src_seq, enc_output):
-        '''tgt_seq: Concatenated slot values  (B,J,L)
-            slot_features: Hidden features of slot (B,J,H)
+        '''tgt_seq: Concatenated slot values  (B,L)
+            slot_features: Hidden features of slot (B,H)
             src_seq: Input sequence (B,Lk)
             enc_output: Sequence of encoded context from encoder: (B,Lk,H)
         '''
-        # -- Reshape input
-        B,J,Lq = tgt_seq.size()
-        B,Lk,H = enc_output.size()
-        tgt_seq = tgt_seq.contiguous().view(B*J,-1)                         #(B,J,Lq) -> (B*J,Lq)
-        src_seq = src_seq.repeat(1,J).contiguous().view(B*J,-1)             #(B,Lk) -> (B*J,Lk)
-        enc_output = enc_output.repeat(1,J,1).contiguous().view(B*J,Lk,-1)  #(B,Lk,H) -> (B*J,Lk,H)
-        # slot_features = slot_features.contiguous().view(B*J,1,-1)           #(B,J,H) -> (B*J,H)由于是cmpact，所以slot_feature已经沿着batch的维度展开了
         # -- Prepare masks
         non_pad_mask = get_non_pad_mask(tgt_seq, self.pad_idx)
 
-        slf_attn_mask_subseq = get_subsequent_mask(tgt_seq)                                                 #(B*J,Lq,Lq)
-        slf_attn_mask_keypad = get_attn_key_pad_mask(seq_k=tgt_seq, seq_q=tgt_seq, pad_idx=self.pad_idx)    #(B*J,Lq,Lq)
+        slf_attn_mask_subseq = get_subsequent_mask(tgt_seq)                                                 #(B,Lq,Lq)
+        slf_attn_mask_keypad = get_attn_key_pad_mask(seq_k=tgt_seq, seq_q=tgt_seq, pad_idx=self.pad_idx)    #(B,Lq,Lq)
         slf_attn_mask = (slf_attn_mask_keypad + slf_attn_mask_subseq).gt(0)             
-        dec_enc_attn_mask = get_attn_key_pad_mask(seq_k=src_seq, seq_q=tgt_seq, pad_idx=self.pad_idx)       #(B*J,Lq,Lk)
+        dec_enc_attn_mask = get_attn_key_pad_mask(seq_k=src_seq, seq_q=tgt_seq, pad_idx=self.pad_idx)       #(B,Lq,Lk)
 
         # -- Forward
         max_len = tgt_seq.size()[1]
         position = torch.arange(0, max_len).long().unsqueeze(0).to(tgt_seq.device)
-        dec_output = self.tgt_word_emb(tgt_seq) + self.post_word_emb(position)                              #(B*J,Lq,H)
+        dec_output = self.tgt_word_emb(tgt_seq) + self.post_word_emb(position)                              #(B,Lq,H)
         # -- Noting: 目标序列[SLOT]t1t2t3..[EOS]的embedding在进入decoder前 
         #            [SLOT]对应的feature要替换成为h_{[SLOT]_j} 因为h_{[SLOT]_j}
         #            和上下文通过self-attention进行了双向信息交互
-        dec_output = torch.cat([slot_features, dec_output[:,1:]],dim=1)
+        dec_output = torch.cat([slot_features.unsqueeze(1), dec_output[:,1:]],dim=1)
         
         for dec_layer in self.layer_stack:
             dec_output, dec_slf_attn, dec_enc_attn = dec_layer(dec_output, enc_output,
                                                                 non_pad_mask=non_pad_mask,
                                                                 slf_attn_mask=slf_attn_mask,
-                                                                dec_enc_attn_mask=dec_enc_attn_mask)        #(B*J,Lq,H)
+                                                                dec_enc_attn_mask=dec_enc_attn_mask)        #(B,Lq,H)
 
-        logits = torch.matmul(dec_output, self.tgt_word_emb.weight.transpose(0,1))                          #(B*J,Lq,H)*(H,V) -> (B*J,Lq,V)
-        logits = logits.view(B,J,Lq,-1)                                                                     #(B*J,Lq,V) -> (B,J,Lq,V)
+        logits = torch.matmul(dec_output, self.tgt_word_emb.weight.transpose(0,1))                          #(B,Lq,H)*(H,V) -> (B,Lq,V)
 
         return logits
 

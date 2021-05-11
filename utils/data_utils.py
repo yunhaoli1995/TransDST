@@ -28,6 +28,86 @@ OP_SET = {
     '4': {'delete': 0, 'update': 1, 'dontcare': 2, 'carryover': 3},
     '6': {'delete': 0, 'update': 1, 'dontcare': 2, 'carryover': 3, 'yes': 4, 'no': 5}
 }
+
+def make_slot_meta(ontology):
+    meta = []
+    change = {}
+    idx = 0
+    max_len = 0
+    for i, k in enumerate(ontology.keys()):
+        d, s = k.split('-')
+        if d not in EXPERIMENT_DOMAINS:
+            continue
+        if 'price' in s or 'leave' in s or 'arrive' in s:
+            s = s.replace(' ', '')
+        ss = s.split()
+        if len(ss) + 1 > max_len:
+            max_len = len(ss) + 1
+        meta.append('-'.join([d, s]))
+        change[meta[-1]] = ontology[k]
+    return sorted(meta), change
+    
+def make_turn_label(slot_meta, last_dialog_state, turn_dialog_state,
+                    tokenizer, op_code='4', dynamic=False):
+    if dynamic:
+        gold_state = turn_dialog_state
+        turn_dialog_state = {}
+        for x in gold_state:
+            s = x.split('-')
+            k = '-'.join(s[:2])
+            turn_dialog_state[k] = s[2]
+
+    op_labels = ['carryover'] * len(slot_meta)
+    generate_y = []
+    keys = list(turn_dialog_state.keys())
+    for k in keys:
+        v = turn_dialog_state[k]
+        if v == 'none':
+            turn_dialog_state.pop(k)
+            continue
+        vv = last_dialog_state.get(k)
+        try:
+            idx = slot_meta.index(k)
+            if vv != v:
+                if v == 'dontcare' and OP_SET[op_code].get('dontcare') is not None:
+                    op_labels[idx] = 'dontcare'
+                elif v == 'yes' and OP_SET[op_code].get('yes') is not None:
+                    op_labels[idx] = 'yes'
+                elif v == 'no' and OP_SET[op_code].get('no') is not None:
+                    op_labels[idx] = 'no'
+                else:
+                    op_labels[idx] = 'update'
+                    generate_y.append([tokenizer.tokenize(v) + ['[EOS]'], idx])
+            elif vv == v:
+                op_labels[idx] = 'carryover'
+        except ValueError:
+            continue
+
+    for k, v in last_dialog_state.items():
+        vv = turn_dialog_state.get(k)
+        try:
+            idx = slot_meta.index(k)
+            if vv is None:
+                if OP_SET[op_code].get('delete') is not None:
+                    op_labels[idx] = 'delete'
+                else:
+                    op_labels[idx] = 'update'
+                    generate_y.append([['[NULL]', '[EOS]'], idx])
+        except ValueError:
+            continue
+    gold_state = [str(k) + '-' + str(v) for k, v in turn_dialog_state.items()]
+    if len(generate_y) > 0:
+        generate_y = sorted(generate_y, key=lambda lst: lst[1])
+        generate_y, _ = [list(e) for e in list(zip(*generate_y))]
+
+    if dynamic:
+        op2id = OP_SET[op_code]
+        generate_y = [tokenizer.convert_tokens_to_ids(y) for y in generate_y]
+        op_labels = [op2id[i] for i in op_labels]
+
+    return op_labels, generate_y, gold_state
+
+
 #---------------------------------------------------------My Code----------------------------------------------------------------#
 
 #----------------------------Instance---------------------------#
@@ -245,12 +325,17 @@ class CompactTransDSTInstance:
 
         self.input_mask = input_mask
         self.domain_id = domain2id[self.turn_domain]
-        self.op_idx = [x for x in range(len(self.generate_y)) if '[' in self.generate_y[x][0]]
-        self.generate_idx = [x for x in range(len(self.generate_y)) if '[' not in self.generate_y[x][0]]
-        self.op_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' in y[0]]
-        self.generate_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' not in y[0]]
+        self.op_idx = [x for x in range(len(self.generate_y)) if '[' in self.generate_y[x][1]]
+        self.generate_idx = [x for x in range(len(self.generate_y)) if '[' not in self.generate_y[x][1]]
+        self.op_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' in y[1]]
+        self.generate_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' not in y[1]]
 
-
+Instance = {
+    'TransDST':TransDSTInstance,
+    'CompactTransDST':CompactTransDSTInstance,
+    'TransDSTV2':TransDSTInstance,
+    'TransDSTV3':TransDSTInstance,
+}
 #----------------------------Dataset----------------------------#
 class TransDSTMultiWozDataset(Dataset):
     '''
@@ -341,6 +426,18 @@ class CompactTransDSTMultiWozDataset(Dataset):
         return self.data[idx]
 
     def collate_fn(self, batch):
+        '''
+        Return: {
+                    'input_ids':input_ids,              
+                    'token_type_ids':segment_ids,           
+                    'attention_mask':input_mask, 
+                    'slot_positions':state_position_ids,
+                    'tgt_seq':gen_ids,
+                    'op_ids':op_ids,
+                    'gen_idx':gen_idx,                      #posisition of generate ids among slot features
+                    'op_idx':op_idx                         #posisition of op idsd among slot features
+                }                        
+        '''
         input_ids = torch.tensor([f.input_id for f in batch], dtype=torch.long)
         input_mask = torch.tensor([f.input_mask for f in batch], dtype=torch.long)
         segment_ids = torch.tensor([f.segment_id for f in batch], dtype=torch.long)
@@ -348,25 +445,33 @@ class CompactTransDSTMultiWozDataset(Dataset):
         gen_ids = [b.generate_ids for b in batch]
         op_ids = [b.op_ids for b in batch]
         gen_idx = [b.generate_idx for b in batch]
-        op_idx = [b.op_idx for b in b in batch]
+        op_idx = [b.op_idx for b in batch]
         
-        max_update = max([len(b) for b in gen_ids])
-        max_value = max([len(b) for b in flatten(gen_ids)])
+        flatten_gen_ids = flatten(gen_ids)
+        if len(flatten_gen_ids) == 0: max_value = 0
+        else: max_value = max([len(b) for b in flatten_gen_ids])
+        
+        gen_ids2 = []
         for bid, b in enumerate(gen_ids):
             n_update = len(b)
+            if n_update == 0: continue
             for idx, v in enumerate(b):
-                b[idx] = v + [0] * (max_value - len(v))
-            gen_ids[bid] = b + [[0] * max_value] * (max_update - n_update)
-        gen_ids = torch.tensor(gen_ids, dtype=torch.long)
+                gen_ids2.append(v + [0] * (max_value - len(v)))
+        gen_ids = torch.tensor(gen_ids2, dtype=torch.long)
 
-        max_op = max([len(b) for b in flatten(op_ids)])
+        flatten_op_ids = flatten(op_ids)
+        if len(flatten_op_ids) == 0: max_op = 0
+        else:
+            max_op = max([len(b) for b in flatten_op_ids])
+        op_ids2 = []
         for bid, b in enumerate(op_ids):
-            n_update = len(b)
+            if len(b) == 0: continue
             for idx, v in enumerate(b):
-                b[idx] = v + [0] * (max_op - len(v))
-        op_ids = torch.tensor(op_ids, dtype=torch.long)
+                op_ids2.append(v + [0] * (max_op - len(v)))
+        op_ids = torch.tensor(op_ids2, dtype=torch.long)
 
-        J = len(gen_ids[0]) + len(op_ids[0])
+        J = len(self.slot_meta)
+
         op_idx2 = []
         for idx, o in enumerate(op_idx):
             o = [oo+idx*J for oo in o]
@@ -492,7 +597,10 @@ def TransDST_make_turn_label(slot_meta, last_dialog_state, turn_dialog_state,
 def TransDST_prepare_dataset(data_path, tokenizer, slot_meta,
                     n_history, max_seq_length, diag_level=False, op_code='4', use_cache=True, args=None):
     if use_cache:
-        cache_file = data_path.replace('.json','_TransDST{}.data'.format(op_code))
+        if args.model == 'CompactTransDST':
+            cache_file = data_path.replace('.json','_CompactTransDST{}.data'.format(op_code))
+        else:
+            cache_file = data_path.replace('.json','_TransDST{}.data'.format(op_code))
         if os.path.exists(cache_file):
             logging.info("Loading data from {}.........".format(cache_file))
             with open(cache_file,'rb') as f:
@@ -533,17 +641,17 @@ def TransDST_prepare_dataset(data_path, tokenizer, slot_meta,
                     else:
                         is_last_turn = False
 
-                    instance = TransDSTInstance(dial_dict["dialogue_idx"], 
-                                                turn_domain,
-                                                turn_id, turn_uttr, 
-                                                ' '.join(dialog_history[-n_history:]),
-                                                last_dialog_state, 
-                                                generate_y, 
-                                                gold_state, 
-                                                max_seq_length, 
-                                                slot_meta,
-                                                is_last_turn, 
-                                                op_code=op_code)
+                    instance = Instance[args.model](dial_dict["dialogue_idx"], 
+                                                    turn_domain,
+                                                    turn_id, turn_uttr, 
+                                                    ' '.join(dialog_history[-n_history:]),
+                                                    last_dialog_state, 
+                                                    generate_y, 
+                                                    gold_state, 
+                                                    max_seq_length, 
+                                                    slot_meta,
+                                                    is_last_turn, 
+                                                    op_code=op_code)
                     instance.make_instance(tokenizer)
                     data.append(instance)
                     last_dialog_state = turn_dialog_state

@@ -5,7 +5,7 @@ MIT license
 """
 
 from utils.data_utils import TransDST_prepare_dataset, TransDSTMultiWozDataset, TransDSTInstance
-from utils.data_utils import make_slot_meta, domain2id, OP_SET, make_turn_label, postprocessing, TransDSTpostprocessing
+from utils.data_utils import make_slot_meta, domain2id, OP_SET, make_turn_label, TransDSTpostprocessing
 from utils.eval_utils import compute_prf, compute_acc, per_domain_join_accuracy
 from Model.transformers import BertTokenizer, BertConfig
 from Model.TransformerDST import TransformerDST
