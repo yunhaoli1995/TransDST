@@ -117,6 +117,7 @@ class TransDSTInstance:
                  turn_id,
                  turn_utter,
                  dialog_history,
+                 last_update_states, # 上一轮对话更新了哪些状态，只有这些才能故意引入错误
                  last_dialog_state,
                  generate_y,
                  gold_state,
@@ -129,6 +130,7 @@ class TransDSTInstance:
         self.turn_id = turn_id
         self.turn_utter = turn_utter
         self.dialog_history = dialog_history
+        self.last_update_states = last_update_states
         self.last_dialog_state = last_dialog_state
         self.gold_p_state = last_dialog_state
         self.generate_y = generate_y
@@ -138,6 +140,10 @@ class TransDSTInstance:
         self.is_last_turn = is_last_turn
         self.op2id = OP_SET[op_code]
     
+    def introduce_artificial_errors(self, p=0.1):
+        # 故意引入错误
+        pass
+
     def shuffle_state(self, rng, slot_meta=None):
         new_y = deepcopy(self.generate_y)
         if slot_meta is None:
@@ -597,7 +603,7 @@ def TransDST_make_turn_label(slot_meta, last_dialog_state, turn_dialog_state,
 def TransDST_prepare_dataset(data_path, tokenizer, slot_meta,
                     n_history, max_seq_length, diag_level=False, op_code='4', use_cache=True, args=None):
     if use_cache:
-        if args.model == 'CompactTransDST':
+        if args and args.model == 'CompactTransDST':
             cache_file = data_path.replace('.json','_CompactTransDST{}.data'.format(op_code))
         else:
             cache_file = data_path.replace('.json','_TransDST{}.data'.format(op_code))
