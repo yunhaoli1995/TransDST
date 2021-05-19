@@ -139,11 +139,7 @@ class TransDSTInstance:
         self.slot_meta = slot_meta
         self.is_last_turn = is_last_turn
         self.op2id = OP_SET[op_code]
-    
-    def introduce_artificial_errors(self, p=0.1):
-        # 故意引入错误
-        pass
-
+        
     def shuffle_state(self, rng, slot_meta=None):
         new_y = deepcopy(self.generate_y)
         if slot_meta is None:
@@ -169,6 +165,7 @@ class TransDSTInstance:
             state.append(slot_token)
             k = s.split('-')
             v = self.last_dialog_state.get(s)
+            # 在这里故意引入错误
             if v is not None:
                 k.extend(['-', v])
                 t = tokenizer.tokenize(' '.join(k))
