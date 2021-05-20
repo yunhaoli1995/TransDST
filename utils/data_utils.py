@@ -117,7 +117,6 @@ class TransDSTInstance:
                  turn_id,
                  turn_utter,
                  dialog_history,
-                 last_update_states, # 上一轮对话更新了哪些状态，只有这些才能故意引入错误
                  last_dialog_state,
                  generate_y,
                  gold_state,
@@ -130,7 +129,7 @@ class TransDSTInstance:
         self.turn_id = turn_id
         self.turn_utter = turn_utter
         self.dialog_history = dialog_history
-        self.last_update_states = last_update_states
+        self.corrupt_last_dialog_state = deepcopy(last_dialog_state)
         self.last_dialog_state = last_dialog_state
         self.gold_p_state = last_dialog_state
         self.generate_y = generate_y
@@ -139,7 +138,7 @@ class TransDSTInstance:
         self.slot_meta = slot_meta
         self.is_last_turn = is_last_turn
         self.op2id = OP_SET[op_code]
-        
+
     def shuffle_state(self, rng, slot_meta=None):
         new_y = deepcopy(self.generate_y)
         if slot_meta is None:
