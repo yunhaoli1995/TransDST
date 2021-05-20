@@ -9,6 +9,7 @@ import json
 from torch.utils.data import Dataset
 import torch
 import random
+import math
 import re
 from copy import deepcopy
 from .fix_label import fix_general_label_error
@@ -346,7 +347,7 @@ class TransDSTMultiWozDataset(Dataset):
                 ontology, word_dropout=0.1
     '''
     def __init__(self, data, tokenizer, slot_meta, max_seq_length, rng,
-                 ontology, word_dropout=0.1, shuffle_state=False, shuffle_p=0.0):
+                 ontology, word_dropout=0.1, shuffle_state=False, shuffle_p=0.0, corrupt_p=0.1):
         self.data = data
         self.len = len(data)
         self.tokenizer = tokenizer
@@ -357,6 +358,39 @@ class TransDSTMultiWozDataset(Dataset):
         self.shuffle_state = shuffle_state
         self.shuffle_p = shuffle_p
         self.rng = rng
+        self.corrupt_p = corrupt_p
+        self._preprocess_slots()
+
+    def _hash_generate_y(self, generate_y):
+        return ':'.join(generate_y)
+
+    def _preprocess_slots(self):
+        self.slot_values = {k: dict() for k in self.slot_meta}
+        self.slot_values_arr = {k: [] for k in self.slot_meta}
+        self.slot_values_p = {k: [] for k in self.slot_meta}
+        self.slot_lengths = {k: [0, 0] for k in self.slot_meta}
+        for one in self.data:
+            for slot_meta, generate_y in zip(one.slot_meta, one.generate_y):
+                if "[" not in generate_y[1]:
+                    self.slot_lengths[slot_meta][1] += 1
+                    self.slot_lengths[slot_meta][0] += len(generate_y) - 2
+                    d = self.slot_values[slot_meta].get(self._hash_generate_y(generate_y), {"text": None, "freq": 0})
+                    d["text"] = generate_y
+                    d["freq"] += 1
+                    self.slot_values[slot_meta][self._hash_generate_y(generate_y)] = d
+        for k in self.slot_lengths:
+            self.slot_lengths[k] = math.ceil(self.slot_lengths[k][0] / self.slot_lengths[k][1])
+
+        for k in self.slot_values:
+            cnt = 0
+            one_slot_values = self.slot_values[k]
+            for hshkey in one_slot_values:
+                d = one_slot_values[hshkey]
+                self.slot_values_arr[k].append(self.tokenizer.convert_tokens_to_ids(d["text"]))
+                self.slot_values_p[k].append(d["freq"])
+                cnt += d["freq"]
+            for i in range(len(self.slot_values_p[k])):
+                self.slot_values_p[k][i] /= cnt
 
     def __len__(self):
         return self.len
