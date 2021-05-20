@@ -169,7 +169,6 @@ class TransDSTInstance:
             if v is not None:
                 k.extend(['-', v])
                 if corrupt_method == "random" and np.random.binomial(1, corrupt_p) == 1:
-                    print("corrupt", v,)
                     t = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s]) 
                 else:
                     t = tokenizer.tokenize(' '.join(k))
