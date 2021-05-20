@@ -251,7 +251,7 @@ class CompactTransDSTInstance:
         self.slot_meta = slot_meta
         self.is_last_turn = is_last_turn
         self.op2id = OP_SET[op_code]
-    
+
     def shuffle_state(self, rng, slot_meta=None):
         new_y = deepcopy(self.generate_y)
         if slot_meta is None:
@@ -269,7 +269,7 @@ class CompactTransDSTInstance:
         self.generate_y = list(temp[1])
 
     def make_instance(self, tokenizer, max_seq_length=None,
-                      word_dropout=0., slot_token='[SLOT]'):
+                      word_dropout=0., slot_token='[SLOT]', corrupt_method=None, corrupt_p=0.2, slot_values_lengths=None):
         if max_seq_length is None:
             max_seq_length = self.max_seq_length
         state = []
@@ -332,6 +332,12 @@ class CompactTransDSTInstance:
         self.generate_idx = [x for x in range(len(self.generate_y)) if '[' not in self.generate_y[x][1]]
         self.op_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' in y[1]]
         self.generate_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' not in y[1]]
+        if corrupt_method == "random":
+            corrupt_mask = np.random.binomial(1, corrupt_p, len(self.generate_idx))
+            for i, mask in enumerate(corrupt_mask):
+                if mask == 1:
+                    sm = self.slot_meta[self.generate_idx[i]]
+                    self.generate_ids[i] = self.generate_ids[0] + np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[sm]) + self.generate_ids[-1]
 
 Instance = {
     'TransDST':TransDSTInstance,
@@ -347,7 +353,7 @@ class TransDSTMultiWozDataset(Dataset):
                 ontology, word_dropout=0.1
     '''
     def __init__(self, data, tokenizer, slot_meta, max_seq_length, rng,
-                 ontology, word_dropout=0.1, shuffle_state=False, shuffle_p=0.0, corrupt_p=0.1):
+                 ontology, word_dropout=0.1, shuffle_state=False, shuffle_p=0.0, corrupt_method=None, corrupt_p=0.2):
         self.data = data
         self.len = len(data)
         self.tokenizer = tokenizer
@@ -359,6 +365,7 @@ class TransDSTMultiWozDataset(Dataset):
         self.shuffle_p = shuffle_p
         self.rng = rng
         self.corrupt_p = corrupt_p
+        self.corrupt_method = corrupt_method
         self._preprocess_slots()
 
     def _hash_generate_y(self, generate_y):
@@ -401,9 +408,9 @@ class TransDSTMultiWozDataset(Dataset):
                 self.data[idx].shuffle_state(self.rng, None)
             else:
                 self.data[idx].shuffle_state(self.rng, self.slot_meta)
-        if self.word_dropout > 0 or self.shuffle_state:
+        if self.word_dropout > 0 or self.shuffle_state or self.corrupt_method:
             self.data[idx].make_instance(self.tokenizer,
-                                         word_dropout=self.word_dropout)
+                                         word_dropout=self.word_dropout, corrupt_method=self.corrupt_method, corrupt_p=self.corrupt_p, slot_values_lengths=self.slot_values)
         return self.data[idx]
 
     def collate_fn(self, batch):
