@@ -98,7 +98,9 @@ def main(args):
                                     ontology,
                                     args.word_dropout,
                                     args.shuffle_state,
-                                    args.shuffle_p)
+                                    args.shuffle_p,
+                                    args.corrupt_method,
+                                    args.corrupt_p)
 
     logger.info("# train examples {}".format(len(train_data_raw)))
 
@@ -262,6 +264,8 @@ if __name__ == "__main__":
 
     parser.add_argument("--n_history", default=1, type=int)
     parser.add_argument("--max_seq_length", default=256, type=int)
+    parser.add_argument("--corrupt_method", default="random", type=str)
+    parser.add_argument("--corrupt_p", default=0.2, type=float)
 
     args = parser.parse_args()
     args.train_data_path = os.path.join(args.data_root, args.train_data)
