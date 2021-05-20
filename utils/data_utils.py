@@ -157,7 +157,7 @@ class TransDSTInstance:
         self.generate_y = list(temp[1])
 
     def make_instance(self, tokenizer, max_seq_length=None,
-                      word_dropout=0., slot_token='[SLOT]'):
+                      word_dropout=0., slot_token='[SLOT]', corrupt_method=None, corrupt_p=0.2, slot_values_lengths=None):
         if max_seq_length is None:
             max_seq_length = self.max_seq_length
         state = []
@@ -168,7 +168,11 @@ class TransDSTInstance:
             # 在这里故意引入错误
             if v is not None:
                 k.extend(['-', v])
-                t = tokenizer.tokenize(' '.join(k))
+                if corrupt_method == "random" and np.random.binomial(1, corrupt_p) == 1:
+                    print("corrupt", v,)
+                    t = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s]) 
+                else:
+                    t = tokenizer.tokenize(' '.join(k))
             else:
                 t = tokenizer.tokenize(' '.join(k))
                 t.extend(['-', '[NULL]'])
@@ -218,7 +222,6 @@ class TransDSTInstance:
         self.input_mask = input_mask
         self.domain_id = domain2id[self.turn_domain]
         self.generate_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y]
-
 
 class CompactTransDSTInstance:
     '''
@@ -332,12 +335,6 @@ class CompactTransDSTInstance:
         self.generate_idx = [x for x in range(len(self.generate_y)) if '[' not in self.generate_y[x][1]]
         self.op_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' in y[1]]
         self.generate_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' not in y[1]]
-        if corrupt_method == "random":
-            corrupt_mask = np.random.binomial(1, corrupt_p, len(self.generate_idx))
-            for i, mask in enumerate(corrupt_mask):
-                if mask == 1:
-                    sm = self.slot_meta[self.generate_idx[i]]
-                    self.generate_ids[i] = self.generate_ids[0] + np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[sm]) + self.generate_ids[-1]
 
 Instance = {
     'TransDST':TransDSTInstance,
@@ -410,7 +407,7 @@ class TransDSTMultiWozDataset(Dataset):
                 self.data[idx].shuffle_state(self.rng, self.slot_meta)
         if self.word_dropout > 0 or self.shuffle_state or self.corrupt_method:
             self.data[idx].make_instance(self.tokenizer,
-                                         word_dropout=self.word_dropout, corrupt_method=self.corrupt_method, corrupt_p=self.corrupt_p, slot_values_lengths=self.slot_values)
+                                         word_dropout=self.word_dropout, corrupt_method=self.corrupt_method, corrupt_p=self.corrupt_p, slot_values_lengths=self.slot_lengths)
         return self.data[idx]
 
     def collate_fn(self, batch):
