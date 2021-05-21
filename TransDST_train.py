@@ -23,13 +23,13 @@ import logging
 
 MODEL_DICT = {
     'TransDST':TransformerDST,
-    'CompactTransDST':CompactTransformerDST,
+    # 'CompactTransDST':CompactTransformerDST,
     'TransDSTV2':TransformerDSTV2,
     'TransDSTV3':TransformerDSTV3,
 }
 Dataset = {
     'TransDST':TransDSTMultiWozDataset,
-    'CompactTransDST':CompactTransDSTMultiWozDataset,
+    # 'CompactTransDST':CompactTransDSTMultiWozDataset,
     'TransDSTV2':TransDSTMultiWozDataset,
     'TransDSTV3':TransDSTMultiWozDataset,
 }
