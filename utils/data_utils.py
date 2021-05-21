@@ -184,8 +184,8 @@ class TransDSTInstance:
                     k.extend([v])
                     t = tokenizer.tokenize(' '.join(k))
             else:
-                k.extend(["-"])
                 if should_corrupt:
+                    k.extend(["-"])
                     # 先 tokenize
                     t = tokenizer.tokenize(' '.join(k))
                     # 得到随机 ID
@@ -198,8 +198,8 @@ class TransDSTInstance:
                     else:
                         substitute_generate_y[idx] = ["[SLOT]", "[NULL]", "[EOS]"]
                 else:
-                    k.extend(['[NULL]'])
                     t = tokenizer.tokenize(' '.join(k))
+                    t.extend(["-", "[NULL]"])
             state.extend(t)
         avail_length_1 = max_seq_length - len(state) - 3
         diag_1 = tokenizer.tokenize(self.dialog_history)
