@@ -158,7 +158,7 @@ class TransDSTInstance:
         self.generate_y = list(temp[1])
 
     def make_instance(self, tokenizer, max_seq_length=None,
-                      word_dropout=0., slot_token='[SLOT]', corrupt_method=None, corrupt_p=0.2, slot_values_lengths=None):
+                      word_dropout=0., slot_token='[SLOT]', corrupt_method=None, corrupt_p=0.2, slot_values_lengths=None, slot_values_arr=None, slot_values_p=None):
         if max_seq_length is None:
             max_seq_length = self.max_seq_length
         state = []
@@ -168,17 +168,22 @@ class TransDSTInstance:
             k = s.split('-')
             v = self.last_dialog_state.get(s)
             # 在这里故意引入错误
-            should_corrupt = corrupt_method == "random" and np.random.binomial(1, corrupt_p) == 1
+            should_corrupt = corrupt_method is not None and np.random.binomial(1, corrupt_p) == 1
             if v is not None:
                 k.extend(["-"])
                 if should_corrupt:
                     # 先 tokenize
                     t = tokenizer.tokenize(' '.join(k))
-                    # 得到随机 ID
-                    random_value_ids = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s])
-                    # 将 ID 转回 Token，拼回去
-                    t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
-                    # 应该生成这个值
+                    if corrupt_method == "random":
+                        # 得到随机 ID
+                        random_value_ids = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s])
+                        # 将 ID 转回 Token，拼回去
+                        t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
+                    elif corrupt_method == "value":
+                        # 按照概率选择一个值
+                        value_tokens = np.random.choice(slot_values_arr[s], p=slot_values_p[s])
+                        t.extend(value_tokens)
+                    # 应该生成原来的值
                     substitute_generate_y[idx] = ["[SLOT]"] + tokenizer.tokenize(v) + ["[EOS]"]
                 else:
                     k.extend([v])
@@ -188,8 +193,15 @@ class TransDSTInstance:
                     k.extend(["-"])
                     # 先 tokenize
                     t = tokenizer.tokenize(' '.join(k))
-                    # 得到随机 ID
-                    random_value_ids = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s])
+                    if corrupt_method == "random":
+                        # 得到随机 ID
+                        random_value_ids = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s])
+                        # 将 ID 转回 Token，拼回去
+                        t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
+                    elif corrupt_method == "value":
+                        # 按照概率选择一个值
+                        value_tokens = np.random.choice(slot_values_arr[s], p=slot_values_p[s])
+                        t.extend(value_tokens)
                     # 将 ID 转回 Token，拼回去
                     t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
                     # 模型有 Delete 应该生成 Delete，否则 update -> null
@@ -302,7 +314,7 @@ class TransDSTMultiWozDataset(Dataset):
             one_slot_values = self.slot_values[k]
             for hshkey in one_slot_values:
                 d = one_slot_values[hshkey]
-                self.slot_values_arr[k].append(self.tokenizer.convert_tokens_to_ids(d["text"]))
+                self.slot_values_arr[k].append(d["text"])
                 self.slot_values_p[k].append(d["freq"])
                 cnt += d["freq"]
             for i in range(len(self.slot_values_p[k])):
@@ -319,7 +331,12 @@ class TransDSTMultiWozDataset(Dataset):
                 self.data[idx].shuffle_state(self.rng, self.slot_meta)
         if self.word_dropout > 0 or self.shuffle_state or self.corrupt_method:
             self.data[idx].make_instance(self.tokenizer,
-                                         word_dropout=self.word_dropout, corrupt_method=self.corrupt_method, corrupt_p=self.corrupt_p, slot_values_lengths=self.slot_lengths)
+                                         word_dropout=self.word_dropout, 
+                                         corrupt_method=self.corrupt_method, 
+                                         corrupt_p=self.corrupt_p, 
+                                         slot_values_lengths=self.slot_lengths, 
+                                         slot_values_arr=self.slot_values_arr, 
+                                         slot_values_p=self.slot_values_p)
         return self.data[idx]
 
     def collate_fn(self, batch):
