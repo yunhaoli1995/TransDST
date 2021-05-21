@@ -202,7 +202,7 @@ class TransDSTInstance:
                         # 按照概率选择一个值
                         value_tokens = np.random.choice(slot_values_arr[s], p=slot_values_p[s])
                         t.extend(value_tokens)
-                        
+
                     # 模型有 Delete 应该生成 Delete，否则 update -> null
                     if OP_SET[self.op_code].get('delete') is not None:
                         substitute_generate_y[idx] = ["[SLOT]", "[Delete]", "[EOS]"]
@@ -313,7 +313,7 @@ class TransDSTMultiWozDataset(Dataset):
             one_slot_values = self.slot_values[k]
             for hshkey in one_slot_values:
                 d = one_slot_values[hshkey]
-                self.slot_values_arr[k].append(d["text"])
+                self.slot_values_arr[k].append(d["text"][1:-1])
                 self.slot_values_p[k].append(d["freq"])
                 cnt += d["freq"]
             for i in range(len(self.slot_values_p[k])):
