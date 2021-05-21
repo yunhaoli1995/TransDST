@@ -168,7 +168,7 @@ class TransDSTInstance:
             k = s.split('-')
             v = self.last_dialog_state.get(s)
             # 在这里故意引入错误
-            should_corrupt = np.random.binomial(1, corrupt_p) == 1
+            should_corrupt = corrupt_method == "random" and np.random.binomial(1, corrupt_p) == 1
             if v is not None:
                 k.extend(["-"])
                 if should_corrupt:
