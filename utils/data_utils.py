@@ -139,6 +139,7 @@ class TransDSTInstance:
         self.slot_meta = slot_meta
         self.is_last_turn = is_last_turn
         self.op2id = OP_SET[op_code]
+        self.op_code = op_code
 
     def shuffle_state(self, rng, slot_meta=None):
         new_y = deepcopy(self.generate_y)
@@ -161,20 +162,44 @@ class TransDSTInstance:
         if max_seq_length is None:
             max_seq_length = self.max_seq_length
         state = []
-        for s in self.slot_meta:
+        substitute_generate_y = {}
+        for idx, s in enumerate(self.slot_meta):
             state.append(slot_token)
             k = s.split('-')
             v = self.last_dialog_state.get(s)
             # 在这里故意引入错误
+            should_corrupt = np.random.binomial(1, corrupt_p) == 1
             if v is not None:
-                k.extend(['-', v])
-                if corrupt_method == "random" and np.random.binomial(1, corrupt_p) == 1:
-                    t = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s]) 
+                k.extend(["-"])
+                if should_corrupt:
+                    # 先 tokenize
+                    t = tokenizer.tokenize(' '.join(k))
+                    # 得到随机 ID
+                    random_value_ids = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s])
+                    # 将 ID 转回 Token，拼回去
+                    t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
+                    # 应该生成这个值
+                    substitute_generate_y[idx] = ["[SLOT]"] + tokenizer.tokenize(v) + ["[EOS]"]
                 else:
+                    k.extend([v])
                     t = tokenizer.tokenize(' '.join(k))
             else:
-                t = tokenizer.tokenize(' '.join(k))
-                t.extend(['-', '[NULL]'])
+                k.extend(["-"])
+                if should_corrupt:
+                    # 先 tokenize
+                    t = tokenizer.tokenize(' '.join(k))
+                    # 得到随机 ID
+                    random_value_ids = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s])
+                    # 将 ID 转回 Token，拼回去
+                    t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
+                    # 模型有 Delete 应该生成 Delete，否则 update -> null
+                    if OP_SET[self.op_code].get('delete') is not None:
+                        substitute_generate_y[idx] = ["[SLOT]", "[Delete]", "[EOS]"]
+                    else:
+                        substitute_generate_y[idx] = ["[SLOT]", "[NULL]", "[EOS]"]
+                else:
+                    k.extend(['[NULL]'])
+                    t = tokenizer.tokenize(' '.join(k))
             state.extend(t)
         avail_length_1 = max_seq_length - len(state) - 3
         diag_1 = tokenizer.tokenize(self.dialog_history)
@@ -222,122 +247,10 @@ class TransDSTInstance:
         self.domain_id = domain2id[self.turn_domain]
         self.generate_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y]
 
-class CompactTransDSTInstance:
-    '''
-        为了减少内存使用，将gen_ids分为两组
-        [CarryOver],[Delete],[DontCare]一组
-        [Update] 一组
-    '''
-    def __init__(self, ID,
-                 turn_domain,
-                 turn_id,
-                 turn_utter,
-                 dialog_history,
-                 last_dialog_state,
-                 generate_y,
-                 gold_state,
-                 max_seq_length,
-                 slot_meta,
-                 is_last_turn,
-                 op_code='4'):
-        self.id = ID
-        self.turn_domain = turn_domain
-        self.turn_id = turn_id
-        self.turn_utter = turn_utter
-        self.dialog_history = dialog_history
-        self.last_dialog_state = last_dialog_state
-        self.gold_p_state = last_dialog_state
-        self.generate_y = generate_y
-        self.gold_state = gold_state
-        self.max_seq_length = max_seq_length
-        self.slot_meta = slot_meta
-        self.is_last_turn = is_last_turn
-        self.op2id = OP_SET[op_code]
-
-    def shuffle_state(self, rng, slot_meta=None):
-        new_y = deepcopy(self.generate_y)
-        if slot_meta is None:
-            temp = list(zip(self.slot_meta, new_y))
-            rng.shuffle(temp)
-        else:
-            #回到原始的顺序
-            indices = list(range(len(slot_meta)))
-            for idx, st in enumerate(slot_meta):
-                indices[self.slot_meta.index(st)] = idx
-            temp = list(zip(self.slot_meta, new_y, indices))
-            temp = sorted(temp, key=lambda x: x[-1])
-        temp = list(zip(*temp))
-        self.slot_meta = list(temp[0])
-        self.generate_y = list(temp[1])
-
-    def make_instance(self, tokenizer, max_seq_length=None,
-                      word_dropout=0., slot_token='[SLOT]', corrupt_method=None, corrupt_p=0.2, slot_values_lengths=None):
-        if max_seq_length is None:
-            max_seq_length = self.max_seq_length
-        state = []
-        for s in self.slot_meta:
-            state.append(slot_token)
-            k = s.split('-')
-            v = self.last_dialog_state.get(s)
-            if v is not None:
-                k.extend(['-', v])
-                t = tokenizer.tokenize(' '.join(k))
-            else:
-                t = tokenizer.tokenize(' '.join(k))
-                t.extend(['-', '[NULL]'])
-            state.extend(t)
-        avail_length_1 = max_seq_length - len(state) - 3
-        diag_1 = tokenizer.tokenize(self.dialog_history)
-        diag_2 = tokenizer.tokenize(self.turn_utter)
-        avail_length = avail_length_1 - len(diag_2)
-
-        if len(diag_1) > avail_length:  # truncated
-            avail_length = len(diag_1) - avail_length
-            diag_1 = diag_1[avail_length:]
-
-        if len(diag_1) == 0 and len(diag_2) > avail_length_1:
-            avail_length = len(diag_2) - avail_length_1
-            diag_2 = diag_2[avail_length:]
-
-        drop_mask = [0] + [1] * len(diag_1) + [0] + [1] * len(diag_2) + [0]
-        diag_1 = ["[CLS]"] + diag_1 + ["[SEP]"]
-        diag_2 = diag_2 + ["[SEP]"]
-        segment = [0] * len(diag_1) + [1] * len(diag_2)
-
-        diag = diag_1 + diag_2
-        # word dropout
-        if word_dropout > 0.:
-            drop_mask = np.array(drop_mask)
-            word_drop = np.random.binomial(drop_mask.astype('int64'), word_dropout)
-            diag = [w if word_drop[i] == 0 else '[UNK]' for i, w in enumerate(diag)]
-        input_ = diag + state
-        segment = segment + [1]*len(state)
-        self.input_ = input_
-
-        self.segment_id = segment
-        slot_position = []
-        for i, t in enumerate(self.input_):
-            if t == slot_token:
-                slot_position.append(i)
-        self.slot_position = slot_position
-
-        input_mask = [1] * len(self.input_)
-        self.input_id = tokenizer.convert_tokens_to_ids(self.input_)
-        if len(input_mask) < max_seq_length:
-            self.input_id = self.input_id + [0] * (max_seq_length-len(input_mask))
-            self.segment_id = self.segment_id + [0] * (max_seq_length-len(input_mask))
-            input_mask = input_mask + [0] * (max_seq_length-len(input_mask))
-
-        self.input_mask = input_mask
-        self.domain_id = domain2id[self.turn_domain]
-        self.op_idx = [x for x in range(len(self.generate_y)) if '[' in self.generate_y[x][1]]
-        self.generate_idx = [x for x in range(len(self.generate_y)) if '[' not in self.generate_y[x][1]]
-        self.op_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' in y[1]]
-        self.generate_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y if '[' not in y[1]]
 
 Instance = {
     'TransDST':TransDSTInstance,
-    'CompactTransDST':CompactTransDSTInstance,
+    # 'CompactTransDST':CompactTransDSTInstance,
     'TransDSTV2':TransDSTInstance,
     'TransDSTV3':TransDSTInstance,
 }
@@ -429,108 +342,6 @@ class TransDSTMultiWozDataset(Dataset):
                 'attention_mask':input_mask, 
                 'slot_positions':state_position_ids,
                 'tgt_seq':gen_ids}
-
-
-class CompactTransDSTMultiWozDataset(Dataset):
-    '''
-        Input: 
-                data, tokenizer, slot_meta, max_seq_length, rng,
-                ontology, word_dropout=0.1
-    '''
-    def __init__(self, data, tokenizer, slot_meta, max_seq_length, rng,
-                 ontology, word_dropout=0.1, shuffle_state=False, shuffle_p=0.0):
-        self.data = data
-        self.len = len(data)
-        self.tokenizer = tokenizer
-        self.slot_meta = slot_meta
-        self.max_seq_length = max_seq_length
-        self.ontology = ontology
-        self.word_dropout = word_dropout
-        self.shuffle_state = shuffle_state
-        self.shuffle_p = shuffle_p
-        self.rng = rng
-
-    def __len__(self):
-        return self.len
-
-    def __getitem__(self, idx):
-        if self.shuffle_state and self.shuffle_p > 0.:
-            if self.rng.random() < self.shuffle_p:
-                self.data[idx].shuffle_state(self.rng, None)
-            else:
-                self.data[idx].shuffle_state(self.rng, self.slot_meta)
-        if self.word_dropout > 0 or self.shuffle_state:
-            self.data[idx].make_instance(self.tokenizer,
-                                         word_dropout=self.word_dropout)
-        return self.data[idx]
-
-    def collate_fn(self, batch):
-        '''
-        Return: {
-                    'input_ids':input_ids,              
-                    'token_type_ids':segment_ids,           
-                    'attention_mask':input_mask, 
-                    'slot_positions':state_position_ids,
-                    'tgt_seq':gen_ids,
-                    'op_ids':op_ids,
-                    'gen_idx':gen_idx,                      #posisition of generate ids among slot features
-                    'op_idx':op_idx                         #posisition of op idsd among slot features
-                }                        
-        '''
-        input_ids = torch.tensor([f.input_id for f in batch], dtype=torch.long)
-        input_mask = torch.tensor([f.input_mask for f in batch], dtype=torch.long)
-        segment_ids = torch.tensor([f.segment_id for f in batch], dtype=torch.long)
-        state_position_ids = torch.tensor([f.slot_position for f in batch], dtype=torch.long)
-        gen_ids = [b.generate_ids for b in batch]
-        op_ids = [b.op_ids for b in batch]
-        gen_idx = [b.generate_idx for b in batch]
-        op_idx = [b.op_idx for b in batch]
-        
-        flatten_gen_ids = flatten(gen_ids)
-        if len(flatten_gen_ids) == 0: max_value = 0
-        else: max_value = max([len(b) for b in flatten_gen_ids])
-        
-        gen_ids2 = []
-        for bid, b in enumerate(gen_ids):
-            n_update = len(b)
-            if n_update == 0: continue
-            for idx, v in enumerate(b):
-                gen_ids2.append(v + [0] * (max_value - len(v)))
-        gen_ids = torch.tensor(gen_ids2, dtype=torch.long)
-
-        flatten_op_ids = flatten(op_ids)
-        if len(flatten_op_ids) == 0: max_op = 0
-        else:
-            max_op = max([len(b) for b in flatten_op_ids])
-        op_ids2 = []
-        for bid, b in enumerate(op_ids):
-            if len(b) == 0: continue
-            for idx, v in enumerate(b):
-                op_ids2.append(v + [0] * (max_op - len(v)))
-        op_ids = torch.tensor(op_ids2, dtype=torch.long)
-
-        J = len(self.slot_meta)
-
-        op_idx2 = []
-        for idx, o in enumerate(op_idx):
-            o = [oo+idx*J for oo in o]
-            op_idx2 += o
-        op_idx = torch.tensor(op_idx2, dtype=torch.long)
-
-        gen_idx2 = []
-        for idx, g in enumerate(gen_idx):
-            g = [gg+idx*J for gg in g]
-            gen_idx2 += g
-        gen_idx = torch.tensor(gen_idx2, dtype=torch.long)
-
-        return {'input_ids':input_ids, 
-                'token_type_ids':segment_ids, 
-                'attention_mask':input_mask, 
-                'slot_positions':state_position_ids,
-                'tgt_seq':gen_ids,
-                'op_ids':op_ids,
-                'gen_idx':gen_idx,
-                'op_idx':op_idx}
 
 
 #----------------------------Method------------------------------#
