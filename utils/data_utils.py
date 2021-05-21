@@ -245,7 +245,7 @@ class TransDSTInstance:
 
         self.input_mask = input_mask
         self.domain_id = domain2id[self.turn_domain]
-        self.generate_ids = [tokenizer.convert_tokens_to_ids(y) for y in self.generate_y]
+        self.generate_ids = [tokenizer.convert_tokens_to_ids(substitute_generate_y.get(idx, y)) for idx, y in enumerate(self.generate_y)]
 
 
 Instance = {
