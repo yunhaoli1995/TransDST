@@ -181,7 +181,8 @@ class TransDSTInstance:
                         t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
                     elif corrupt_method == "value":
                         # 按照概率选择一个值
-                        value_tokens = np.random.choice(slot_values_arr[s], p=slot_values_p[s])
+                        vid = np.random.choice(len(slot_values_arr[s]), p=slot_values_p[s])
+                        value_tokens = slot_values_arr[s][vid]
                         t.extend(value_tokens)
                     # 应该生成原来的值
                     substitute_generate_y[idx] = ["[SLOT]"] + tokenizer.tokenize(v) + ["[EOS]"]
@@ -200,7 +201,8 @@ class TransDSTInstance:
                         t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
                     elif corrupt_method == "value":
                         # 按照概率选择一个值
-                        value_tokens = np.random.choice(slot_values_arr[s], p=slot_values_p[s])
+                        vid = np.random.choice(len(slot_values_arr[s]), p=slot_values_p[s])
+                        value_tokens = slot_values_arr[s][vid]
                         t.extend(value_tokens)
 
                     # 模型有 Delete 应该生成 Delete，否则 update -> null
