@@ -179,13 +179,15 @@ class TransDSTInstance:
                         random_value_ids = np.random.randint(1000, tokenizer.vocab_size, slot_values_lengths[s])
                         # 将 ID 转回 Token，拼回去
                         t.extend(tokenizer.convert_ids_to_tokens(random_value_ids))
+                        # 应该生成原来的值
+                        substitute_generate_y[idx] = ["[SLOT]"] + tokenizer.tokenize(v) + ["[EOS]"]
                     elif corrupt_method == "value":
                         # 按照概率选择一个值
                         vid = np.random.choice(len(slot_values_arr[s]), p=slot_values_p[s])
                         value_tokens = slot_values_arr[s][vid]
                         t.extend(value_tokens)
-                    # 应该生成原来的值
-                    substitute_generate_y[idx] = ["[SLOT]"] + tokenizer.tokenize(v) + ["[EOS]"]
+                        if tokenizer.convert_tokens_to_string(value_tokens) != v:
+                            substitute_generate_y[idx] = ["[SLOT]"] + tokenizer.tokenize(v) + ["[EOS]"]
                 else:
                     k.extend([v])
                     t = tokenizer.tokenize(' '.join(k))
