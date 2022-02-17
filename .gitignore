@@ -10,3 +10,6 @@ outputs/
 checkpoint/
 assets/
 *.ipynb
+experiments/
+log/
+*.log

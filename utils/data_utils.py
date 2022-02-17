@@ -332,7 +332,7 @@ class TransDSTMultiWozDataset(Dataset):
                 self.data[idx].shuffle_state(self.rng, None)
             else:
                 self.data[idx].shuffle_state(self.rng, self.slot_meta)
-        if self.word_dropout > 0 or self.shuffle_state or self.corrupt_method:
+        if self.word_dropout > 0 or self.shuffle_state or self.corrupt_method in ["value", "random"]:
             self.data[idx].make_instance(self.tokenizer,
                                          word_dropout=self.word_dropout, 
                                          corrupt_method=self.corrupt_method, 

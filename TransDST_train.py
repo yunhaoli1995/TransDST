@@ -37,11 +37,6 @@ Dataset = {
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 log_time = time.strftime("%m-%d-%H-%M", time.localtime())
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-file_handler = logging.FileHandler('./log/log_{}.json'.format(log_time))
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
-
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def print_batch(batch, tokenizer):
@@ -50,8 +45,8 @@ def print_batch(batch, tokenizer):
         #input_ids
         logger.info("Input ids: {}".format(str(batch['input_ids'][i].numpy().tolist())))
         logging.info("Input sequence: {}".format(tokenizer.decode(batch['input_ids'][i])))
-        # for j in range(30):
-        #     logger.info("[SLOT]_{}: {}".format(j,tokenizer.decode(batch['tgt_seq'][i][j])))
+        for j in range(30):
+            logger.info("[SLOT]_{}: {}".format(j,tokenizer.decode(batch['tgt_seq'][i][j])))
 
 def main(args):
     # 初始化tensorboard
@@ -130,7 +125,7 @@ def main(args):
 
     model = MODEL_DICT[args.model](args.bert_ckpt_path, model_config)
     # re-initialize added special tokens ([SLOT], [NULL], [EOS], [CarryOver], [DontCare], [YES], [NO])
-    for i in range(1,8):
+    for i in range(1,5):
         model.encoder.embeddings.word_embeddings.weight.data[i].normal_(mean=0.0, std=0.02)
     model.to(device)
     
@@ -201,6 +196,12 @@ def main(args):
 
         if (epoch+1) % args.eval_epoch == 0:
             eval_res = model_evaluation(model, dev_data_raw, tokenizer, slot_meta, epoch+1, args.op_code, args=args)
+            writer.add_scalars('metrics',{
+                    'joint_acc': eval_res['joint_acc'],
+                    'slot_acc': eval_res['slot_acc'],
+                    'slot_f1': eval_res['slot_f1'],
+                    'final_slot_f1': eval_res['final_slot_f1'],
+                })
             if eval_res['joint_acc'] > best_score['joint_acc']:
                 best_score = eval_res
                 model_to_save = model.module if hasattr(model, 'module') else model
@@ -237,7 +238,7 @@ if __name__ == "__main__":
     parser.add_argument("--exp_dir", default='experiments', type=str)
 
     parser.add_argument("--mode",default="train",type=str)
-    parser.add_argument("--model",default="CompactTransDST",type=str,
+    parser.add_argument("--model",default="TransDST",type=str,
                         help="Model type, include: [TransDST, CompactTransDST,TransDSTV2, TransDSTV3]")
     # Model architecture
     parser.add_argument("--num_decoder_layers", default=2, type=int, help="Layers of transformer decoder")
@@ -285,6 +286,12 @@ if __name__ == "__main__":
                                             args.random_seed))
     if not os.path.exists(args.save_dir):
         os.mkdir(args.save_dir)
+    # 设置日志   
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    log_path = os.path.join(args.save_dir,"log.json")
+    file_handler = logging.FileHandler(log_path)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
 
     logger.info('pytorch version: {}'.format(torch.__version__))
     logger.info(args)

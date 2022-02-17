@@ -315,7 +315,7 @@ class TransformerDecoder(nn.Module):
         max_len = tgt_seq.size()[1]
         position = torch.arange(0, max_len).long().unsqueeze(0).to(tgt_seq.device)
         dec_output = self.tgt_word_emb(tgt_seq) + self.post_word_emb(position)                              #(B*J,Lq,H)
-        # -- Noting: 目标序列[SLOT]t1t2t3..[EOS]的embedding在进入decoder前 
+        # -- Note: 目标序列[SLOT]t1t2t3..[EOS]的embedding在进入decoder前 
         #            [SLOT]对应的feature要替换成为h_{[SLOT]_j} 因为h_{[SLOT]_j}
         #            和上下文通过self-attention进行了双向信息交互
         dec_output = torch.cat([slot_features, dec_output[:,1:]],dim=1)
@@ -480,13 +480,13 @@ class TransformerDecoderV2(nn.Module):
         attn_e = torch.matmul(dec_output,enc_output.unsqueeze(1).transpose(-1,-2))                          #(B,J,Lq,H) * (B,1,H,Lk) -> (B,J,Lq,Lk)
         mask = src_seq.eq(self.pad_idx).view(B,1,1,Lk)                                                      #(B,1,1,Lk)
         attn_e = attn_e.masked_fill(mask, -1e9)                                                             #(B,J,Lq,Lk)
-        # Copy probability
+        # -- Copy probability
         attn_history = nn.functional.softmax(attn_e, -1)                                                    #(B,J,Lq,Lk)     
 
         p_vocab = nn.functional.softmax(logits, -1)                                                         #(B,J,Lq,V)
 
         context = torch.matmul(attn_history, enc_output.unsqueeze(1))                                       #(B,J,Lq,Lk) * (B,1,Lk,H) -> (B,J,Lq,H)
-        #Pointer cofficient
+        # -- Pointer cofficient
         dec_input = dec_input.view(B,J,Lq,-1)
         p_gen = torch.sigmoid(self.w_gen(torch.cat([dec_input, context, dec_output], -1)))                  #(B,J,Lq,1) 
         p_gen = p_gen.squeeze(-1)
@@ -500,7 +500,7 @@ class TransformerDecoderV2(nn.Module):
 
 
 class TransformerDecoderV3(nn.Module):
-    ''' A decoder model with self attention mechanism, without cross attention, with copy mechanism
+    ''' A decoder model with self attention mechanism, with copy mechanism
         With cross attention to context
         Input: 
             tgt_seq: Target sequence
@@ -581,13 +581,13 @@ class TransformerDecoderV3(nn.Module):
         attn_e = torch.matmul(dec_output,enc_output.transpose(-1,-2))                                       #(B,J,Lq,H) * (B,J,H,Lk) -> (B,J,Lq,Lk)
         mask = src_seq.eq(self.pad_idx).view(B,J,1,Lk)                                                      #(B,1,1,Lk)
         attn_e = attn_e.masked_fill(mask, -1e9)                                                             #(B,J,Lq,Lk)
-        # Copy probability
+        # -- Copy probability
         attn_history = nn.functional.softmax(attn_e, -1)                                                    #(B,J,Lq,Lk)     
 
         p_vocab = nn.functional.softmax(logits, -1)                                                         #(B,J,Lq,V)
 
         context = torch.matmul(attn_history, enc_output)                                                    #(B,J,Lq,Lk) * (B,J,Lk,H) -> (B,J,Lq,H)
-        #Pointer cofficient
+        # Pointer cofficient
         dec_input = dec_input.view(B,J,Lq,-1)
         p_gen = torch.sigmoid(self.w_gen(torch.cat([dec_input, context, dec_output], -1)))                  #(B,J,Lq,1) 
         p_gen = p_gen.squeeze(-1)
