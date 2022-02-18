@@ -8,7 +8,6 @@ tempo/
 qualitative/
 outputs/
 checkpoint/
-assets/
 *.ipynb
 experiments/
 log/
