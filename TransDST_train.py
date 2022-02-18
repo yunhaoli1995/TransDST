@@ -265,7 +265,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--n_history", default=1, type=int)
     parser.add_argument("--max_seq_length", default=256, type=int)
-    parser.add_argument("--corrupt_method", default="random", type=str)
+    parser.add_argument("--corrupt_method", default=None, type=str)
     parser.add_argument("--corrupt_p", default=0.2, type=float)
 
     args = parser.parse_args()
