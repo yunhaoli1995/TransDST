@@ -1,4 +1,4 @@
-CUDA_VISIBLE_DEVICES="4,5,6,7" python TransDST_train.py \
+CUDA_VISIBLE_DEVICES="0,1,2,3" python TransDST_train.py \
         --data_root data/mwz2.1/ \
         --op_code '2' \
         --batch_size 32 \
@@ -11,7 +11,7 @@ CUDA_VISIBLE_DEVICES="4,5,6,7" python TransDST_train.py \
         --n_epochs 10 \
         --corrupt_p 0 \
 
-CUDA_VISIBLE_DEVICES="4,5,6,7" python TransDST_train.py \
+CUDA_VISIBLE_DEVICES="0,1,2,3" python TransDST_train.py \
         --data_root data/mwz2.1/ \
         --op_code '2' \
         --batch_size 24 \

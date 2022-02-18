@@ -3,6 +3,7 @@ Most codes are from https://github.com/jasonwu0731/trade-dst
 """
 
 from .data_utils import EXPERIMENT_DOMAINS
+import logging
 
 
 def per_domain_join_accuracy(data, slot_temp):
@@ -20,7 +21,7 @@ def per_domain_join_accuracy(data, slot_temp):
                     jt += 1
                 temp_acc = compute_acc(set(gg), set(pp), slot_temp)
                 acc += temp_acc
-        print(dom, jt / count, acc / count)
+        logging.info(dom, jt / count, acc / count)
 
 
 def compute_acc(gold, pred, slot_temp):
